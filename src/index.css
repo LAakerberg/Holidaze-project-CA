@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  margin: 0px auto;
+  background-color: #d9dfee;
+}
+
+@layer base {
+  header,
+  main,
+  footer {
+    width: 100%;
+    margin: 0px auto;
+    padding: 0px;
+  }
+}
+
+header {
+  z-index: 10;
+}
+
+@layer base {
+  body {
+    background-color: #1f2d3b;
+    border: 1px solid #1f2d3b;
+  }
+}
