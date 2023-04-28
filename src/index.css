@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @tailwind base; */
+@import 'tailwindcss/base';
+@import '/src/assets/css/base.css';
+/* @tailwind components; */
+@import 'tailwindcss/components';
+@import '/src/assets/css/components.css';
+/* @tailwind utilities; */
+@import 'tailwindcss/utilities';
 
 #root {
   min-height: 100vh;
