@@ -5,9 +5,9 @@ import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg
 export function Header() {
   return (
     <>
-      <header className="">
+      <header className="h-4/5">
         <div
-          className="h-96 relative"
+          className="header_content relative"
           style={{
             backgroundImage: `url(${headerbg})`,
             backgroundRepeat: 'no-repeat',
@@ -33,7 +33,7 @@ export function Header() {
               </div> */}
             </div>
           </div>
-          <div className="m-auto mt-6 bg-shandy min-w-min sm:w-9/12 max-w-xl h-16 outline-none outline-offset-0 outline-gray-400 rounded">
+          <div className="m-auto mt-6 bg-shandy opacity-95 min-w-min sm:w-9/12 max-w-xl h-16 outline-none outline-offset-0 outline-gray-400 rounded">
             <p>Search</p>
           </div>
         </div>
