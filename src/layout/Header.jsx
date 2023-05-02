@@ -32,7 +32,7 @@ export function Header() {
                 <div className="flex border">
                   <ul>
                     <li>
-                      <Link to="/register">Profile</Link>
+                      <Link to="/auth">Profile</Link>
                     </li>
                   </ul>
                 </div>
