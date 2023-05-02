@@ -1,11 +1,12 @@
 /* import { Navbar } from './navigation/Navbar'; */
+import { Link } from 'react-router-dom';
 import { Nav } from '../App';
 import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
 
 export function Header() {
   return (
     <>
-      <header className="h-4/5">
+      <header className="static">
         <div
           className="header_content relative"
           style={{
@@ -16,9 +17,11 @@ export function Header() {
           }}
         >
           <div className="bg-gradient-to-b from-light_salmon to-topaz drop-shadow-lg">
-            <div className="flex w-full md:w-4/5 max-w-screen-2xl m-auto">
+            <div className="flex w-full md:w-4/5 max-w-screen-2xl m-auto px-1">
               <div className="border flex">
-                <h1 className="text-shandy">Holidaze</h1>
+                <h1 className="text-shandy">
+                  <Link to="/">Holidaze</Link>
+                </h1>
               </div>
               <div className="border flex flex-auto flex-row">
                 <div className="flex-1 border">
@@ -26,7 +29,13 @@ export function Header() {
                     <Nav />
                   </div>
                 </div>
-                <div className="flex border">Profile</div>
+                <div className="flex border">
+                  <ul>
+                    <li>
+                      <Link to="/register">Profile</Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
               {/*               <div className="border flex">
                 <h3>Profile</h3>
@@ -38,6 +47,9 @@ export function Header() {
           </div>
         </div>
         {/* <Navbar /> */}
+        {/*         <div className="absolute top-10">
+          <Card />
+        </div> */}
       </header>
     </>
   );
