@@ -1,0 +1,30 @@
+/* Global button style */
+
+.button {
+  margin: 5px;
+  padding: 3px 15px;
+  color: #fff;
+  background-color: #ffc97f;
+  border-radius: 5px;
+  border: 1px solid salmon;
+  text-transform: uppercase;
+  font-family: Oswald;
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
+}
+
+.primary {
+  background-color: salmon;
+}
+
+.primary:hover {
+  background-color: orange;
+}
+
+.secondary {
+  background-color: orange;
+}
+
+.secondary:hover {
+  background-color: salmon;
+}
