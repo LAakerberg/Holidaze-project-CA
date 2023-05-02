@@ -1,30 +1,24 @@
 import { Routes, Route, Outlet, Link } from 'react-router-dom';
-import { useEffect } from 'react';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
-
-export function Home() {
-  useEffect(() => {
-    document.title = 'Home page';
-  }, []);
-
-  return (
-    <>
-      <h2>Hello and welcome</h2>
-    </>
-  );
-}
-
-function Booking() {
-  useEffect(() => {
-    document.title = 'Booking page';
-  }, []);
-
-  return <div>Booking page</div>;
-}
+import { Home } from './pages/HomePage/HomePage';
+import { Booking } from './pages/BookingPage/BookingPage';
+import { Register } from './pages/Register/RegisterPage';
 
 function RouteNotFound() {
   return <div>Page not found</div>;
+}
+
+export function Main() {
+  return (
+    <>
+      <main>
+        <div>
+          <div>Hello</div>
+        </div>
+      </main>
+    </>
+  );
 }
 
 export function Nav() {
@@ -35,7 +29,7 @@ export function Nav() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/bookings">Booking</Link>
+          <Link to="/bookings">Venues</Link>
         </li>
       </ul>
     </nav>
@@ -59,6 +53,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="bookings" element={<Booking />} />
+          <Route path="register" element={<Register />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
