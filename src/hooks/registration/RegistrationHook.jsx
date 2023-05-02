@@ -1,126 +1,127 @@
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { baseUrl, registerAuth } from '../../services/api/apiBase';
+
+const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
+const regexName = /^[\w]+$/;
+
+const matchForm = yup
+  .object({
+    name: yup
+      .string()
+      .matches(regexName, 'No special character and max 20 char long')
+      .required(),
+    email: yup
+      .string()
+      .matches(
+        regexEmail,
+        'Must be a @stud.noroff.no or @noroff.no defined email'
+      ),
+    password: yup.string().min(3).max(20).required(),
+    venueManager: yup.boolean().required(),
+    avatar: yup.string(),
+  })
+  .required();
 
 export function RegistrationForm() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(matchForm) });
 
-  function onSubmit(data) {
+  const onSubmit = async (data) => {
     console.log(data);
-  }
 
+    try {
+      const response = await fetch(baseUrl + registerAuth, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const responseData = await response.json();
+      console.log(response);
+      console.log(responseData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} action="/register" method="post">
+      <div>
         <div>
-          <div>
-            <div className="flex flex-col">
-              <label htmlFor="fName" className="">
-                First name
-              </label>
-              <input
-                type="text"
-                id="fName"
-                placeholder="Enter your first-name"
-                {...register('fName', {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 20,
-                })}
-              />
+          <div className="flex flex-col">
+            <label htmlFor="firstName" className="">
+              First name
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="Enter your first-name"
+              {...register('name')}
+            />
 
-              <label htmlFor="lName" className="">
-                Last name
-              </label>
-              <input
-                type="text"
-                id="lName"
-                placeholder="Enter your last-name"
-                {...register('lName', {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 20,
-                })}
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="email" className="">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                {...register('email', {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 20,
-                })}
-              />
-
-              <label htmlFor="password" className="">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter a password"
-                {...register('password', {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 20,
-                })}
-              />
-            </div>
-
-            <div className="flex flex-row">
-              <label htmlFor="user" className="pr-2">
-                User
-              </label>
-              <input
-                type="radio"
-                id="user"
-                value="user"
-                placeholder="Enter your name"
-                {...register('user', {
-                  required: true,
-                })}
-              />
-
-              <label htmlFor="admin" className="px-2">
-                Admin
-              </label>
-              <input
-                type="radio"
-                id="admin"
-                value="admin"
-                {...register('admin', {
-                  required: true,
-                })}
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="url" className="">
-                Avatar
-              </label>
-              <input
-                type="url"
-                id="url"
-                value=""
-                placeholder="Enter a url for avatar"
-                {...register('url', {
-                  required: false,
-                })}
-              />
-            </div>
+            <p>{errors.name?.message}</p>
           </div>
-          <div>
-            <button className="button primary" type="submit">
-              Submit
-            </button>
+
+          <div className="flex flex-col">
+            <label htmlFor="email" className="">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              {...register('email')}
+            />
+            <p>{errors.email?.message}</p>
+
+            <label htmlFor="password" className="">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter a password"
+              {...register('password')}
+            />
+            <p>{errors.password?.message}</p>
+          </div>
+
+          <div className="flex flex-row">
+            <label htmlFor="user" className="pr-2 switch">
+              <input
+                type="checkbox"
+                id="user"
+                className="user_2"
+                {...register('venueManager')}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="avatar" className="">
+              Avatar
+            </label>
+            <input
+              type="url"
+              id="avatar"
+              placeholder="Enter a url for avatar"
+              {...register('avatar')}
+            />
+            <p>{errors.avatar?.message}</p>
           </div>
         </div>
-      </form>
-    </>
+        <div>
+          <button className="button primary" type="submit">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
   );
 }
