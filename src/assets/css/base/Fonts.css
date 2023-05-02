@@ -1,0 +1,17 @@
+@layer base {
+  @font-face {
+    font-family: Oswald;
+    font-weight: 500;
+    src: url(/src/assets/fonts/oswald/Oswald-Regular.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: Ubuntu;
+    font-weight: 500;
+    src: url(/assets/fonts/Ubuntu-Regular.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: Niramit;
+    font-weight: 500;
+    src: url(/assets/fonts/Niramit-Regular.ttf) format('ttf');
+  }
+}
