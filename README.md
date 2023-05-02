@@ -16,3 +16,4 @@
 - Styled-components
 - React-router
 - React Icons
+- React hook form
