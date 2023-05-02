@@ -43,6 +43,16 @@ export function RegistrationForm() {
         body: JSON.stringify(data),
       });
       const responseData = await response.json();
+
+      if (response.ok) {
+        alert(
+          'Registration was successful, you will be redirected to login page'
+        );
+        window.location.href = '/success'; // Redirect to success page
+      } else {
+        alert('Registration was not successful, please try again');
+      }
+
       console.log(response);
       console.log(responseData);
     } catch (error) {
