@@ -1,3 +1,5 @@
+import { RegistrationForm } from '../../hooks/registration/RegistrationHook';
+
 export function Register() {
   return (
     <>
@@ -6,20 +8,17 @@ export function Register() {
           <h2>Register account</h2>
         </div>
         <div>
-          <div className="backdrop-blur-xl bg-white/30 hover:bg-white h-40 w-full border border-light_salmon p-1 mb-2 flex flex-col transition ease-in-out delay-100 duration-500">
+          <div className="w-full border border-light_salmon p-1 mb-2 flex flex-col">
             <div className="flex flex-row p-1">
               <div className="flex-1">
                 <p>Form:</p>
                 <div>
-                  <form>
-                    <label>Name:</label>
-                    <input />
-                  </form>
+                  <RegistrationForm />
                 </div>
               </div>
-              <div className=" flex">Hello x3</div>
+              <div className="flex">Hello x3</div>
             </div>
-            <div className="justify-center m-auto">
+            <div className="justify-center m-auto hidden">
               <div className="text-center">
                 <button className="button primary">View</button>
               </div>
