@@ -3,7 +3,6 @@
 nav {
   width: 100%;
   display: flex;
-  background-color: #fff;
 }
 
 .navbar {
@@ -45,7 +44,6 @@ li {
 
 .mobile_navigation {
   display: none;
-  background-color: lightgrey;
 }
 
 /* Media query */
@@ -60,7 +58,7 @@ li {
 
   .mobile_navigation {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
   }
 
   .mobile_navigation .Hamburger {
@@ -69,9 +67,12 @@ li {
   .mobile_navigation,
   .navbar,
   .menu-items,
-  li {
+  nav li {
     display: block;
     padding: 5px;
+  }
+  nav ul {
     background-color: #fff;
+    border-radius: 10px;
   }
 }
