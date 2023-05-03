@@ -50,6 +50,10 @@ export function LoginForm() {
 
       console.log(response);
       console.log(responseData);
+      localStorage.setItem('userData', JSON.stringify(responseData));
+      const getUserData = localStorage.getItem('userData');
+      const userData = JSON.parse(getUserData);
+      console.log(userData.accessToken);
     } catch (error) {
       console.log(error);
       console.error(error);
