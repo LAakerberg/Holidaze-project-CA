@@ -43,7 +43,7 @@ export function LoginForm() {
         alert(
           'Registration was successful, you will be redirected to login page'
         );
-        /* window.location.href = '/success'; // Redirect to success page */
+        window.location.href = '/auth/profile'; // Redirect to success page
       } else {
         alert('Registration was not successful, please try again');
       }
