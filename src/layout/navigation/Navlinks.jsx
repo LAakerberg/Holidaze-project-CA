@@ -1,87 +1,104 @@
-import classes from './Navbar.module.css';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import classes from './Navbar.module.css';
 
-export function NavLinks() {
-  const getUserData = localStorage.getItem('userData');
-  const userData = getUserData ? JSON.parse(getUserData) : null;
+/**
+ *
+ * @returns The correct links based on the user is a Admin or not and also if the user is logged in or not
+ *
+ */
 
-  if (userData) {
-    console.log('True');
-    console.log(userData.venueManager);
-    return <Links1 userData={userData} />;
-  } else {
-    console.log('False');
-    return <Links2 />;
-  }
-}
+export function NavLinks(props) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-export function Links1(props) {
-  const getUserData = localStorage.getItem('userData');
-  const userData = getUserData ? JSON.parse(getUserData) : null;
-  console.log(userData);
-  const isLoggedIn = props.userData.accessToken;
-  const isAdmin = props.userData.venueManager;
+  /**
+   * Take's the information from localStorage to see if the user
+   * is logged in and if the user is admin or not.
+   */
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userData'));
+    if (user && user.accessToken && user.venueManager) {
+      setIsLoggedIn(true);
+      setIsAdmin(true);
+    } else if (user && user.accessToken) {
+      setIsLoggedIn(true);
+      setIsAdmin(false);
+    } else {
+      setIsLoggedIn(false);
+      setIsAdmin(false);
+    }
+  }, []);
+
+  /**
+   *
+   * @returns This function handle the logout link and is clearing the localStorage and redirect the user to the homepage
+   */
 
   const handleLogout = () => {
     localStorage.clear();
-    props.history.push('/');
+    setIsLoggedIn(false);
+    setIsAdmin(false);
+    window.location.href = '/';
   };
 
   return (
     <>
       <div className={classes.NavBar}>
         <ul className="menu-items">
-          <li onClick={() => props.isMobile && props.closeMobile()}>
-            <Link to="/">Home</Link>
+          <li>
+            <Link to="/" onClick={() => props.isMobile && props.closeMobile()}>
+              Home
+            </Link>
           </li>
-          <li onClick={() => props.isMobile && props.closeMobile()}>
-            <Link to="/bookings">Venues</Link>
+          <li>
+            <Link
+              to="/bookings"
+              onClick={() => props.isMobile && props.closeMobile()}
+            >
+              Venues
+            </Link>
           </li>
           {isLoggedIn && (
-            <li onClick={() => props.isMobile && props.closeMobile()}>
-              <Link to="/bookings">Profile</Link>
-            </li>
+            <>
+              <li>
+                <Link
+                  to="/profile"
+                  onClick={() => props.isMobile && props.closeMobile()}
+                >
+                  Profile
+                </Link>
+              </li>
+              {isAdmin && (
+                <li>
+                  <Link
+                    to="/admin"
+                    onClick={() => props.isMobile && props.closeMobile()}
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )}
+            </>
           )}
-          {isLoggedIn && isAdmin && (
-            <li onClick={() => props.isMobile && props.closeMobile()}>
-              <Link to="/bookings">Admin</Link>
+          {!isLoggedIn && (
+            <li>
+              <Link
+                to="/auth/login"
+                onClick={() => props.isMobile && props.closeMobile()}
+              >
+                Login
+              </Link>
             </li>
           )}
           {isLoggedIn && (
-            <li onClick={() => props.isMobile && props.closeMobile()}>
+            <li>
               <Link to="/" onClick={handleLogout}>
                 Logout
               </Link>
             </li>
           )}
-          {!isLoggedIn && (
-            <li onClick={() => props.isMobile && props.closeMobile()}>
-              <Link to="/auth/login">Login</Link>
-            </li>
-          )}
-          {/*           <li onClick={() => props.isMobile && props.closeMobile()}>
-            <Link to="/contact">Contact</Link>
-          </li> */}
-        </ul>
-      </div>
-    </>
-  );
-}
-
-export function Links2(props) {
-  return (
-    <>
-      <div className={classes.NavBar}>
-        <ul className="menu-items">
-          <li onClick={() => props.isMobile && props.closeMobile()}>
-            <Link to="/">Home</Link>
-          </li>
-          <li onClick={() => props.isMobile && props.closeMobile()}>
-            <Link to="/bookings">Booking</Link>
-          </li>
-          {/*           <li onClick={() => props.isMobile && props.closeMobile()}>
-            <Link to="/contact">Contact</Link>
-          </li> */}
         </ul>
       </div>
     </>
