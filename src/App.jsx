@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
 import { Home } from './pages/HomePage/HomePage';
@@ -21,53 +21,6 @@ export function Main() {
         </div>
       </main>
     </>
-  );
-}
-
-export function Navigation() {
-  const getUserData = localStorage.getItem('userData');
-  const userData = getUserData ? JSON.parse(getUserData) : null;
-
-  console.log('getUserData');
-  console.log('userData');
-
-  if (userData) {
-    console.log('True');
-    console.log('getUserData');
-    console.log('userData');
-    return <Nav2 userData={userData} />;
-  } else {
-    return <Nav />;
-  }
-}
-
-export function Nav() {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/bookings">Venues</Link>
-        </li>
-      </ul>
-    </nav>
-  );
-}
-
-export function Nav2() {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/bookings">Kebab</Link>
-        </li>
-      </ul>
-    </nav>
   );
 }
 
