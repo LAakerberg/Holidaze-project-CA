@@ -3,7 +3,7 @@ import houseImg from '../assets/img/house.jpg';
 export function ListVenues(props) {
   return (
     <>
-      {props.data.slice(0, 10).map((venue) => (
+      {props.data.slice(0, 5).map((venue) => (
         <div
           key={venue.id}
           className="backdrop-blur-xl bg-white/30 hover:bg-white h-40 w-full border border-light_salmon p-1 mb-2 flex flex-row transition ease-in-out delay-100 duration-500"
