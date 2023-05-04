@@ -5,6 +5,7 @@ export function useFetchVenues() {
   const [venues, setVenues] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  /*   const [searchResult, setSerachResults] = useState([]); */
 
   useEffect(() => {
     async function getVenues() {
