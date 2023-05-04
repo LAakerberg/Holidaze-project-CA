@@ -35,34 +35,3 @@ export function Card(props) {
     </>
   );
 }
-
-/* export function Card2(props) {
-  return (
-    <>
-      {props.data.map((venue) => (
-        <div key={venue.id} className="bg-red-400 rounded-md p-1 m-1">
-          <div>
-            <p>ID: {venue.id}</p>
-          </div>
-          <div>
-            <p>Name: {venue.name}</p>
-          </div>
-          <div>
-            <p>Description: {venue.description}</p>
-          </div>
-          <div>Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}</div>
-          <div>
-            <p>Wifi: {venue.meta.wifi ? 'Yes' : 'No'}</p>
-          </div>
-          <div>
-            <p>Parking: {venue.meta.parking ? 'Yes' : 'No'}</p>
-          </div>
-          <div>
-            <p>Pets: {venue.meta.pets ? 'Yes' : 'No'}</p>
-          </div>
-        </div>
-      ))}
-    </>
-  );
-}
- */
