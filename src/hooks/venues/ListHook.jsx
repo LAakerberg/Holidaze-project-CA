@@ -1,9 +1,10 @@
 import { authFetch } from '../../services/api/apiFetch';
-import { Card } from '../../components/Cards';
+import { VenueSlice } from '../../components/VenuesList';
 import { baseUrl, getAllVenues } from '../../services/api/apiBase';
 
-export function ApiCard() {
+export function GetList() {
   const { data, isLoading, isError } = authFetch(baseUrl + getAllVenues);
+  console.log(data);
 
   if (isLoading) {
     return <div>Loading Venues</div>;
@@ -15,8 +16,7 @@ export function ApiCard() {
 
   return (
     <>
-      {/* Render Card component */}
-      <Card data={data} />
+      <VenueSlice data={data} />
     </>
   );
 }
