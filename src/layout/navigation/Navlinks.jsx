@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import classes from './Navbar.module.css';
 
 /**
  *
@@ -11,6 +10,7 @@ import classes from './Navbar.module.css';
 export function NavLinks(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const user = JSON.parse(localStorage.getItem('userData'));
 
   /**
    * Take's the information from localStorage to see if the user
@@ -45,62 +45,60 @@ export function NavLinks(props) {
 
   return (
     <>
-      <div className={classes.NavBar}>
-        <ul className="menu-items">
-          <li>
-            <Link to="/" onClick={() => props.isMobile && props.closeMobile()}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/bookings"
-              onClick={() => props.isMobile && props.closeMobile()}
-            >
-              Venues
-            </Link>
-          </li>
-          {isLoggedIn && (
-            <>
-              <li>
-                <Link
-                  to="/profile"
-                  onClick={() => props.isMobile && props.closeMobile()}
-                >
-                  Profile
-                </Link>
-              </li>
-              {isAdmin && (
-                <li>
-                  <Link
-                    to="/admin"
-                    onClick={() => props.isMobile && props.closeMobile()}
-                  >
-                    Admin
-                  </Link>
-                </li>
-              )}
-            </>
-          )}
-          {!isLoggedIn && (
+      <ul className="menu-items">
+        <li className="">
+          <Link to="/" onClick={() => props.isMobile && props.closeMobile()}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/venues"
+            onClick={() => props.isMobile && props.closeMobile()}
+          >
+            Venues
+          </Link>
+        </li>
+        {isLoggedIn && (
+          <>
             <li>
               <Link
-                to="/auth/login"
+                to={`/profile/${user.name}`}
                 onClick={() => props.isMobile && props.closeMobile()}
               >
-                Login
+                Profile
               </Link>
             </li>
-          )}
-          {isLoggedIn && (
-            <li>
-              <Link to="/" onClick={handleLogout}>
-                Logout
-              </Link>
-            </li>
-          )}
-        </ul>
-      </div>
+            {isAdmin && (
+              <li>
+                <Link
+                  to="/admin"
+                  onClick={() => props.isMobile && props.closeMobile()}
+                >
+                  Admin
+                </Link>
+              </li>
+            )}
+          </>
+        )}
+        {!isLoggedIn && (
+          <li>
+            <Link
+              to="/login"
+              onClick={() => props.isMobile && props.closeMobile()}
+            >
+              Login
+            </Link>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li>
+            <Link to="/" onClick={handleLogout}>
+              Logout
+            </Link>
+          </li>
+        )}
+      </ul>
     </>
   );
 }
