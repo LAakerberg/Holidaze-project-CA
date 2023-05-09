@@ -14,3 +14,7 @@ export const registerAuth = 'auth/register';
 // Login Auth
 
 export const loginAuth = 'auth/login';
+
+// Profile
+
+export const getProfileUrl = 'profiles/';
