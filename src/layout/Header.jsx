@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom';
 import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
 import { Navbar } from './navigation/Navbar';
-import { VenueSearch } from '../hooks/apiHook/searchHook';
-import { ApiCard } from '../hooks/apiHook/cardHook';
+import { VenueSearch } from '../hooks/venues/searchHook';
+import { GetCard } from '../hooks/venues/CardHook';
 
 export function Header() {
   return (
@@ -48,7 +48,7 @@ export function Header() {
           </div>
         </div>
         <div className="absolute top-64 z-20 w-full">
-          <ApiCard />
+          <GetCard />
         </div>
       </header>
     </>
