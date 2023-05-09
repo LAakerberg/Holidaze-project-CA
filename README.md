@@ -10,3 +10,10 @@
 - React Template
 - Vite Dev server
 -
+
+### React library
+
+- Styled-components
+- React-router
+- React Icons
+- React hook form

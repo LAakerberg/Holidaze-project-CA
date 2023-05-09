@@ -1,0 +1,19 @@
+@layer base {
+  @font-face {
+    font-family: Oswald, sans-serif;
+    font-weight: 500;
+    src: url(/src/assets/fonts/oswald/Oswald-Regular.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: Anton, sans-serif;
+    font-weight: 500;
+    src: url(/assets/fonts/Anton/Anton-regular.ttf) format('ttf');
+  }
+}
+
+.header-logo {
+  font-family: Anton;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 3px 4px #633825;
+}
