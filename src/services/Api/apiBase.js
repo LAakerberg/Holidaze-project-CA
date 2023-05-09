@@ -7,6 +7,8 @@ export const getAllVenues = 'venues/';
 
 export const venuesId = 'id/';
 
+export const getVenue = baseUrl + getAllVenues;
+
 // Register auth
 
 export const registerAuth = 'auth/register';
