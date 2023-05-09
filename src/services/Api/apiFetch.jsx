@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
-import { baseUrl, getAllVenues } from './apiBase';
 
-export function useFetchVenues() {
-  const [venues, setVenues] = useState([]);
+export function authFetch(url, method = 'GET') {
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  /*   const [searchResult, setSerachResults] = useState([]); */
 
   useEffect(() => {
     async function getVenues() {
       try {
         setIsError(false);
-
         setIsLoading(true);
 
-        const response = await fetch(
-          baseUrl + getAllVenues + '?limit=10_&offset=0'
-        );
+        const accessToken = localStorage.getItem('accessToken');
+        const fetchOptions = {
+          method,
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        };
+
+        const response = await fetch(url, fetchOptions);
 
         const json = await response.json();
-        setVenues(json);
+        setData(json);
 
         setIsLoading(false);
       } catch (error) {
@@ -29,7 +33,7 @@ export function useFetchVenues() {
     }
 
     getVenues();
-  }, []);
+  }, [method, url]);
 
-  return { venues, isLoading, isError };
+  return { data, isLoading, isError };
 }
