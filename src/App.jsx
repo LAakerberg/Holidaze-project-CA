@@ -2,7 +2,7 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
 import { Home } from './pages/HomePage/HomePage';
-import { Booking } from './pages/BookingPage/BookingPage';
+import { Venues } from './pages/VenuePage';
 import { AuthUser } from './pages/AuthPage/Index';
 import { Register } from './pages/AuthPage/Register/RegisterPage';
 import { Login } from './pages/AuthPage/Login/LoginPage';
@@ -40,11 +40,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="bookings" element={<Booking />} />
+          <Route path="venues" element={<Venues />} />
           <Route path="auth" element={<AuthUser />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Register />} />
-          <Route path="/auth/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile/:name" element={<ProfilePage />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
