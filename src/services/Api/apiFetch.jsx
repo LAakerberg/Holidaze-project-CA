@@ -33,7 +33,7 @@ export function authFetch(url, method = 'GET') {
     }
 
     getData();
-  }, [method, url]);
+  }, [url, method]);
 
   return { data, isLoading, isError };
 }
