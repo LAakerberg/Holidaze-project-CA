@@ -3,36 +3,45 @@ import houseImg from '../assets/img/house.jpg';
 export function ListVenues(props) {
   return (
     <>
-      {props.data.slice(0, 5).map((venue) => (
+      {props.data.slice(3, 15).map((venue) => (
         <div
           key={venue.id}
-          className="backdrop-blur-xl bg-white/30 hover:bg-white h-40 w-full border border-light_salmon p-1 mb-2 flex flex-row transition ease-in-out delay-100 duration-500"
+          className="backdrop-blur-xl bg-white/30 hover:bg-white border border-light_salmon p-1 mb-2 flex flex-col sm:flex-row transition ease-in-out delay-100 duration-500 items-center justify-center text-center sm:justify-start sm:text-start"
         >
-          <div className="flex flex-row p-1">
-            <div className="drop-shadow-xl flex-none w-36 m-1">
-              <img
-                src={venue.media ? venue.media : { houseImg }}
-                className="object-cover rounded-xl h-32 w-36 border border-1 border-gray-800 m-auto drop-shadow-xl"
-                alt="Logo"
-              />
+          <div className="flex-1">
+            <div>
+              <p className="text-lg font-bold">{venue.name}</p>
             </div>
-            <div className="flex-1 px-1 hidden md:block">
-              <p>
-                Descriptions: Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Nulla lacinia lorem vel ipsum viverra, at tempus mi
-                aliquam. Nunc in justo nisl.
-              </p>
-            </div>
-            <div className=" flex">
-              <ul className="">
-                <li>Breakfast: Yes</li>
-                <li>Wifi: No</li>
-                <li>Parking: Yes</li>
-                <li>Pets: Yes</li>
-              </ul>
+            <div className="flex flex-col sm:flex-row p-1">
+              <div className="drop-shadow-xl flex-none sm:w-36 m-1">
+                <img
+                  src={venue.media ? venue.media : { houseImg }}
+                  className="object-cover rounded-xl h-32 sm:w-36 border border-1 border-gray-800 m-auto drop-shadow-xl"
+                  alt="Logo"
+                />
+              </div>
+              <div className="flex-1 w-full px-1 md:block">
+                <p>{venue.description.slice(0, 200)}</p>
+              </div>
+              <div className="flex-none w-32">
+                <ul className="">
+                  <li className="block p-0">
+                    Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}
+                  </li>
+                  <li className="block p-0">
+                    Wifi: {venue.meta.wifi ? 'Yes' : 'No'}
+                  </li>
+                  <li className="block p-0">
+                    Parking: {venue.meta.parking ? 'Yes' : 'No'}
+                  </li>
+                  <li className="block p-0">
+                    Pets: {venue.meta.pets ? 'Yes' : 'No'}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div className="justify-center m-auto">
+          <div className="flex justify-center m-auto">
             <div className="text-center">
               <button className="button primary">View</button>
             </div>

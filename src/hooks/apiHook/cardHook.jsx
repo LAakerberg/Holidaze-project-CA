@@ -1,8 +1,9 @@
-import { useFetchVenues } from '../../services/api/apiFetch';
+import { authFetch } from '../../services/api/apiFetch';
 import { Card } from '../../components/Cards';
+import { baseUrl, getAllVenues } from '../../services/api/apiBase';
 
 export function ApiCard() {
-  const { venues, isLoading, isError } = useFetchVenues();
+  const { data, isLoading, isError } = authFetch(baseUrl + getAllVenues);
 
   if (isLoading) {
     return <div>Loading Venues</div>;
@@ -15,7 +16,7 @@ export function ApiCard() {
   return (
     <>
       {/* Render Card component */}
-      <Card data={venues} />
+      <Card data={data} />
     </>
   );
 }
