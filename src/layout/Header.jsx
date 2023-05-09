@@ -4,6 +4,7 @@ import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg
 import { Navbar } from './navigation/Navbar';
 import { VenueSearch } from '../hooks/venues/searchHook';
 import { GetCard } from '../hooks/venues/CardHook';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 export function Header() {
   return (
@@ -34,7 +35,10 @@ export function Header() {
                   </div>
                 </div>
                 <div className="flex hidden md:block">
-                  <Link to="/auth">Profile</Link>
+                  <AiOutlineSearch />
+                  <h3>
+                    <AiOutlineSearch />
+                  </h3>
                 </div>
               </div>
             </div>
