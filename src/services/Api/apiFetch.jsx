@@ -6,7 +6,7 @@ export function authFetch(url, method = 'GET') {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    async function getVenues() {
+    async function getData() {
       try {
         setIsError(false);
         setIsLoading(true);
@@ -32,7 +32,7 @@ export function authFetch(url, method = 'GET') {
       }
     }
 
-    getVenues();
+    getData();
   }, [method, url]);
 
   return { data, isLoading, isError };
