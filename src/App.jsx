@@ -6,7 +6,7 @@ import { Venues } from './pages/VenuePage';
 import { AuthUser } from './pages/AuthPage/Index';
 import { Register } from './pages/AuthPage/Register/RegisterPage';
 import { Login } from './pages/AuthPage/Login/LoginPage';
-import { ProfilePage } from './pages/ProfilePage';
+import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 
 function RouteNotFound() {
   return <div>Page not found</div>;
