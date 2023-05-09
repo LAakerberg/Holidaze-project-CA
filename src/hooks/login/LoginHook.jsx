@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { baseUrl, loginAuth } from '../../services/api/apiBase';
+import * as storage from '../../services/storage/loadToken';
+import { load } from '../../services/storage/loadToken';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 
@@ -38,19 +40,21 @@ export function LoginForm() {
         body: JSON.stringify(data),
       });
       const responseData = await response.json();
+      const accessToken = responseData.accessToken;
+      storage.save('accessToken', accessToken);
+      storage.save2('userData', responseData);
 
       if (response.ok) {
         alert(
           'Registration was successful, you will be redirected to login page'
         );
-        window.location.href = '/auth/profile'; // Redirect to success page
+        window.location.href = '/profile'; // Redirect to success page
       } else {
         alert('Registration was not successful, please try again');
       }
 
-      console.log(response);
-      console.log(responseData);
-      localStorage.setItem('userData', JSON.stringify(responseData));
+      load();
+      console.log(load);
       const getUserData = localStorage.getItem('userData');
       const userData = JSON.parse(getUserData);
       console.log(userData.accessToken);
