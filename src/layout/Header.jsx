@@ -2,16 +2,15 @@
 import { Link } from 'react-router-dom';
 import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
 import { Navbar } from './navigation/Navbar';
+import { VenueSearch } from '../hooks/apiHook/searchHook';
+import { ApiCard } from '../hooks/apiHook/cardHook';
 
 export function Header() {
-  /*   const getUserData = localStorage.getItem('userData');
-  const userData = JSON.parse(getUserData); */
-
   return (
     <>
-      <header className="static">
+      <header className="relative">
         <div
-          className="header_content relative"
+          className="header_content relative z-20"
           style={{
             backgroundImage: `url(${headerbg})`,
             backgroundRepeat: 'no-repeat',
@@ -21,34 +20,36 @@ export function Header() {
         >
           <div className="bg-gradient-to-b from-light_salmon to-topaz drop-shadow-lg">
             <div className="flex flex-row w-full md:w-4/5 max-w-screen-2xl m-auto px-1">
-              <div className="border flex">
-                <h1 className="text-shandy">
-                  <Link to="/">Holidaze</Link>
+              <div className="flex">
+                <h1 className="text-shandy logo">
+                  <Link to="/" className="header-logo">
+                    Holidaze
+                  </Link>
                 </h1>
               </div>
-              <div className="border flex flex-auto flex-row">
-                <div className="flex-1 border">
-                  <div className="flex flex-col">
+              <div className="flex flex-auto flex-row">
+                <div className="flex-1 z-40">
+                  <div className="flex flex-col z-40 pt-2">
                     <Navbar />
                   </div>
                 </div>
-                <div className="flex border hidden md:block">
-                  <ul>
-                    <li className="">
-                      <Link to="/auth">Profile</Link>
-                    </li>
-                  </ul>
+                <div className="flex hidden md:block">
+                  <Link to="/auth">Profile</Link>
                 </div>
               </div>
             </div>
           </div>
-          <div className="m-auto mt-6 bg-shandy opacity-95 min-w-min sm:w-9/12 max-w-xl h-16 outline-none outline-offset-0 outline-gray-400 rounded">
-            <p>Search</p>
+        </div>
+        <div className="absolute top-20 w-full z-30 m-auto flex justify-center">
+          <div className="w-72 h-20 bg-yellow_red rounded-lg border border-light_salmon flex justify-center items-center">
+            <div className="">
+              <VenueSearch />
+            </div>
           </div>
         </div>
-        {/*         <div className="absolute top-10">
-          <Card />
-        </div> */}
+        <div className="absolute top-64 z-20 w-full">
+          <ApiCard />
+        </div>
       </header>
     </>
   );
