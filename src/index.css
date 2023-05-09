@@ -25,10 +25,6 @@
   }
 }
 
-header {
-  z-index: 10;
-}
-
 @layer base {
   body {
     background-color: #1f2d3b;
