@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { baseUrl, loginAuth } from '../../services/api/apiBase';
+import { loginAuth } from '../../services/authorization/apiBase';
 import * as storage from '../../services/storage/loadToken';
 import { load } from '../../services/storage/loadToken';
 
@@ -32,7 +32,7 @@ export function LoginForm() {
     console.log(data);
 
     try {
-      const response = await fetch(baseUrl + loginAuth, {
+      const response = await fetch(loginAuth, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

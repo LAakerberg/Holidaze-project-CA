@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function authFetch(url, method = 'GET') {
+export function useApiCall(url) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -13,7 +13,6 @@ export function authFetch(url, method = 'GET') {
 
         const accessToken = localStorage.getItem('accessToken');
         const fetchOptions = {
-          method,
           headers: {
             'Content-type': 'application/json',
             Authorization: `Bearer ${accessToken}`,
@@ -33,7 +32,7 @@ export function authFetch(url, method = 'GET') {
     }
 
     getData();
-  }, [url, method]);
+  }, [url]);
 
   return { data, isLoading, isError };
 }
