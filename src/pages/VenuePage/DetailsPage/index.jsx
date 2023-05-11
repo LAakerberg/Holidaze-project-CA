@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useApiCall } from '../../../hooks/api/useApiCall';
 import { getVenue } from '../../../services/authorization/apiBase';
-import { VenueDetails } from '../../../components/venue/venueData';
+import { VenueDetails } from '../../../components/venue/VenueDetails';
 
 export function DetailsPage() {
   const { id } = useParams();
-  const { data, isLoading, isError } = useApiCall(getVenue + id);
-  console.log(data);
+  const { data, response, isLoading, isError } = useApiCall(
+    getVenue + id + `?_bookings=true`
+  );
+
   if (isLoading) {
     return <div>Loading Profile</div>;
   }
@@ -17,7 +19,7 @@ export function DetailsPage() {
 
   return (
     <>
-      <VenueDetails venueData={data} />
+      <VenueDetails venueData={data} response={response} />
     </>
   );
 }

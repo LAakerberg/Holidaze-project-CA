@@ -3,7 +3,7 @@ import { GetVenues } from '../../hooks/venues/GetVenues';
 
 export function VenuesPage() {
   useEffect(() => {
-    document.title = 'Booking page';
+    document.title = 'Venues page';
   }, []);
 
   return (

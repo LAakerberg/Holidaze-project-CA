@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 export function useApiCall(url) {
   const [data, setData] = useState([]);
+  const [response, setResponse] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -23,6 +24,7 @@ export function useApiCall(url) {
 
         const json = await response.json();
         setData(json);
+        setResponse(response);
 
         setIsLoading(false);
       } catch (error) {
@@ -34,5 +36,5 @@ export function useApiCall(url) {
     getData();
   }, [url]);
 
-  return { data, isLoading, isError };
+  return { data, response, isLoading, isError };
 }
