@@ -83,8 +83,7 @@ nav li:hover {
   nav li {
     display: block;
     padding: 5px;
-    color: #000;
-    text-shadow: 0px;
+    color: #ffffff;
   }
   nav li:hover {
     display: block;
@@ -94,6 +93,6 @@ nav li:hover {
   }
   nav ul {
     border-radius: 10px;
-    background-color: #ff9c73;
+    background-color: #9e4700;
   }
 }

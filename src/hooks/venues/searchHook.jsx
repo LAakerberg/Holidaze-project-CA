@@ -1,9 +1,9 @@
-import { authFetch } from '../../services/api/apiFetch';
 import { Search } from '../../components/Search';
-import { baseUrl, getAllVenues } from '../../services/api/apiBase';
+import { getVenue } from '../../services/Api/apiBase';
+import { useApiCall } from '../api/useApiCall';
 
 export const VenueSearch = () => {
-  const { data, isLoading, isError } = authFetch(baseUrl + getAllVenues);
+  const { data, isLoading, isError } = useApiCall(getVenue);
 
   if (isLoading) {
     return <div>Loading...</div>;

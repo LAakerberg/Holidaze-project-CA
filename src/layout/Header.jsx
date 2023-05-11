@@ -4,7 +4,6 @@ import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg
 import { Navbar } from './navigation/Navbar';
 import { VenueSearch } from '../hooks/venues/searchHook';
 import { GetCard } from '../hooks/venues/CardHook';
-import { AiOutlineSearch } from 'react-icons/ai';
 
 export function Header() {
   return (
@@ -34,19 +33,18 @@ export function Header() {
                     <Navbar />
                   </div>
                 </div>
-                <div className="flex hidden md:block">
-                  <AiOutlineSearch />
-                  <h3>
-                    <AiOutlineSearch />
-                  </h3>
+                <div className="top-20 w-full z-40 m-auto flex justify-center">
+                  <div className="bg-gradient-to-b from-topaz to-light_salmon m-auto drop-shadow-lg p-1 rounded-xl">
+                    <VenueSearch />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="absolute top-20 w-full z-30 m-auto flex justify-center">
+        <div className="absolute top-20 w-full z-30 m-auto flex justify-center hidden">
           <div className="w-72 h-20 bg-yellow_red rounded-lg border border-light_salmon flex justify-center items-center">
-            <div className="">
+            <div className="hidden">
               <VenueSearch />
             </div>
           </div>
