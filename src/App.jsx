@@ -2,12 +2,12 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
 import { Home } from './pages/HomePage/HomePage';
-import { VenuesPage } from './pages/VenuePage/VenuesPage';
+import { VenuesPage } from './pages/VenuePage';
 import { AuthUser } from './pages/AuthPage/Index';
 import { Register } from './pages/AuthPage/Register/RegisterPage';
 import { Login } from './pages/AuthPage/Login/LoginPage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
-import { DetailsPage } from './pages/VenuePage/DetailsPage/DetailsPage';
+import { DetailsPage } from './pages/VenuePage/DetailsPage';
 
 function RouteNotFound() {
   return <div>Page not found</div>;

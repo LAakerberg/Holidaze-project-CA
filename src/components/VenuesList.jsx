@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 export function VenuesList(props) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10);
+  const [venuesPerPage] = useState(10);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = props.data.slice(
+  const indexOfLastProduct = currentPage * venuesPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - venuesPerPage;
+  const currentVenues = props.data.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(props.data.length / productsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(props.data.length / venuesPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -47,14 +47,14 @@ export function VenuesList(props) {
         <button
           onClick={handleNextPage}
           disabled={
-            currentPage === Math.ceil(props.data.length / productsPerPage)
+            currentPage === Math.ceil(props.data.length / venuesPerPage)
           }
         >
           Next
         </button>
       </div>
       <div className="pt-4">
-        {currentProducts.map((venue) => (
+        {currentVenues.map((venue) => (
           <div
             key={venue.id}
             className="backdrop-blur-xl bg-white/30 hover:bg-white border border-light_salmon p-1 mb-2 flex flex-col sm:flex-row transition ease-in-out delay-100 duration-500 items-center justify-center text-center sm:justify-start sm:text-start"
@@ -84,13 +84,13 @@ export function VenuesList(props) {
                       Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}
                     </li>
                     <li className="block p-0">
-                      Wifi: {venue.meta.wifi ? 'Yes' : 'No'}
-                    </li>
-                    <li className="block p-0">
                       Parking: {venue.meta.parking ? 'Yes' : 'No'}
                     </li>
                     <li className="block p-0">
                       Pets: {venue.meta.pets ? 'Yes' : 'No'}
+                    </li>
+                    <li className="block p-0">
+                      Wifi: {venue.meta.wifi ? 'Yes' : 'No'}
                     </li>
                   </ul>
                 </div>

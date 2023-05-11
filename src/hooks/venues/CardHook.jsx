@@ -1,6 +1,6 @@
 import { useApiCall } from '../api/useApiCall';
 import { Card } from '../../components/Cards';
-import { getVenue } from '../../services/Api/apiBase';
+import { getVenue } from '../../services/api/apiBase';
 
 export function GetCard() {
   const { data, isLoading, isError } = useApiCall(getVenue);

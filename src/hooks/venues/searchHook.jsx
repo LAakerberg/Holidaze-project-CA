@@ -1,5 +1,5 @@
 import { Search } from '../../components/Search';
-import { getVenue } from '../../services/Api/apiBase';
+import { getVenue } from '../../services/api/apiBase';
 import { useApiCall } from '../api/useApiCall';
 
 export const VenueSearch = () => {

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { registerAuth } from '../../services/Api/apiBase';
+import { registerAuth } from '../../services/api/apiBase';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 const regexName = /^[\w]+$/;

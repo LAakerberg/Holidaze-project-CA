@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useApiCall } from '../../hooks/api/useApiCall';
-import { getProfileUrl } from '../../services/Api/apiBase';
+import { getProfileUrl } from '../../services/api/apiBase';
 import { Profile } from '../../components/Profile';
 
 export function ProfilePage() {
