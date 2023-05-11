@@ -1,6 +1,6 @@
 import { useApiCall } from '../api/useApiCall';
 import { VenuesList } from '../../components/VenuesList';
-import { getVenue } from '../../services/Api/apiBase';
+import { getVenue } from '../../services/authorization/apiBase';
 
 export function GetVenues() {
   const { data, isLoading, isError } = useApiCall(getVenue);

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { loginAuth } from '../../services/Api/apiBase';
+import { loginAuth } from '../../services/authorization/apiBase';
 import * as storage from '../../services/storage/loadToken';
 import { load } from '../../services/storage/loadToken';
 
