@@ -17,7 +17,6 @@ export function DetailsPage() {
 
   return (
     <>
-      <div>Hello</div>
       <div className="border border-light_salmon m-1 p-1">
         <div className="flex border border-light_salmon m-1 p-1">
           <h3>{data.name}</h3>
