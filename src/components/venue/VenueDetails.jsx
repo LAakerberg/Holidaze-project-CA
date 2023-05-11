@@ -1,4 +1,18 @@
+import { useEffect } from 'react';
+import { BsWifi } from 'react-icons/bs';
+import { TbParking } from 'react-icons/tb';
+import { BiRestaurant } from 'react-icons/bi';
+import { MdOutlinePets } from 'react-icons/md';
+
 export function VenueDetails({ venueData }) {
+  /* const user = JSON.parse(localStorage.getItem('userData')); */
+  console.log(venueData);
+  const titleName = venueData.name;
+
+  useEffect(() => {
+    document.title = `Venue | ${titleName}`;
+  }, []);
+
   return (
     <>
       <div className="border border-light_salmon m-1 p-1">
@@ -9,28 +23,99 @@ export function VenueDetails({ venueData }) {
           <div className="flex-1 border border-light_salmon m-1 p-1">
             <img src={venueData.media} className="w-full h-96 object-cover" />
           </div>
-          <div className="flex-none w-40 border border-light_salmon m-1 p-1">
+          <div className="flex-initial w-40 border border-light_salmon m-1 p-1">
             <div className="flex flex-col">
               <div className="h-60">
                 <div>
-                  {/*                   <ul>
-                    <li className="block p-0">
-                      Breakfast: {venueData.meta.breakfast ? 'Yes' : 'No'}
+                  <p className="text-lg font-bold break-all">
+                    This venue offers:
+                  </p>
+                  <ul className="grid grid-cols-2 list-none">
+                    <li className="p-0">
+                      {venueData.meta?.breakfast ? (
+                        <div className="main-icon">
+                          <BiRestaurant
+                            className="icons-style"
+                            title="Restaurant available"
+                          />
+                          <div className=""></div>
+                        </div>
+                      ) : (
+                        <div className="main-icon">
+                          <BiRestaurant className="icons-style" />
+                          <div className="cross"></div>
+                        </div>
+                      )}
                     </li>
-                    <li className="block p-0">
-                      Parking: {venueData.meta.parking ? 'Yes' : 'No'}
+                    <li className="p-0">
+                      {venueData.meta?.parking ? (
+                        <div className="main-icon">
+                          <TbParking
+                            className="icons-style"
+                            title="Parking available"
+                          />
+                          <div className=""></div>
+                        </div>
+                      ) : (
+                        <div className="main-icon">
+                          <TbParking
+                            className="icons-style"
+                            title="No parking"
+                          />
+                          <div className="cross"></div>
+                        </div>
+                      )}
                     </li>
-                    <li className="block p-0">
-                      Pets: {venueData.meta.pets ? 'Yes' : 'No'}
+                    <li className="p-0">
+                      {venueData.meta?.pets ? (
+                        <div className="main-icon">
+                          <MdOutlinePets
+                            className="icons-style"
+                            title="Pets allowed"
+                          />
+                          <div className=""></div>
+                        </div>
+                      ) : (
+                        <div className="main-icon">
+                          <MdOutlinePets
+                            className="icons-style"
+                            title="No pets allowed"
+                          />
+                          <div className="cross"></div>
+                        </div>
+                      )}
                     </li>
-                    <li className="block p-0">
-                      Wifi: {venueData.meta.wifi ? 'Yes' : 'No'}
+                    <li className="p-0">
+                      {venueData.meta?.wifi ? (
+                        <div className="main-icon">
+                          <BsWifi
+                            className="icons-style"
+                            title="Wifi available"
+                          />
+                          <div className=""></div>
+                        </div>
+                      ) : (
+                        <div className="main-icon">
+                          <BsWifi
+                            className="icons-style"
+                            title="No wifi available"
+                          />
+                          <div className="cross"></div>
+                        </div>
+                      )}
                     </li>
-                  </ul> */}
+                  </ul>
                 </div>
               </div>
               <div className="">
-                <p>{venueData.name}</p>
+                <ul>
+                  <li className="block p-0">
+                    Country: {venueData.location?.country ?? 'Unknown country'}
+                  </li>
+                  <li className="block p-0">
+                    City: {venueData.location?.city ?? 'Unknown city'}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -49,7 +134,7 @@ export function VenueDetails({ venueData }) {
           <p className="">Price: {venueData.price}</p>
           <p className="">Rating: {venueData.rating}</p>
           <p className="">Last update: {venueData.updated}</p>
-          {/* <p className="">Location: {venueData.location.city}</p> */}
+          <p className="">Location: {venueData.location?.city}</p>
         </div>
       </div>
     </>
