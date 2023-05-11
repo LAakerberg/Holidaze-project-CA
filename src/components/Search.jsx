@@ -47,7 +47,7 @@ export const Search = ({ data }) => {
         placeholder="Search for a venue..."
         value={query}
         onChange={handleInputChange}
-        className="w-60 h-8 p-1 rounded-md outline outline-1"
+        className="w-40 md:w-52 h-8 p-1 rounded-md outline outline-1"
       />
       <div
         className={`absolute pt-1 w-full ${hasInput ? 'bg-topaz/90' : ''}`}
