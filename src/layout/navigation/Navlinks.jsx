@@ -70,7 +70,7 @@ export function NavLinks(props) {
               </Link>
             </li>
             {isAdmin && (
-              <li>
+              <li className="hidden">
                 <Link
                   to="/admin"
                   onClick={() => props.isMobile && props.closeMobile()}
