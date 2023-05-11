@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export function VenuesList(props) {
+  console.log(props.data);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [venuesPerPage] = useState(10);
 
@@ -91,21 +93,6 @@ export function VenuesList(props) {
                     </li>
                     <li className="block p-0">
                       Wifi: {venue.meta.wifi ? 'Yes' : 'No'}
-                    </li>
-                  </ul>
-                </div>
-                <div className="flex-none w-32">
-                  Location:
-                  <ul className="">
-                    <li className="block p-0">
-                      City:{' '}
-                      {venue.location.city ? venue.location.city : 'Not in use'}
-                    </li>
-                    <li className="block p-0">
-                      Country:{' '}
-                      {venue.location.country
-                        ? venue.location.country
-                        : 'Not in use'}
                     </li>
                   </ul>
                 </div>
