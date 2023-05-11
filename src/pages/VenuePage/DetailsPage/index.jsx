@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useApiCall } from '../../../hooks/api/useApiCall';
 import { getVenue } from '../../../services/authorization/apiBase';
-import { VenueDetails } from '../../../components/venue/venueData';
+import { VenueDetails } from '../../../components/venue/VenueDetails';
 
 export function DetailsPage() {
   const { id } = useParams();

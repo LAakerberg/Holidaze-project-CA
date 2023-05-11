@@ -49,6 +49,7 @@ export function VenueDetails({ venueData }) {
           <p className="">Price: {venueData.price}</p>
           <p className="">Rating: {venueData.rating}</p>
           <p className="">Last update: {venueData.updated}</p>
+          {/* <p className="">Location: {venueData.location.city}</p> */}
         </div>
       </div>
     </>

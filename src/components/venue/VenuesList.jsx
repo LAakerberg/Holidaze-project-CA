@@ -1,4 +1,4 @@
-import houseImg from '../assets/img/house.jpg';
+import houseImg from '../../assets/img/house.jpg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import { useApiCall } from '../api/useApiCall';
-import { VenuesList } from '../../components/VenuesList';
+import { VenuesList } from '../../components/venue/VenuesList';
 import { getVenue } from '../../services/authorization/apiBase';
 
 export function GetVenues() {
