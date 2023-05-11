@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
 import { Navbar } from './navigation/Navbar';
 import { VenueSearch } from '../hooks/venues/searchHook';
-import { GetCard } from '../hooks/venues/CardHook';
 
 export function Header() {
   return (
@@ -49,9 +48,7 @@ export function Header() {
             </div>
           </div>
         </div>
-        <div className="hidden absolute top-64 z-20 w-full">
-          <GetCard />
-        </div>
+        <div className="hidden absolute top-64 z-20 w-full"></div>
       </header>
     </>
   );
