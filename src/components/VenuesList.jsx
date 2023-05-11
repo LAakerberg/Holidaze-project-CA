@@ -2,7 +2,7 @@ import houseImg from '../assets/img/house.jpg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export function VenueSlice(props) {
+export function VenuesList(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(10);
 
@@ -53,7 +53,7 @@ export function VenueSlice(props) {
           Next
         </button>
       </div>
-      <div>
+      <div className="pt-4">
         {currentProducts.map((venue) => (
           <div
             key={venue.id}
@@ -76,7 +76,7 @@ export function VenueSlice(props) {
                   />
                 </div>
                 <div className="flex-1 w-full px-1 md:block">
-                  <p>{venue.description.slice(0, 200)}</p>
+                  <p className="break-all">{venue.description.slice(0, 200)}</p>
                 </div>
                 <div className="flex-none w-32">
                   <ul className="">
@@ -91,6 +91,21 @@ export function VenueSlice(props) {
                     </li>
                     <li className="block p-0">
                       Pets: {venue.meta.pets ? 'Yes' : 'No'}
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex-none w-32">
+                  Location:
+                  <ul className="">
+                    <li className="block p-0">
+                      City:{' '}
+                      {venue.location.city ? venue.location.city : 'Not in use'}
+                    </li>
+                    <li className="block p-0">
+                      Country:{' '}
+                      {venue.location.country
+                        ? venue.location.country
+                        : 'Not in use'}
                     </li>
                   </ul>
                 </div>

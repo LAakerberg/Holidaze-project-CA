@@ -1,9 +1,10 @@
 import { useApiCall } from '../api/useApiCall';
-import { Card } from '../../components/Cards';
+import { VenuesList } from '../../components/VenuesList';
 import { getVenue } from '../../services/Api/apiBase';
 
-export function GetCard() {
+export function GetVenues() {
   const { data, isLoading, isError } = useApiCall(getVenue);
+  console.log(data);
 
   if (isLoading) {
     return <div>Loading Venues</div>;
@@ -15,8 +16,7 @@ export function GetCard() {
 
   return (
     <>
-      {/* Render Card component */}
-      <Card data={data} />
+      <VenuesList data={data} />
     </>
   );
 }

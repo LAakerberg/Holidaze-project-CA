@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { baseUrl, registerAuth } from '../../services/api/apiBase';
+import { registerAuth } from '../../services/Api/apiBase';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 const regexName = /^[\w]+$/;
@@ -35,7 +35,7 @@ export function RegistrationForm() {
     console.log(data);
 
     try {
-      const response = await fetch(baseUrl + registerAuth, {
+      const response = await fetch(registerAuth, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
