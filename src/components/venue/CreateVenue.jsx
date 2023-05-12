@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
-import houseImg from '../assets/img/house.jpg';
+import houseImg from '../../assets/img/house.jpg';
 
 export function CreateVenue({ data }) {
   const user = JSON.parse(localStorage.getItem('userData'));
