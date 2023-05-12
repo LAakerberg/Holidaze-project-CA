@@ -5,7 +5,9 @@ import { Profile } from '../../components/Profile';
 
 export function ProfilePage() {
   const { name } = useParams();
-  const { data, isLoading, isError } = useApiCall(getProfileUrl + name);
+  const { data, isLoading, isError } = useApiCall(
+    getProfileUrl + name + `?_bookings=true&_venues=true`
+  );
   console.log(data);
   if (isLoading) {
     return <div>Loading Profile</div>;

@@ -1,5 +1,6 @@
-export function Profile(props) {
-  const data = props;
+import { CreateVenue } from './CreateVenue';
+
+export function Profile({ data }) {
   return (
     <>
       <div>
@@ -8,17 +9,26 @@ export function Profile(props) {
             <div>
               {' '}
               <img
-                src={data.data.avatar}
+                src={data.avatar}
                 className="w-52 object-contain rounded-full"
               />
             </div>
             <div className="px-2 border-l-2 border-topaz">
               <div>
-                <p className="text-lg font-bold">{data.data.name}</p>
+                <p className="text-lg font-bold">{data.name}</p>
               </div>
-              <div className="">Stats Bookings: 0 Venues: 0</div>
+              <div className="">
+                My stats:
+                <ul>
+                  <li>Bookings: {data._count.bookings}</li>
+                  <li>Venues: {data._count.venues}</li>
+                </ul>
+              </div>
             </div>
           </div>
+        </div>
+        <div className="">
+          <CreateVenue data={data} />
         </div>
         <div className="border border-light_salmon bg-gray-200 py-1 my-1">
           <div className="p-1">

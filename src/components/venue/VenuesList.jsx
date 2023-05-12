@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export function VenuesList(props) {
-  console.log(props.data);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [venuesPerPage] = useState(10);
 
