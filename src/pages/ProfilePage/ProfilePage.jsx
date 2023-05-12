@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useApiCall } from '../../hooks/api/useApiCall';
 import { getProfileUrl } from '../../services/authorization/apiBase';
 import { Profile } from '../../components/Profile';
@@ -8,6 +9,13 @@ export function ProfilePage() {
   const { data, isLoading, isError } = useApiCall(
     getProfileUrl + name + `?_bookings=true&_venues=true`
   );
+
+  const user = JSON.parse(localStorage.getItem('userData'));
+
+  useEffect(() => {
+    document.title = `Profile | ${user.name}`;
+  }, []);
+
   console.log(data);
   if (isLoading) {
     return <div>Loading Profile</div>;
