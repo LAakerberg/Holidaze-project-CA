@@ -6,7 +6,7 @@ import { VenuesPage } from './pages/VenuePage';
 import { AuthUser } from './pages/AuthPage/Index';
 import { Register } from './pages/AuthPage/Register/RegisterPage';
 import { Login } from './pages/AuthPage/Login/LoginPage';
-import { ProfilePage } from './pages/ProfilePage/ProfilePage';
+import { ProfilePage } from './pages/ProfilePage/index';
 import { DetailsPage } from './pages/VenuePage/DetailsPage';
 
 function RouteNotFound() {
