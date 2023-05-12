@@ -20,8 +20,8 @@ export function Profile({ data }) {
               <div className="">
                 My stats:
                 <ul>
-                  <li>Bookings: {data._count.bookings}</li>
-                  <li>Venues: {data._count.venues}</li>
+                  <li>Bookings: {data._count?.bookings}</li>
+                  <li>Venues: {data._count?.venues}</li>
                 </ul>
               </div>
             </div>
