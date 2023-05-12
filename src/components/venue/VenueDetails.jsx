@@ -3,15 +3,47 @@ import { BsWifi } from 'react-icons/bs';
 import { TbParking } from 'react-icons/tb';
 import { BiRestaurant } from 'react-icons/bi';
 import { MdOutlinePets } from 'react-icons/md';
+import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export function VenueDetails({ venueData }) {
   /* const user = JSON.parse(localStorage.getItem('userData')); */
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [bookedDates, setBookedDates] = useState([]);
   console.log(venueData);
+  console.log(venueData.bookings);
   const titleName = venueData.name;
 
   useEffect(() => {
     document.title = `Venue | ${titleName}`;
   }, []);
+
+  useEffect(() => {
+    if (venueData.bookings) {
+      const dates = venueData.bookings.reduce((acc, booking) => {
+        const startDate = new Date(booking.dateFrom);
+        const endDate = new Date(booking.dateTo);
+
+        const bookingDates = getBookingDates(startDate, endDate);
+        return [...acc, ...bookingDates];
+      }, []);
+
+      setBookedDates(dates);
+    }
+  }, [venueData.bookings]);
+
+  const getBookingDates = (startDate, endDate) => {
+    const dates = [];
+    const currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dates;
+  };
 
   return (
     <>
@@ -136,6 +168,15 @@ export function VenueDetails({ venueData }) {
           <p className="">Last update: {venueData.updated}</p>
           <p className="">Location: {venueData.location?.city}</p>
         </div>
+      </div>
+      <div className="border border-light_salmon m-1 p-1">
+        <h4>Select a Date for Booking</h4>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          minDate={new Date()}
+          excludeDates={bookedDates}
+        />
       </div>
     </>
   );
