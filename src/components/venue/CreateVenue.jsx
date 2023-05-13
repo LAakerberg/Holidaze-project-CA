@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import houseImg from '../../assets/img/house.jpg';
 
@@ -49,18 +52,245 @@ function ManageVenue({ data }) {
 }
 
 function VenueCreation() {
-  const handleSubmit = (e) => {
+  /*   const handleSubmit = (e) => {
     e.preventDefault();
     // Process the form data or perform other actions here
+  }; */
+
+  const matchForm = yup
+    .object({
+      name: yup.string().required(),
+      email: yup.string(),
+      password: yup.string().min(3).max(20).required(),
+      venueManager: yup.boolean().required(),
+      avatar: yup.string(),
+    })
+    .required();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(matchForm) });
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
     <div className="venue-form">
-      <h3>Create New Venue</h3>
-      <form onSubmit={handleSubmit}>
-        {/* Form fields for venue creation */}
-        <button type="submit">Create</button>
-      </form>
+      <div className="flex">
+        <div className="flex-1">
+          <h3>Create New Venue</h3>
+        </div>
+        <div className="flex-initial">
+          <button
+            className={`arrow-button ${isOpen ? 'open' : ''}`}
+            onClick={toggleOpen}
+          >
+            <TiArrowSortedDown />
+          </button>
+        </div>
+      </div>
+      {isOpen && (
+        <div className="transition-all delay-500 duration-300 ease-in-out p-1">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <div className="flex flex-row">
+                <div className="border flex-1">
+                  Title, description & Media
+                  <div className="flex flex-col">
+                    <label htmlFor="firstName" className="">
+                      Title name:
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      placeholder="Enter your first-name"
+                      {...register('name')}
+                    />
+
+                    <p>{errors.name?.message}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="firstName" className="">
+                      Description
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      placeholder="Enter your first-name"
+                      {...register('name')}
+                    />
+
+                    <p>{errors.name?.message}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="avatar" className="">
+                      Media
+                    </label>
+                    <input
+                      type="url"
+                      id="avatar"
+                      placeholder="Enter a url for avatar"
+                      {...register('avatar')}
+                    />
+                    <p>{errors.avatar?.message}</p>
+                  </div>
+                </div>
+                <div className="border ml-2 flex-1">
+                  Price, Max guests, Rating + Meta = Wifi, Parking, Breakfast &
+                  Pets
+                  <div className="flex max-w-10">
+                    <div className="flex-initial">
+                      <div className="flex flex-col">
+                        <label htmlFor="avatar" className="">
+                          Price
+                        </label>
+                        <input
+                          type="range"
+                          id="avatar"
+                          placeholder="Enter a url for avatar"
+                          min="1"
+                          max="2000"
+                          className="w-32"
+                          {...register('avatar')}
+                        />
+                        <p>{errors.avatar?.message}</p>
+                      </div>
+                    </div>
+                    <div className="flex-initial m-2 p-1 border"> 10</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="avatar" className="">
+                      Max Guests
+                    </label>
+                    <input
+                      type="range"
+                      id="avatar"
+                      placeholder="Enter a url for avatar"
+                      min="1"
+                      max="50"
+                      className="w-32"
+                      {...register('avatar')}
+                    />
+                    <p>{errors.avatar?.message}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="avatar" className="">
+                      Ratings
+                    </label>
+                    <input
+                      type="range"
+                      id="avatar"
+                      placeholder="Max guests"
+                      min="0"
+                      max="50"
+                      className="w-32"
+                      {...register('avatar')}
+                    />
+                    <p>{errors.avatar?.message}</p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2 item-center justify-center mb-2">
+                    <div className="flex flex-col">
+                      <label htmlFor="avatar" className="">
+                        Wifi
+                      </label>
+                      <input
+                        type="checkbox"
+                        id="avatar"
+                        placeholder="Enter a url for avatar"
+                        {...register('avatar')}
+                      />
+                      <p>{errors.avatar?.message}</p>
+                    </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="avatar" className="">
+                        Parking
+                      </label>
+                      <input
+                        type="checkbox"
+                        id="avatar"
+                        placeholder="Enter a url for avatar"
+                        {...register('avatar')}
+                      />
+                      <p>{errors.avatar?.message}</p>
+                    </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="avatar" className="">
+                        Breakfast
+                      </label>
+                      <input
+                        type="checkbox"
+                        id="avatar"
+                        placeholder="Enter a url for avatar"
+                        {...register('avatar')}
+                      />
+                      <p>{errors.avatar?.message}</p>
+                    </div>
+                    <div className="flex flex-col">
+                      <label htmlFor="avatar" className="">
+                        Pets
+                      </label>
+                      <input
+                        type="checkbox"
+                        id="avatar"
+                        placeholder="Enter a url for avatar"
+                        {...register('avatar')}
+                      />
+                      <p>{errors.avatar?.message}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="border mt-2">
+                Location, Address, City, Zip, Country, Continent
+                <div className="flex flex-col">
+                  <label htmlFor="firstName" className="">
+                    Title name:
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    placeholder="Enter your first-name"
+                    {...register('name')}
+                  />
+
+                  <p>{errors.name?.message}</p>
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="firstName" className="">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    placeholder="Enter your first-name"
+                    {...register('name')}
+                  />
+
+                  <p>{errors.name?.message}</p>
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="avatar" className="">
+                    Media
+                  </label>
+                  <input
+                    type="url"
+                    id="avatar"
+                    placeholder="Enter a url for avatar"
+                    {...register('avatar')}
+                  />
+                  <p>{errors.avatar?.message}</p>
+                </div>
+              </div>
+            </div>
+            <button type="submit">Create</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
