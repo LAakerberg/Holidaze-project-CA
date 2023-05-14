@@ -5,7 +5,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { getVenue } from '../../services/authorization/apiBase';
 
-import houseImg from '../../assets/img/house.jpg';
+/* import houseImg from '../../assets/img/house.jpg'; */
 
 import { VenueForm } from './CreateVenue';
 import { Spinner } from '../Spinner';
@@ -175,7 +175,7 @@ function MyVenues({ data }) {
   if (data.venues.length > 0) {
     return (
       <div>
-        {successMessage ? (
+        {successMessage && (
           <>
             <div className="border bg-green-500/50 border-green-800 w-full m-auto">
               <div className="flex">
@@ -188,7 +188,7 @@ function MyVenues({ data }) {
               </div>
             </div>
           </>
-        ) : null}
+        )}
         {errorMessage ? (
           <>
             <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
@@ -202,13 +202,13 @@ function MyVenues({ data }) {
               <div className="flex-1">
                 <div>
                   <img
-                    src={venue.media}
+                    src={venue.media[0]}
                     alt={venue.name}
                     className="object-cover rounded-xl h-32 w-32 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
-                    onError={(e) => {
+                    /*                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = houseImg;
-                    }}
+                    }} */
                   />
                 </div>
                 <div className="">
