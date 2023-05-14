@@ -71,10 +71,10 @@ export function EditVenueForm({ venue }) {
       const responseData = await response.json();
       console.log(responseData);
       if (response.ok) {
-        alert(
-          'Registration was successful, you will be redirected to the login page'
-        );
-        /* window.location.href = '/success'; */ // Redirect to the success page
+        alert('Update of venue was successful, the page will be refreshing');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } else {
         alert('Registration was not successful, please try again');
       }
