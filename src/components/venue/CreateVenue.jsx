@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { Spinner } from '../Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { getVenue } from '../../services/authorization/apiBase';
@@ -44,6 +46,8 @@ const matchForm = yup
   .required();
 
 export function VenueForm() {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const {
     register,
     handleSubmit,
@@ -69,20 +73,47 @@ export function VenueForm() {
       const responseData = await response.json();
       console.log(responseData);
       if (response.ok) {
-        alert(
-          'Registration was successful, you will be redirected to the login page'
-        );
-        /* window.location.href = '/success'; */ // Redirect to the success page
+        setSuccessMessage('Venue was successfully created, page will refresh!');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } else {
-        alert('Registration was not successful, please try again');
+        console.log('Registration was not successful, please try again');
+        setErrorMessage('Registration was not successful, please try again');
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {}, [errorMessage, successMessage]);
+
   return (
     <div className="venue-form">
+      {/* Render success message if it exists */}
+      {successMessage && (
+        <>
+          <div className="border bg-green-500/50 border-green-800 w-full m-auto">
+            <div className="flex">
+              <div className="flex-1 p-1">
+                <p>{successMessage}</p>
+              </div>
+              <div className="flex-initial p-1">
+                <Spinner />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {/* Render error message if it exists */}
+      {errorMessage && (
+        <>
+          <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
+            <p className="m-auto">{errorMessage}</p>
+          </div>
+        </>
+      )}
+      {/* Rest of your form code */}
       <div className="transition-all delay-500 duration-300 ease-in-out p-1">
         <form
           onSubmit={handleSubmit(onSubmit)}
