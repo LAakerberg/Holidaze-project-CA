@@ -48,7 +48,8 @@ export function LoginForm() {
         alert(
           'Registration was successful, you will be redirected to login page'
         );
-        window.location.href = '/profile'; // Redirect to success page
+        const user = JSON.parse(localStorage.getItem('userData'));
+        window.location.href = `/profile/${user.name}`; // Redirect to success page
       } else {
         alert('Registration was not successful, please try again');
       }
