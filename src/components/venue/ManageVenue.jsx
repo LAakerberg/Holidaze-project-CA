@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 import { getVenue } from '../../services/authorization/apiBase';
 
 import houseImg from '../../assets/img/house.jpg';
 
 import { VenueForm } from './CreateVenue';
 import { Spinner } from '../Spinner';
+import { EditVenueForm } from './EditVenue';
 
 export function ManageVenue({ data }) {
   const user = JSON.parse(localStorage.getItem('userData'));
@@ -52,6 +54,31 @@ function HandlingVenues({ data }) {
       <MyVenues key="comp1" data={data} />
       <VenueCreation key="comp2" />
     </>
+  );
+}
+
+function VenueEdit({ venue }) {
+  const [editOpen, setEditOpen] = useState(false);
+
+  const toggleEditOpen = () => {
+    setEditOpen(!editOpen);
+  };
+
+  return (
+    <div className="static">
+      <button
+        className={`edit-button ${editOpen ? 'open' : ''}`}
+        onClick={toggleEditOpen}
+      >
+        {editOpen ? (
+          <AiOutlineClose className="icons-style_close" />
+        ) : (
+          <AiOutlineEdit className="icons-style_edit" />
+        )}
+      </button>
+
+      {editOpen && <EditVenueForm venue={venue} />}
+    </div>
   );
 }
 
@@ -172,11 +199,16 @@ function MyVenues({ data }) {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-1 gap-5">
           {data.venues.map((venue) => (
             <div key={venue.id} className="flex flex-row p-1">
-              <div>
+              <div className="flex-1">
                 <div>
                   <img
-                    src={houseImg}
-                    className="object-cover rounded-xl h-32 sm:w-36 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
+                    src={venue.media}
+                    alt={venue.name}
+                    className="object-cover rounded-xl h-32 w-32 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = houseImg;
+                    }}
                   />
                 </div>
                 <div className="">
@@ -187,7 +219,7 @@ function MyVenues({ data }) {
               </div>
               <div className="flex flex-col h-32">
                 <div className="flex-1" id="edit_venue">
-                  <AiOutlineEdit className="icons-style_edit" />
+                  <VenueEdit venue={venue} />
                 </div>
                 <div className="flex-1">
                   <DeleteVenue
