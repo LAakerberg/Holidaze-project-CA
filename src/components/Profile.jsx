@@ -1,4 +1,4 @@
-import { CreateVenue } from './venue/ManageVenue';
+import { ManageVenue } from './venue/ManageVenue';
 
 export function Profile({ data }) {
   return (
@@ -28,7 +28,7 @@ export function Profile({ data }) {
           </div>
         </div>
         <div className="">
-          <CreateVenue data={data} />
+          <ManageVenue data={data} />
         </div>
         <div className="border border-light_salmon bg-gray-200 py-1 my-1">
           <div className="p-1">
