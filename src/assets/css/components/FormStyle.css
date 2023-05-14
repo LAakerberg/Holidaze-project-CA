@@ -71,3 +71,16 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* Create venue form on the profile page */
+
+input.venue_form {
+  border: 1px solid #2196f3;
+}
+
+form.create-venue input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 80%;
+}

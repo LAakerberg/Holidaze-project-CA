@@ -4,6 +4,12 @@
   color: black;
 }
 
+.icons-style_edit {
+  width: 32px;
+  height: 32px;
+  color: black;
+}
+
 .main-icon {
   position: relative;
   display: inline-block;
