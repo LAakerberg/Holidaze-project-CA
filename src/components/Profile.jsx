@@ -1,4 +1,4 @@
-import { CreateVenue } from './venue/CreateVenue';
+import { CreateVenue } from './venue/ManageVenue';
 
 export function Profile({ data }) {
   return (
