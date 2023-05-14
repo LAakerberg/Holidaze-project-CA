@@ -11,12 +11,11 @@ export function Register() {
           <div className="w-full border border-light_salmon p-1 mb-2 flex flex-col">
             <div className="flex flex-row p-1">
               <div className="flex-1">
-                <p>Form:</p>
                 <div>
                   <RegistrationForm />
                 </div>
               </div>
-              <div className="flex">Hello x3</div>
+              <div className="flex"></div>
             </div>
             <div className="justify-center m-auto hidden">
               <div className="text-center">
