@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useApiCall(url) {
+export function useApiCall(url, method) {
   const [data, setData] = useState([]);
   const [response, setResponse] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +34,7 @@ export function useApiCall(url) {
     }
 
     getData();
-  }, [url]);
+  }, [url, method]);
 
   return { data, response, isLoading, isError };
 }
