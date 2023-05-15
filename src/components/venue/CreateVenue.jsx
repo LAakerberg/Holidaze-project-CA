@@ -120,6 +120,7 @@ export function VenueForm() {
           action=""
           method="post"
           className="create-venue"
+          id="create-venue-form"
         >
           <div>
             <div className="flex flex-row">
