@@ -160,8 +160,6 @@ function DeleteVenue({ venueId, onError, onMessage }) {
 }
 
 function MyVenues({ data }) {
-  console.log(data);
-
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
