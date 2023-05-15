@@ -94,8 +94,8 @@ function VenueEdit({ venue }) {
 }
 
 /**
- * Renders the component to create a new venue.
- * @returns {JSX.Element} - The rendered component.
+ * This function is holding the creation of venue and when toggle the button the manager will get access to the VenueForm.
+ * @returns {JSX.Element} - Open and close the VenueForm.
  */
 function VenueCreation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -123,6 +123,14 @@ function VenueCreation() {
     </div>
   );
 }
+
+/**
+ * This function is rendering if the venueManger has any active venues. If the manager does not have any venues it's will
+ * been rendering that's no venue is created yet. The function will also execute successful or error message during edit or deleting.
+ * @param {string} props The components props
+ * @param {string} data.venues Is mapping all venues
+ * @returns Returns the venues where the manager can edit or delete
+ */
 
 function MyVenues({ data }) {
   const [errorMessage, setErrorMessage] = useState('');
@@ -152,13 +160,13 @@ function MyVenues({ data }) {
             </div>
           </>
         )}
-        {errorMessage ? (
+        {errorMessage && (
           <>
             <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
               <p className="m-auto">{errorMessage}</p>
             </div>
           </>
-        ) : null}
+        )}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-1 gap-5">
           {data.venues.map((venue) => (
             <div key={venue.id} className="flex flex-row p-1">
