@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "settings": {
     "react": {
@@ -13,7 +14,18 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime"
   ],
-  "overrides": [],
+  "overrides": [
+    {
+      "files": ["**/*.cy.js"],
+      "env": { "cypress/globals": true },
+      "plugins": ["cypress"],
+      "extends": ["plugin:cypress/recommended"],
+      "rules": {
+        "cypress/no-unnecessary-waiting": "off",
+        "no-unused-vars": "off"
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
