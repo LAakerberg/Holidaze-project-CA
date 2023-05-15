@@ -16,8 +16,10 @@ import { EditVenueForm } from './EditVenue';
  * @param {Object} props.data - The venue data.
  * @returns {JSX.Element} - The rendered component.
  */
-export function ManageVenue({ data }) {
+export function ManageVenue({ data, onVenueDelete }) {
   const user = JSON.parse(localStorage.getItem('userData'));
+  console.log(data);
+  console.log(onVenueDelete);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -51,21 +53,21 @@ export function ManageVenue({ data }) {
   } else {
     return console.log('No admin access');
   }
-}
 
-function HandlingVenues({ data }) {
-  return (
-    <>
-      <MyVenues key="comp1" data={data} />
-      <VenueCreation key="comp2" />
-    </>
-  );
+  function HandlingVenues({ data }) {
+    return (
+      <>
+        <MyVenues key="comp1" data={data} onVenueDelete={onVenueDelete} />
+        <VenueCreation key="comp2" />
+      </>
+    );
+  }
 }
 
 /**
  * Renders the component to edit a venue.
  * @param {Object} props - The component props.
- * @param {Object} props.venue - The venue to edit.
+ * @param {Object} props.venue - Load the specific venue to edit by the ID.
  * @returns {JSX.Element} - The rendered component.
  */
 function VenueEdit({ venue }) {
@@ -132,7 +134,7 @@ function VenueCreation() {
  * @returns Returns the venues where the manager can edit or delete
  */
 
-function MyVenues({ data }) {
+function MyVenues({ data, onVenueDelete }) {
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
@@ -141,6 +143,10 @@ function MyVenues({ data }) {
   const [successMessage, setSuccessMessage] = useState('');
   const handleSuccess = (message) => {
     setSuccessMessage(message);
+  };
+
+  const handleVenueDelete = (venueId) => {
+    onVenueDelete(venueId);
   };
 
   if (data.venues.length > 0) {
@@ -197,6 +203,7 @@ function MyVenues({ data }) {
                     venueId={venue.id}
                     onError={handleDeleteError}
                     onMessage={handleSuccess}
+                    onVenueDelete={handleVenueDelete}
                   />
                 </div>
               </div>
