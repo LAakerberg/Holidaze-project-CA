@@ -1,6 +1,32 @@
 import { ManageVenue } from './venue/ManageVenue';
+import { useState, useEffect } from 'react';
 
-export function Profile({ data }) {
+/**
+ * Profile component.
+ * Displays user profile information.
+ *
+ * @param {Object} data - The user profile data.
+ * @param {Function} onVenueDelete - The function to call when a venue is deleted.
+ * @returns {JSX.Element} The rendered Profile component.
+ */
+export function Profile({ data, onVenueDelete }) {
+  const [venueList, setVenueList] = useState(data.venues); // State variable for the list of venues
+
+  useEffect(() => {
+    setVenueList(data.venues); // Update the venue list when the data.venues prop changes
+  }, [data.venues]);
+
+  /**
+   * Event handler for venue deletion.
+   *
+   * @param {number} venueId - The ID of the venue to delete.
+   */
+  const handleDelete = (venueId) => {
+    // Call the onVenueDelete function passed from the ProfilePage component
+    onVenueDelete(venueId);
+    setVenueList(venueList.filter((venue) => venue.id !== venueId)); // Remove the deleted venue from the list
+  };
+
   return (
     <>
       <div>
@@ -28,7 +54,8 @@ export function Profile({ data }) {
           </div>
         </div>
         <div className="">
-          <ManageVenue data={data} />
+          <ManageVenue data={data} onVenueDelete={handleDelete} />{' '}
+          {/* Render the ManageVenue component */}
         </div>
         <div className="border border-light_salmon bg-gray-200 py-1 my-1">
           <div className="p-1">

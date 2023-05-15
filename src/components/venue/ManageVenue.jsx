@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
-import { AiOutlineDelete } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
-import { getVenue } from '../../services/authorization/apiBase';
+import { DeleteVenue } from './DeleteVenue';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
@@ -11,8 +10,16 @@ import { VenueForm } from './CreateVenue';
 import { Spinner } from '../Spinner';
 import { EditVenueForm } from './EditVenue';
 
-export function ManageVenue({ data }) {
+/**
+ * Renders the component to manage a venue.
+ * @param {Object} props - The component props.
+ * @param {Object} props.data - The venue data.
+ * @returns {JSX.Element} - The rendered component.
+ */
+export function ManageVenue({ data, onVenueDelete }) {
   const user = JSON.parse(localStorage.getItem('userData'));
+  console.log(data);
+  console.log(onVenueDelete);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,17 +53,23 @@ export function ManageVenue({ data }) {
   } else {
     return console.log('No admin access');
   }
+
+  function HandlingVenues({ data }) {
+    return (
+      <>
+        <MyVenues key="comp1" data={data} onVenueDelete={onVenueDelete} />
+        <VenueCreation key="comp2" />
+      </>
+    );
+  }
 }
 
-function HandlingVenues({ data }) {
-  return (
-    <>
-      <MyVenues key="comp1" data={data} />
-      <VenueCreation key="comp2" />
-    </>
-  );
-}
-
+/**
+ * Renders the component to edit a venue.
+ * @param {Object} props - The component props.
+ * @param {Object} props.venue - Load the specific venue to edit by the ID.
+ * @returns {JSX.Element} - The rendered component.
+ */
 function VenueEdit({ venue }) {
   const [editOpen, setEditOpen] = useState(false);
 
@@ -82,6 +95,10 @@ function VenueEdit({ venue }) {
   );
 }
 
+/**
+ * This function is holding the creation of venue and when toggle the button the manager will get access to the VenueForm.
+ * @returns {JSX.Element} - Open and close the VenueForm.
+ */
 function VenueCreation() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -109,57 +126,15 @@ function VenueCreation() {
   );
 }
 
-function DeleteVenue({ venueId, onError, onMessage }) {
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const handleDelete = async () => {
-    const accessToken = localStorage.getItem('accessToken');
-    try {
-      // Perform the delete request
-      // You can use the fetch API or any other library you prefer
-      const response = await fetch(getVenue + `${venueId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+/**
+ * This function is rendering if the venueManger has any active venues. If the manager does not have any venues it's will
+ * been rendering that's no venue is created yet. The function will also execute successful or error message during edit or deleting.
+ * @param {string} props The components props
+ * @param {string} data.venues Is mapping all venues
+ * @returns Returns the venues where the manager can edit or delete
+ */
 
-      if (response.ok) {
-        // Handle the successful deletion
-        // You can update the UI or perform any other necessary actions
-        console.log('Venue deleted successfully');
-        setSuccessMessage('Venue deleted successfully, page will refresh!');
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 3000);
-      } else {
-        // Handle the error case if the deletion was not successful
-        console.log('Failed to delete the venue');
-        setErrorMessage('Error deleting the venue');
-      }
-    } catch (error) {
-      // Handle any network or other errors
-      console.error('Error deleting the venue:', error);
-      setErrorMessage('Error deleting the venue', error);
-    }
-  };
-
-  useEffect(() => {
-    onError(errorMessage);
-    onMessage(successMessage);
-  }, [errorMessage, successMessage, onError, onMessage]);
-
-  return (
-    <>
-      <button type="button" onClick={handleDelete}>
-        <AiOutlineDelete className="icons-style_edit" />
-      </button>
-    </>
-  );
-}
-
-function MyVenues({ data }) {
+function MyVenues({ data, onVenueDelete }) {
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
@@ -168,6 +143,10 @@ function MyVenues({ data }) {
   const [successMessage, setSuccessMessage] = useState('');
   const handleSuccess = (message) => {
     setSuccessMessage(message);
+  };
+
+  const handleVenueDelete = (venueId) => {
+    onVenueDelete(venueId);
   };
 
   if (data.venues.length > 0) {
@@ -187,13 +166,13 @@ function MyVenues({ data }) {
             </div>
           </>
         )}
-        {errorMessage ? (
+        {errorMessage && (
           <>
             <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
               <p className="m-auto">{errorMessage}</p>
             </div>
           </>
-        ) : null}
+        )}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-1 gap-5">
           {data.venues.map((venue) => (
             <div key={venue.id} className="flex flex-row p-1">
@@ -224,6 +203,7 @@ function MyVenues({ data }) {
                     venueId={venue.id}
                     onError={handleDeleteError}
                     onMessage={handleSuccess}
+                    onVenueDelete={handleVenueDelete}
                   />
                 </div>
               </div>
