@@ -16,7 +16,6 @@ export function ProfilePage() {
     document.title = `Profile | ${user.name}`;
   }, []);
 
-  console.log(data);
   if (isLoading) {
     return <div>Loading Profile</div>;
   }
