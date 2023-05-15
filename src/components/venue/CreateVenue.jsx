@@ -75,7 +75,7 @@ export function VenueForm() {
       if (response.ok) {
         setSuccessMessage('Venue was successfully created, page will refresh!');
         setTimeout(() => {
-          window.location.reload();
+          setSuccessMessage(''); // Clear the success message
         }, 3000);
       } else {
         console.log('Registration was not successful, please try again');

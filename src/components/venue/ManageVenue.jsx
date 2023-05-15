@@ -131,7 +131,7 @@ function DeleteVenue({ venueId, onError, onMessage }) {
         console.log('Venue deleted successfully');
         setSuccessMessage('Venue deleted successfully, page will refresh!');
         setTimeout(() => {
-          window.location.reload();
+          setSuccessMessage('');
         }, 3000);
       } else {
         // Handle the error case if the deletion was not successful
