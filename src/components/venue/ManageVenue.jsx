@@ -40,6 +40,7 @@ export function ManageVenue({ data, onVenueDelete }) {
                 <button
                   className={`arrow-button ${isOpen ? 'open' : ''}`}
                   onClick={toggleOpen}
+                  id="open_manage_venue"
                 >
                   <TiArrowSortedDown />
                 </button>
@@ -116,6 +117,7 @@ function VenueCreation() {
           <button
             className={`arrow-button ${isOpen ? 'open' : ''}`}
             onClick={toggleOpen}
+            id="open_venue_form"
           >
             <TiArrowSortedDown />
           </button>

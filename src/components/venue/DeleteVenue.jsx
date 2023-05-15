@@ -48,7 +48,7 @@ export function DeleteVenue({ venueId, onError, onMessage, onVenueDelete }) {
 
   return (
     <>
-      <button type="button" onClick={handleDelete}>
+      <button type="button" onClick={handleDelete} id="delete_button">
         <AiOutlineDelete className="icons-style_edit" />
       </button>
     </>
