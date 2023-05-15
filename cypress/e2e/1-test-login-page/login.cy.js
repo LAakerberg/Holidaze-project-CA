@@ -1,6 +1,6 @@
 describe('Login function for Holidaze project', () => {
   it('can login to the holidaze as venue manager', () => {
-    cy.visit('http://localhost:3000/');
+    cy.visit('/');
     cy.clearLocalStorage();
     cy.wait(1000);
     cy.get('li').contains('Login').click();
