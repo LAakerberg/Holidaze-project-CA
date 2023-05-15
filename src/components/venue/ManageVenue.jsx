@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
-
 import { AiOutlineClose } from 'react-icons/ai';
-
 import { DeleteVenue } from './DeleteVenue';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
@@ -12,6 +10,12 @@ import { VenueForm } from './CreateVenue';
 import { Spinner } from '../Spinner';
 import { EditVenueForm } from './EditVenue';
 
+/**
+ * Renders the component to manage a venue.
+ * @param {Object} props - The component props.
+ * @param {Object} props.data - The venue data.
+ * @returns {JSX.Element} - The rendered component.
+ */
 export function ManageVenue({ data }) {
   const user = JSON.parse(localStorage.getItem('userData'));
 
@@ -58,6 +62,12 @@ function HandlingVenues({ data }) {
   );
 }
 
+/**
+ * Renders the component to edit a venue.
+ * @param {Object} props - The component props.
+ * @param {Object} props.venue - The venue to edit.
+ * @returns {JSX.Element} - The rendered component.
+ */
 function VenueEdit({ venue }) {
   const [editOpen, setEditOpen] = useState(false);
 
@@ -83,6 +93,10 @@ function VenueEdit({ venue }) {
   );
 }
 
+/**
+ * Renders the component to create a new venue.
+ * @returns {JSX.Element} - The rendered component.
+ */
 function VenueCreation() {
   const [isOpen, setIsOpen] = useState(false);
 
