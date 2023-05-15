@@ -28,9 +28,11 @@ export function MobileNavigation() {
   const closeMobile = () => setOpenNav(false);
 
   return (
-    <nav className={classes.mobile_navigation}>
-      {openNav ? hamburgerClose : hamburgerOpen}
-      {openNav && <NavLinks isMobile={true} closeMobile={closeMobile} />}
-    </nav>
+    <>
+      <nav className={classes.mobile_navigation}>
+        {openNav ? hamburgerClose : hamburgerOpen}
+        {openNav && <NavLinks isMobile={true} closeMobile={closeMobile} />}
+      </nav>
+    </>
   );
 }

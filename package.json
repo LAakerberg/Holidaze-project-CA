@@ -1,20 +1,21 @@
 {
   "name": "holidaze-project",
   "private": true,
-  "version": "0.2.2",
+  "version": "0.3.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "prettier -w src/App.jsx && prettier -w src/**/*.jsx",
+    "format": "prettier -w src/App.jsx && prettier -w src/**/*.jsx && prettier -w src/**/*.js",
     "lint": "eslint src/App.jsx",
-    "lint-fix": "eslint src/**/*.js --cache --fix",
+    "lint-fix": "eslint src/**/*.js --cache --fix && eslint src/**/*.jsx --cache --fix",
     "prepare": "husky install"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
     "react": "^18.2.0",
+    "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",

@@ -8,7 +8,7 @@
   border-radius: 5px;
   border: 1px solid salmon;
   text-transform: uppercase;
-  font-family: Oswald;
+  font-family: Oswald 'Courier New', sans-serif, Courier, monospace;
   font-size: 1.4rem;
   letter-spacing: 1.5px;
 }
