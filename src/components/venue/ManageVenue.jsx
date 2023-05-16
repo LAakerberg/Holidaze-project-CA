@@ -3,6 +3,7 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { DeleteVenue } from './DeleteVenue';
+import { Link } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
@@ -178,24 +179,26 @@ function MyVenues({ data, onVenueDelete }) {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-1 gap-5">
           {data.venues.map((venue) => (
             <div key={venue.id} className="flex flex-row p-1">
-              <div className="flex-1">
-                <div>
-                  <img
-                    src={venue.media[0]}
-                    alt={venue.name}
-                    className="object-cover rounded-xl h-32 w-32 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
-                    /*                     onError={(e) => {
+              <Link to={`/venues/details/${venue.id}`}>
+                <div className="flex-1">
+                  <div>
+                    <img
+                      src={venue.media[0]}
+                      alt={venue.name}
+                      className="object-cover rounded-xl h-32 w-32 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
+                      /*                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = houseImg;
                     }} */
-                  />
+                    />
+                  </div>
+                  <div className="">
+                    {venue.name.length > 15
+                      ? `${venue.name.slice(0, 20)}...`
+                      : venue.name}
+                  </div>
                 </div>
-                <div className="">
-                  {venue.name.length > 15
-                    ? `${venue.name.slice(0, 20)}...`
-                    : venue.name}
-                </div>
-              </div>
+              </Link>
               <div className="flex flex-col h-32">
                 <div className="flex-1" id="edit_venue">
                   <VenueEdit venue={venue} />
