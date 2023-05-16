@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { loginAuth } from '../../services/authorization/apiBase';
 import * as storage from '../../services/storage/loadToken';
-import { load } from '../../services/storage/loadToken';
+import { SuccessLogin } from '../../components/StatusMessage';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 
@@ -22,6 +22,7 @@ const matchForm = yup
 
 export function LoginForm() {
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); // Added state variable for success message
   const {
     register,
     handleSubmit,
@@ -29,8 +30,6 @@ export function LoginForm() {
   } = useForm({ resolver: yupResolver(matchForm) });
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     try {
       const response = await fetch(loginAuth, {
         method: 'POST',
@@ -46,61 +45,57 @@ export function LoginForm() {
 
       if (response.ok) {
         const user = JSON.parse(localStorage.getItem('userData'));
-        console.log(user.name);
+        setSuccessMessage(<SuccessLogin />); // Set the success message
         setTimeout(() => {
           window.location.href = `/profile/${user.name}`; // Redirect to success page
-        }, 3000);
-        /* window.location.href = `/success`; // Redirect to success page */
+        }, 2500);
       } else {
-        alert('Registration was not successful, please try again');
+        setError('Registration was not successful, please try again');
       }
-
-      load();
-      console.log(load);
-      const getUserData = localStorage.getItem('userData');
-      const userData = JSON.parse(getUserData);
-      console.log(userData.accessToken);
     } catch (error) {
-      console.log(error);
-      console.error(error);
       setError('Login failed');
     }
   };
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} action="/success" method="post">
-      <div>
-        <div>
-          <div className="flex flex-col">
-            <label htmlFor="email" className="">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-              {...register('email')}
-            />
-            <p>{errors.email?.message}</p>
 
-            <label htmlFor="password" className="">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter a password"
-              {...register('password')}
-            />
-            <p>{errors.password?.message}</p>
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} action="/success" method="post">
+        <div>
+          <div>
+            <div className="flex flex-col">
+              <label htmlFor="email" className="">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                {...register('email')}
+              />
+              <p>{errors.email?.message}</p>
+
+              <label htmlFor="password" className="">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter a password"
+                {...register('password')}
+              />
+              <p>{errors.password?.message}</p>
+            </div>
+          </div>
+          <div>
+            {error && <p>{error}</p>}
+            {successMessage && <p>{successMessage}</p>}{' '}
+            {/* Render success message */}
+            <button className="button primary" type="submit">
+              Submit
+            </button>
           </div>
         </div>
-        <div>
-          {error && <p>{error}</p>}
-          <button className="button primary" type="submit">
-            Submit
-          </button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
