@@ -43,13 +43,14 @@ export function LoginForm() {
       const accessToken = responseData.accessToken;
       storage.save('accessToken', accessToken);
       storage.save2('userData', responseData);
-      const user = JSON.parse(localStorage.getItem('userData'));
 
       if (response.ok) {
-        alert('Login was successful, you will be redirected to profile page');
+        const user = JSON.parse(localStorage.getItem('userData'));
+        console.log(user.name);
         setTimeout(() => {
           window.location.href = `/profile/${user.name}`; // Redirect to success page
-        }, 1000);
+        }, 3000);
+        /* window.location.href = `/success`; // Redirect to success page */
       } else {
         alert('Registration was not successful, please try again');
       }

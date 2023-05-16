@@ -8,6 +8,7 @@ import { Register } from './pages/AuthPage/Register/RegisterPage';
 import { Login } from './pages/AuthPage/Login/LoginPage';
 import { ProfilePage } from './pages/ProfilePage/index';
 import { DetailsPage } from './pages/VenuePage/DetailsPage';
+import { SuccessPage } from './pages/Success';
 
 function RouteNotFound() {
   return <div>Page not found</div>;
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="venues/details/:id" element={<DetailsPage />} />
           <Route path="auth" element={<AuthUser />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/success" element={<SuccessPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:name" element={<ProfilePage />} />
           <Route path="*" element={<RouteNotFound />} />
