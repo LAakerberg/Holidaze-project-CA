@@ -67,7 +67,7 @@ export function LoginForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} action="/login" method="post">
+    <form onSubmit={handleSubmit(onSubmit)} action="/success" method="post">
       <div>
         <div>
           <div className="flex flex-col">
