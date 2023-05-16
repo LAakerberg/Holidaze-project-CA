@@ -2,7 +2,7 @@
   "name": "holidaze-project",
   "private": false,
   "version": "0.3.7",
-  "homepage": "https://laakerberg.github.io/holidaze-project-ca",
+  "homepage": "https://laakerberg.github.io/Holidaze-project-CA/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
