@@ -1,6 +1,6 @@
 {
   "name": "holidaze-project",
-  "private": true,
+  "private": false,
   "version": "0.3.7",
   "type": "module",
   "scripts": {
