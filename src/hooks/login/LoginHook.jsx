@@ -43,12 +43,12 @@ export function LoginForm() {
       const accessToken = responseData.accessToken;
       storage.save('accessToken', accessToken);
       storage.save2('userData', responseData);
+      const user = JSON.parse(localStorage.getItem('userData'));
 
       if (response.ok) {
         alert(
           'Registration was successful, you will be redirected to login page'
         );
-        const user = JSON.parse(localStorage.getItem('userData'));
         window.location.href = `/profile/${user.name}`; // Redirect to success page
       } else {
         alert('Registration was not successful, please try again');
