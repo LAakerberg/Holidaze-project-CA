@@ -1,12 +1,4 @@
 describe('Login function for Holidaze project', () => {
-  beforeEach(() => {
-    // reset and seed the database prior to every test
-    cy.exec('npm run build');
-    cy.wait(10000);
-    cy.exec('npm run preview');
-    cy.wait(1000);
-  });
-
   it('can login to the holidaze as venue manager', () => {
     cy.visit('/');
     cy.clearLocalStorage();
