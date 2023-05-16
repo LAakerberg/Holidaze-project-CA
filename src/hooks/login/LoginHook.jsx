@@ -48,7 +48,7 @@ export function LoginForm() {
         const user = JSON.parse(localStorage.getItem('userData'));
         console.log(user.name);
         setTimeout(() => {
-          window.location.href = `/profile/${user.name}`; // Redirect to success page
+          window.location.href = `/success`; // Redirect to success page
         }, 3000);
         /* window.location.href = `/success`; // Redirect to success page */
       } else {
