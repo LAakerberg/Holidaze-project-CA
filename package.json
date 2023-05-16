@@ -1,12 +1,9 @@
 {
   "name": "holidaze-project",
-  "private": false,
+  "private": true,
   "version": "0.3.7",
-  "homepage": "https://laakerberg.github.io/Holidaze-project-CA/",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 3000",
@@ -39,7 +36,6 @@
     "eslint": "^8.38.0",
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-react": "^7.32.2",
-    "gh-pages": "^5.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
     "postcss": "^8.4.21",
