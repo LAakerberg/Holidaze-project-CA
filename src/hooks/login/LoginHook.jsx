@@ -46,10 +46,10 @@ export function LoginForm() {
       const user = JSON.parse(localStorage.getItem('userData'));
 
       if (response.ok) {
-        alert(
-          'Registration was successful, you will be redirected to login page'
-        );
-        window.location.href = `/profile/${user.name}`; // Redirect to success page
+        alert('Login was successful, you will be redirected to profile page');
+        setTimeout(() => {
+          window.location.href = `/profile/${user.name}`; // Redirect to success page
+        }, 1000);
       } else {
         alert('Registration was not successful, please try again');
       }
