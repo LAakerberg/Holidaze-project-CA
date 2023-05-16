@@ -50,7 +50,7 @@ export function LoginForm() {
           window.location.href = `/profile/${user.name}`; // Redirect to success page
         }, 2500);
       } else {
-        setError('Registration was not successful, please try again');
+        setError('Login was not successful, please try again');
       }
     } catch (error) {
       setError('Login failed');
