@@ -17,6 +17,7 @@ import { EditVenueForm } from './EditVenue';
  * @returns {JSX.Element} - The rendered component.
  */
 export function ManageVenue({ data, onVenueDelete }) {
+  console.log(data);
   const user = JSON.parse(localStorage.getItem('userData'));
   console.log(data);
   console.log(onVenueDelete);
@@ -27,7 +28,7 @@ export function ManageVenue({ data, onVenueDelete }) {
     setIsOpen(!isOpen);
   };
 
-  if (user.venueManager === true) {
+  if (data.name === user.name && user.venueManager === true) {
     return (
       <>
         <div className="border border-light_salmon bg-gray-200 py-1 my-1">
