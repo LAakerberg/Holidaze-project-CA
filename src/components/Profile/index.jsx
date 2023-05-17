@@ -1,4 +1,4 @@
-import { ManageVenue } from './venue/ManageVenue';
+import { ManageVenue } from '../venue/ManageVenue';
 import { useState, useEffect } from 'react';
 
 /**

@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
-import { DeleteVenue } from './DeleteVenue';
+import { DeleteVenue } from '../DeleteVenue';
 import { Link } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
-import { VenueForm } from './CreateVenue';
-import { Spinner } from '../Spinner';
-import { EditVenueForm } from './EditVenue';
+import { VenueForm } from '../CreateVenue';
+import { Spinner } from '../../Spinner';
+import { EditVenueForm } from '../EditVenue';
 
 /**
  * Renders the component to manage a venue.
