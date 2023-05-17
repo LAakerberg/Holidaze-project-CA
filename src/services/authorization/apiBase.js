@@ -5,7 +5,7 @@ const baseUrl = 'https://api.noroff.dev/api/v1/holidaze/';
 
 const getAllVenues = 'venues/';
 
-export const getVenue = baseUrl + getAllVenues;
+export const venueApiUrl = baseUrl + getAllVenues;
 
 // Register auth
 
@@ -18,3 +18,9 @@ export const loginAuth = baseUrl + 'auth/login/';
 // Profile
 
 export const getProfileUrl = baseUrl + 'profiles/';
+
+// Booking
+
+const booking = 'bookings/';
+
+export const bookingVenueUrl = baseUrl + booking;
