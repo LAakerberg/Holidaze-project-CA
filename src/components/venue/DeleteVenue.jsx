@@ -1,7 +1,7 @@
 /* Deleting venues */
 
 import { useState, useEffect } from 'react';
-import { getVenue } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../services/authorization/apiBase';
 import { AiOutlineDelete } from 'react-icons/ai';
 
 export function DeleteVenue({ venueId, onError, onMessage, onVenueDelete }) {
@@ -12,7 +12,7 @@ export function DeleteVenue({ venueId, onError, onMessage, onVenueDelete }) {
     try {
       // Perform the delete request
       // You can use the fetch API or any other library you prefer
-      const response = await fetch(getVenue + `${venueId}`, {
+      const response = await fetch(venueApiUrl + `${venueId}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json',
