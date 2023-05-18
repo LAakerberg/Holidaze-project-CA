@@ -33,7 +33,7 @@ export function ManageVenue({ data, onVenueDelete }) {
           <div className="flex flex-col p-1">
             <div className="flex flex-row">
               <div className="flex-1">
-                <h3>Manage venue</h3>
+                <h3>Manage venue ({data._count?.venues})</h3>
               </div>
               <div className="flex-initial">
                 <button
