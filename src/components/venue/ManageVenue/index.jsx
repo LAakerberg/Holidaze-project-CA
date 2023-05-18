@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
-import { DeleteVenue } from './DeleteVenue';
+import { DeleteVenue } from '../DeleteVenue';
 import { Link } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
-import { VenueForm } from './CreateVenue';
-import { Spinner } from '../Spinner';
-import { EditVenueForm } from './EditVenue';
+import { VenueForm } from '../CreateVenue';
+import { Spinner } from '../../Spinner';
+import { EditVenueForm } from '../EditVenue';
 
 /**
  * Renders the component to manage a venue.
@@ -18,10 +18,7 @@ import { EditVenueForm } from './EditVenue';
  * @returns {JSX.Element} - The rendered component.
  */
 export function ManageVenue({ data, onVenueDelete }) {
-  console.log(data);
   const user = JSON.parse(localStorage.getItem('userData'));
-  console.log(data);
-  console.log(onVenueDelete);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,7 +51,7 @@ export function ManageVenue({ data, onVenueDelete }) {
       </>
     );
   } else {
-    return console.log('No admin access');
+    return null;
   }
 
   function HandlingVenues({ data }) {

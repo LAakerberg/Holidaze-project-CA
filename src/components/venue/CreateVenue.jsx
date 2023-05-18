@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Spinner } from '../Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { getVenue } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../services/authorization/apiBase';
 
 const matchForm = yup
   .object({
@@ -62,7 +62,7 @@ export function VenueForm() {
       // Ensure media field is always an array
       data.media = Array.isArray(data.media) ? data.media : [data.media];
 
-      const response = await fetch(getVenue, {
+      const response = await fetch(venueApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

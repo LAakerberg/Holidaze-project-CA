@@ -1,4 +1,5 @@
-import { ManageVenue } from './venue/ManageVenue';
+import { BookedVenue } from '../venue/BookedVenue';
+import { ManageVenue } from '../venue/ManageVenue';
 import { useState, useEffect } from 'react';
 
 /**
@@ -57,15 +58,9 @@ export function Profile({ data, onVenueDelete }) {
           <ManageVenue data={data} onVenueDelete={handleDelete} />{' '}
           {/* Render the ManageVenue component */}
         </div>
-        <div className="border border-light_salmon bg-gray-200 py-1 my-1">
-          <div className="p-1">
-            <h3>Upcoming booking</h3>
-          </div>
-        </div>
-        <div className="border border-light_salmon bg-gray-200 py-1 my-1">
-          <div className="p-1">
-            <h3>History</h3>
-          </div>
+
+        <div className="">
+          <BookedVenue bookingData={data} />
         </div>
       </div>
     </>
