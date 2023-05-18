@@ -18,10 +18,7 @@ import { EditVenueForm } from '../EditVenue';
  * @returns {JSX.Element} - The rendered component.
  */
 export function ManageVenue({ data, onVenueDelete }) {
-  console.log(data);
   const user = JSON.parse(localStorage.getItem('userData'));
-  console.log(data);
-  console.log(onVenueDelete);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,7 +51,7 @@ export function ManageVenue({ data, onVenueDelete }) {
       </>
     );
   } else {
-    return console.log('No admin access');
+    return null;
   }
 
   function HandlingVenues({ data }) {
