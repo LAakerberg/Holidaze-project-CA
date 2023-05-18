@@ -21,6 +21,6 @@ export const getProfileUrl = baseUrl + 'profiles/';
 
 // Booking
 
-const booking = 'bookings/';
+export const bookingUrl = 'bookings/';
 
-export const bookingVenueUrl = baseUrl + booking;
+export const bookingVenueUrl = baseUrl + bookingUrl;
