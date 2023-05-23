@@ -12,7 +12,7 @@ export function ProfilePage() {
   const { name } = useParams(); // Get the 'name' parameter from the URL
   const [shouldUpdateProfile, setShouldUpdateProfile] = useState(false); // State variable to trigger profile update
   const { data, isLoading, isError } = useApiCall(
-    getProfileUrl + name + `?_bookings=true&_venues=true`, // API endpoint for retrieving user profile data
+    getProfileUrl + name + `?_bookings=true&_venues=true&sortOrder=asc`, // API endpoint for retrieving user profile data
     shouldUpdateProfile // Pass shouldUpdateProfile as a dependency to trigger the API call
   );
 

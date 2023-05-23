@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { AiOutlineClose } from 'react-icons/ai';
-import { DeleteVenue } from './DeleteVenue';
+import { VenueEdit } from '../VenueEdit/index';
+import { HandlingVenues } from '../HandlingVenues';
+import { VenueDelete } from '../VenueDelete';
+import { Link } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
-import { VenueForm } from './CreateVenue';
-import { Spinner } from '../Spinner';
-import { EditVenueForm } from './EditVenue';
+import { Spinner } from '../../Spinner';
 
 /**
  * Renders the component to manage a venue.
@@ -16,10 +15,10 @@ import { EditVenueForm } from './EditVenue';
  * @param {Object} props.data - The venue data.
  * @returns {JSX.Element} - The rendered component.
  */
-export function ManageVenue({ data, onVenueDelete }) {
+export function ManageVenue({ data }) {
   const user = JSON.parse(localStorage.getItem('userData'));
+
   console.log(data);
-  console.log(onVenueDelete);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,14 +26,14 @@ export function ManageVenue({ data, onVenueDelete }) {
     setIsOpen(!isOpen);
   };
 
-  if (user.venueManager === true) {
+  if (data.name === user.name && user.venueManager === true) {
     return (
       <>
         <div className="border border-light_salmon bg-gray-200 py-1 my-1">
           <div className="flex flex-col p-1">
             <div className="flex flex-row">
               <div className="flex-1">
-                <h3>Manage venue</h3>
+                <h3>Manage venue ({data._count?.venues})</h3>
               </div>
               <div className="flex-initial">
                 <button
@@ -52,80 +51,8 @@ export function ManageVenue({ data, onVenueDelete }) {
       </>
     );
   } else {
-    return console.log('No admin access');
+    return null;
   }
-
-  function HandlingVenues({ data }) {
-    return (
-      <>
-        <MyVenues key="comp1" data={data} onVenueDelete={onVenueDelete} />
-        <VenueCreation key="comp2" />
-      </>
-    );
-  }
-}
-
-/**
- * Renders the component to edit a venue.
- * @param {Object} props - The component props.
- * @param {Object} props.venue - Load the specific venue to edit by the ID.
- * @returns {JSX.Element} - The rendered component.
- */
-function VenueEdit({ venue }) {
-  const [editOpen, setEditOpen] = useState(false);
-
-  const toggleEditOpen = () => {
-    setEditOpen(!editOpen);
-  };
-
-  return (
-    <div className="static">
-      <button
-        className={`edit-button ${editOpen ? 'open' : ''}`}
-        onClick={toggleEditOpen}
-      >
-        {editOpen ? (
-          <AiOutlineClose className="icons-style_close" />
-        ) : (
-          <AiOutlineEdit className="icons-style_edit" />
-        )}
-      </button>
-
-      {editOpen && <EditVenueForm venue={venue} />}
-    </div>
-  );
-}
-
-/**
- * This function is holding the creation of venue and when toggle the button the manager will get access to the VenueForm.
- * @returns {JSX.Element} - Open and close the VenueForm.
- */
-function VenueCreation() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <div className="venue-form">
-      <div className="flex">
-        <div className="flex-1">
-          <h3>Create New Venue</h3>
-        </div>
-        <div className="flex-initial">
-          <button
-            className={`arrow-button ${isOpen ? 'open' : ''}`}
-            onClick={toggleOpen}
-            id="open_venue_form"
-          >
-            <TiArrowSortedDown />
-          </button>
-        </div>
-      </div>
-      {isOpen && <VenueForm />}
-    </div>
-  );
 }
 
 /**
@@ -136,7 +63,7 @@ function VenueCreation() {
  * @returns Returns the venues where the manager can edit or delete
  */
 
-function MyVenues({ data, onVenueDelete }) {
+export function MyVenues({ data, onVenueDelete }) {
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
@@ -178,30 +105,32 @@ function MyVenues({ data, onVenueDelete }) {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-1 gap-5">
           {data.venues.map((venue) => (
             <div key={venue.id} className="flex flex-row p-1">
-              <div className="flex-1">
-                <div>
-                  <img
-                    src={venue.media[0]}
-                    alt={venue.name}
-                    className="object-cover rounded-xl h-32 w-32 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
-                    /*                     onError={(e) => {
+              <Link to={`/venues/details/${venue.id}`}>
+                <div className="flex-1">
+                  <div>
+                    <img
+                      src={venue.media[0]}
+                      alt={venue.name}
+                      className="object-cover rounded-xl h-32 w-32 border border-1 border-gray-800 m-auto drop-shadow-xl hover:scale-110 hover:transition delay-50 duration-500 ease-in-out"
+                      /*                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = houseImg;
                     }} */
-                  />
+                    />
+                  </div>
+                  <div className="">
+                    {venue.name.length > 15
+                      ? `${venue.name.slice(0, 20)}...`
+                      : venue.name}
+                  </div>
                 </div>
-                <div className="">
-                  {venue.name.length > 15
-                    ? `${venue.name.slice(0, 20)}...`
-                    : venue.name}
-                </div>
-              </div>
+              </Link>
               <div className="flex flex-col h-32">
                 <div className="flex-1" id="edit_venue">
                   <VenueEdit venue={venue} />
                 </div>
                 <div className="flex-1">
-                  <DeleteVenue
+                  <VenueDelete
                     venueId={venue.id}
                     onError={handleDeleteError}
                     onMessage={handleSuccess}

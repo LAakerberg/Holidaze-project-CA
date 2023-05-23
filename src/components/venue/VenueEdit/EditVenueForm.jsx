@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { getVenue } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../../services/authorization/apiBase';
 
 const matchForm = yup
   .object({
@@ -60,7 +60,7 @@ export function EditVenueForm({ venue }) {
       // Ensure media field is always an array
       data.media = Array.isArray(data.media) ? data.media : [data.media];
 
-      const response = await fetch(getVenue + venue.id, {
+      const response = await fetch(venueApiUrl + venue.id, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

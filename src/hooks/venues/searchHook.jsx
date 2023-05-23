@@ -1,9 +1,9 @@
 import { Search } from '../../components/Search';
-import { getVenue } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../services/authorization/apiBase';
 import { useApiCall } from '../api/useApiCall';
 
 export const VenueSearch = () => {
-  const { data, isLoading, isError } = useApiCall(getVenue);
+  const { data, isLoading, isError } = useApiCall(venueApiUrl);
 
   if (isLoading) {
     return <div>Loading...</div>;

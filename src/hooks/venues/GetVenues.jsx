@@ -1,10 +1,10 @@
 import { useApiCall } from '../api/useApiCall';
 import { VenuesList } from '../../components/venue/VenuesList';
-import { getVenue } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../services/authorization/apiBase';
 
 export function GetVenues() {
   const { data, isLoading, isError } = useApiCall(
-    getVenue + `?limit=100&offset=5`
+    venueApiUrl + `?limit=100&offset=5`
   );
   console.log(data);
 

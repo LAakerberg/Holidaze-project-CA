@@ -5,10 +5,12 @@ import { BiRestaurant } from 'react-icons/bi';
 import { MdOutlinePets } from 'react-icons/md';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { Calendar } from 'react-calendar';
+import { bookingVenueUrl } from '../../services/authorization/apiBase';
+import 'react-calendar/dist/cjs/MonthView';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export function VenueDetails({ venueData }) {
-  /* const user = JSON.parse(localStorage.getItem('userData')); */
   const [selectedDate, setSelectedDate] = useState(null);
   const [bookedDates, setBookedDates] = useState([]);
   console.log(venueData);
@@ -177,6 +179,80 @@ export function VenueDetails({ venueData }) {
           minDate={new Date()}
           excludeDates={bookedDates}
         />
+      </div>
+      <div className="border border-light_salmon m-1 p-1">
+        <h4>Select a Date for Booking</h4>
+        <div className="text-center justify-center">
+          <div>
+            <BookingCalendar data={venueData} />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function BookingCalendar({ data }) {
+  console.log(data.id);
+  const [selectedDates, setSelectedDates] = useState([]);
+
+  const handleDateChange = (selectedDate) => {
+    setSelectedDates(selectedDate);
+  };
+
+  const handleBookClick = async () => {
+    try {
+      if (selectedDates.length === 2) {
+        const dateFrom = selectedDates[0].toISOString();
+        const dateTo = selectedDates[1].toISOString();
+        const guests = 1;
+        const venueId = '9f1c16fe-6023-4af9-9c59-d3ec8863563f';
+
+        const accessToken = localStorage.getItem('accessToken');
+
+        // Perform API call here with the selected dates
+        const response = await fetch(bookingVenueUrl, {
+          method: 'POST',
+          body: JSON.stringify({ dateFrom, dateTo, guests, venueId }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const responseData = await response.json();
+        console.log(responseData);
+
+        if (!response.ok) {
+          throw new Error('Failed to book. Please try again.');
+        }
+
+        const data = await response.json();
+        console.log(data);
+        // Handle API response
+      } else {
+        console.log('Please select both dateFrom and dateTo');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error
+    }
+  };
+
+  return (
+    <>
+      <div>
+        <h1>Calendar Example</h1>
+        <Calendar
+          className="custom-calendar bg-gradient-to-b from-light_salmon to-topaz drop-shadow-lg"
+          onChange={handleDateChange}
+          value={selectedDates}
+          selectRange
+        />
+      </div>
+      <div>
+        <button className="button primary" onClick={handleBookClick}>
+          Book
+        </button>
       </div>
     </>
   );

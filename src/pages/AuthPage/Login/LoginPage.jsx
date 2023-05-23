@@ -16,7 +16,6 @@ export function Login() {
                   <LoginForm />
                 </div>
               </div>
-              <div className="flex">Hello x3</div>
             </div>
             <div className="justify-center m-auto hidden">
               <div className="text-center">
