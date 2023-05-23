@@ -1,4 +1,4 @@
-import { BookedVenue } from '../venue/BookedVenue';
+import { VenueBooked } from '../venue/VenueBooked';
 import { ManageVenue } from '../venue/ManageVenue';
 import { useState, useEffect } from 'react';
 
@@ -60,7 +60,7 @@ export function Profile({ data, onVenueDelete }) {
         </div>
 
         <div className="">
-          <BookedVenue bookingData={data} />
+          <VenueBooked bookingData={data} />
         </div>
       </div>
     </>

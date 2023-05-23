@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { venueApiUrl } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../../services/authorization/apiBase';
 
 const matchForm = yup
   .object({

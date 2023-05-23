@@ -1,15 +1,10 @@
 /* Deleting venues */
 
 import { useState, useEffect } from 'react';
-import { venueApiUrl } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../../services/authorization/apiBase';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-export function DeleteVenueOk23({
-  venueId,
-  onError,
-  onMessage,
-  onVenueDelete,
-}) {
+export function VenueDelete({ venueId, onError, onMessage, onVenueDelete }) {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const handleDelete = async () => {

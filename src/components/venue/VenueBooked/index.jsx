@@ -7,12 +7,14 @@ import { useApiCall } from '../../../hooks/api/useApiCall';
 import { Spinner } from '../../Spinner';
 import { renderDate } from '../../../utils/formatDates';
 
-export function BookedVenue() {
+export function VenueBooked() {
   const { name } = useParams(); // Get the 'name' parameter from the URL
   const { data, isLoading, isError } = useApiCall(
     getProfileUrl + name + `/` + `bookings?sortOrder=desc&_venue=true`,
     'GET'
   );
+
+  /* console.log(data); */
 
   const [isOpenBooked, setIsOpenBooked] = useState(false);
   const [isOpenHistory, setIsOpenHistory] = useState(false);

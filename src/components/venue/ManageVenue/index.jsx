@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { AiOutlineClose } from 'react-icons/ai';
-import { DeleteVenue } from '../DeleteVenue';
+import { VenueEdit } from '../VenueEdit/index';
+import { HandlingVenues } from '../HandlingVenues';
+import { VenueDelete } from '../VenueDelete';
 import { Link } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
-import { VenueForm } from '../CreateVenue';
 import { Spinner } from '../../Spinner';
-import { EditVenueForm } from '../EditVenue';
 
 /**
  * Renders the component to manage a venue.
@@ -17,8 +15,10 @@ import { EditVenueForm } from '../EditVenue';
  * @param {Object} props.data - The venue data.
  * @returns {JSX.Element} - The rendered component.
  */
-export function ManageVenue({ data, onVenueDelete }) {
+export function ManageVenue({ data }) {
   const user = JSON.parse(localStorage.getItem('userData'));
+
+  console.log(data);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -53,78 +53,6 @@ export function ManageVenue({ data, onVenueDelete }) {
   } else {
     return null;
   }
-
-  function HandlingVenues({ data }) {
-    return (
-      <>
-        <MyVenues key="comp1" data={data} onVenueDelete={onVenueDelete} />
-        <VenueCreation key="comp2" />
-      </>
-    );
-  }
-}
-
-/**
- * Renders the component to edit a venue.
- * @param {Object} props - The component props.
- * @param {Object} props.venue - Load the specific venue to edit by the ID.
- * @returns {JSX.Element} - The rendered component.
- */
-function VenueEdit({ venue }) {
-  const [editOpen, setEditOpen] = useState(false);
-
-  const toggleEditOpen = () => {
-    setEditOpen(!editOpen);
-  };
-
-  return (
-    <div className="static">
-      <button
-        className={`edit-button ${editOpen ? 'open' : ''}`}
-        onClick={toggleEditOpen}
-      >
-        {editOpen ? (
-          <AiOutlineClose className="icons-style_close" />
-        ) : (
-          <AiOutlineEdit className="icons-style_edit" />
-        )}
-      </button>
-
-      {editOpen && <EditVenueForm venue={venue} />}
-    </div>
-  );
-}
-
-/**
- * This function is holding the creation of venue and when toggle the button the manager will get access to the VenueForm.
- * @returns {JSX.Element} - Open and close the VenueForm.
- */
-function VenueCreation() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <div className="venue-form">
-      <div className="flex">
-        <div className="flex-1">
-          <h3>Create New Venue</h3>
-        </div>
-        <div className="flex-initial">
-          <button
-            className={`arrow-button ${isOpen ? 'open' : ''}`}
-            onClick={toggleOpen}
-            id="open_venue_form"
-          >
-            <TiArrowSortedDown />
-          </button>
-        </div>
-      </div>
-      {isOpen && <VenueForm />}
-    </div>
-  );
 }
 
 /**
@@ -135,7 +63,7 @@ function VenueCreation() {
  * @returns Returns the venues where the manager can edit or delete
  */
 
-function MyVenues({ data, onVenueDelete }) {
+export function MyVenues({ data, onVenueDelete }) {
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
@@ -202,7 +130,7 @@ function MyVenues({ data, onVenueDelete }) {
                   <VenueEdit venue={venue} />
                 </div>
                 <div className="flex-1">
-                  <DeleteVenue
+                  <VenueDelete
                     venueId={venue.id}
                     onError={handleDeleteError}
                     onMessage={handleSuccess}
