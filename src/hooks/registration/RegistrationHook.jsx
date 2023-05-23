@@ -60,7 +60,12 @@ export function RegistrationForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} action="/register" method="post">
+    <form
+      id="reg-form"
+      onSubmit={handleSubmit(onSubmit)}
+      action="/register"
+      method="post"
+    >
       <div>
         <div>
           <div className="flex flex-col">
@@ -101,16 +106,19 @@ export function RegistrationForm() {
             <p>{errors.password?.message}</p>
           </div>
 
-          <div className="flex flex-row">
-            <label htmlFor="user" className="pr-2 switch">
-              <input
-                type="checkbox"
-                id="user"
-                className="user_2"
-                {...register('venueManager')}
-              />
-              <span className="slider round"></span>
-            </label>
+          <div className="flex flex-col">
+            User or Venue manager
+            <div className="flex-1">
+              <label htmlFor="user" className="pr-2 switch">
+                <input
+                  type="checkbox"
+                  id="user"
+                  className="user_2"
+                  {...register('venueManager')}
+                />
+                <span className="slider round"></span>
+              </label>
+            </div>
           </div>
 
           <div className="flex flex-col">

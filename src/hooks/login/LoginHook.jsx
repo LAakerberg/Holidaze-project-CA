@@ -59,7 +59,12 @@ export function LoginForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} action="/success" method="post">
+      <form
+        id="login-form"
+        onSubmit={handleSubmit(onSubmit)}
+        action="/success"
+        method="post"
+      >
         <div>
           <div>
             <div className="flex flex-col">
