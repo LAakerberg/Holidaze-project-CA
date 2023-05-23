@@ -17,7 +17,7 @@ function RouteNotFound() {
 export function Main() {
   return (
     <>
-      <main className="relative flex flex-col w-full md:w-4/5 max-w-screen-2xl px-1 z-10">
+      <main className="relative flex flex-col w-full md:w-4/5 max-w-screen-2xl p-1 pb-4 z-10">
         <div className="mt-2"></div>
         <div className="">
           <Outlet />
