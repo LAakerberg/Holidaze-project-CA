@@ -1,13 +1,23 @@
 .icons-style {
   width: 38px;
   height: 38px;
-  color: black;
+  color: #000;
+}
+
+.icons-profile {
+  color: #fff;
+  background-color: #00000030;
+  border-radius: 10px;
+}
+
+.icons-profile:hover {
+  color: #202020;
 }
 
 .icons-style_edit {
   width: 32px;
   height: 32px;
-  color: black;
+  color: #000;
 }
 
 .icons-style_close {

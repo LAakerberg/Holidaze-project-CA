@@ -72,6 +72,15 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+#reg-form input,
+#login-form input {
+  height: 40px;
+  border: 1px solid salmon;
+  border-radius: 5px;
+  padding: 5px;
+  max-width: 600px;
+}
+
 /* Create venue form on the profile page */
 
 input.venue_form {
