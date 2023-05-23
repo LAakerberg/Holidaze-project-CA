@@ -84,7 +84,7 @@ export function NavLinks(props) {
         {!isLoggedIn && (
           <li>
             <Link
-              to="/login"
+              to="/auth"
               onClick={() => props.isMobile && props.closeMobile()}
             >
               Login
