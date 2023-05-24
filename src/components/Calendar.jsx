@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Calendar } from 'react-calendar';
 import { bookingVenueUrl } from '../services/authorization/apiBase';
+import { renderDate } from '../utils/formatDates';
 
 export function BookingCalendar({ data }) {
+  console.log(data);
   const user = JSON.parse(localStorage.getItem('userData'));
   const [selectedDates, setSelectedDates] = useState([]);
   const handleDateChange = (selectedDate) => {
@@ -24,6 +26,13 @@ export function BookingCalendar({ data }) {
     dateFrom: new Date(booking.dateFrom),
     dateTo: new Date(booking.dateTo),
   }));
+
+  renderDate(selectedDates[0]);
+  renderDate(selectedDates[1]);
+
+  console.log(selectedDates);
+  console.log(selectedDates[0]);
+  console.log(selectedDates[1]);
 
   const handleBookClick = async () => {
     const idFromVenue = data.id;
@@ -74,13 +83,26 @@ export function BookingCalendar({ data }) {
         </div>
         <div className="flex flex-col border border-light_salmon ml-5">
           <div className="p-5">
-            <div className="flex flex-col p-1">
-              <label>Reservation name:</label>
-              <input type="text" value={user.name} disabled />
+            <div className="flex flex-col">
+              <span className="font-bold">Reservation name:</span>
+              <input type="text" value={user.name} disabled readOnly />
             </div>
             <div className="flex flex-col">
-              <label>How many guests?</label>
-              <input type="number" value={user.name} />
+              <span className="font-bold">How many guests?</span>
+              <input type="number" max={data.maxGuests} />
+            </div>
+            <div className="flex flex-col">
+              <div>
+                <span className="font-bold">Selected dates</span>
+              </div>
+              <p>
+                From:{' '}
+                {selectedDates.length > 0 ? renderDate(selectedDates[0]) : null}
+              </p>
+              <p>
+                To:{' '}
+                {selectedDates.length > 0 ? renderDate(selectedDates[1]) : null}
+              </p>
             </div>
           </div>
           <div className="text-center">
