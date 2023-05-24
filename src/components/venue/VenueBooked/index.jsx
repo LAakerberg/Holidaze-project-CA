@@ -10,7 +10,7 @@ import { renderDate } from '../../../utils/formatDates';
 export function VenueBooked() {
   const { name } = useParams(); // Get the 'name' parameter from the URL
   const { data, isLoading, isError } = useApiCall(
-    getProfileUrl + name + `/` + `bookings?sortOrder=desc&_venue=true`,
+    getProfileUrl + name + `/` + `bookings?sortOrder=asc&_venue=true`,
     'GET'
   );
 
