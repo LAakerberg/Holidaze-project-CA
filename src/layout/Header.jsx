@@ -38,7 +38,7 @@ export function Header() {
                     <CgProfile className="icons-style icons-profile drop-shadow-xl mr-4" />
                   </div>
                 </div>
-                <div className="top-20  z-40 m-auto flex justify-center">
+                <div className="top-20  z-40 m-auto flex justify-center hidden">
                   <div className="bg-gradient-to-b from-topaz to-light_salmon m-auto drop-shadow-lg p-1 rounded-xl z-40">
                     <VenueSearch />
                   </div>
