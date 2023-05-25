@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { loginAuth } from '../../services/authorization/apiBase';
 import * as storage from '../../services/storage/loadToken';
 import { SuccessLogin } from '../../components/StatusMessage';
+import { useNavigate } from 'react-router-dom';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 
@@ -28,6 +29,7 @@ export function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(matchForm) });
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -47,7 +49,8 @@ export function LoginForm() {
         const user = JSON.parse(localStorage.getItem('userData'));
         setSuccessMessage(<SuccessLogin />); // Set the success message
         setTimeout(() => {
-          window.location.href = `/profile/${user.name}`; // Redirect to success page
+          // Redirect to the dashboard page
+          navigate(`/profile/${user.name}`);
         }, 2500);
       } else {
         setError('Login was not successful, please try again');
