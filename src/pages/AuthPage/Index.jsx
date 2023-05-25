@@ -12,12 +12,16 @@ export function AuthUser() {
             <h3>Login or Register?</h3>
             <div className="flex flex-col mobile:flex-row">
               <div className="flex-initial pt-4">
-                <Link to="/register" className="button primary">
+                <Link
+                  to="/register"
+                  className="button primary"
+                  id="register_account"
+                >
                   New account
                 </Link>
               </div>
               <div className="flex-initial pt-4">
-                <Link to="/login" className="button secondary">
+                <Link to="/login" className="button secondary" id="login_user">
                   Login
                 </Link>
               </div>

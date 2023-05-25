@@ -4,6 +4,8 @@ describe('Login function for Holidaze project', () => {
     cy.clearLocalStorage();
     cy.wait(1000);
     cy.get('li').contains('Login').click();
+    cy.get('#login_user').contains('Login').click();
+    cy.wait(500);
     cy.get('input[name="email"]').type('michael.mcdesert@stud.noroff.no');
     cy.get('input[name="password"]').type('Administration123');
     cy.wait(500);
