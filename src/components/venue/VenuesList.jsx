@@ -53,6 +53,9 @@ export function VenuesList(props) {
           Next
         </button>
       </div>
+      <div>
+        <h3>Find your next venue</h3>
+      </div>
       <div className="pt-4">
         {currentVenues.map((venue) => (
           <div
