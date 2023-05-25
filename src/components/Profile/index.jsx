@@ -55,7 +55,7 @@ export function Profile({ data, onVenueDelete }) {
           </div>
         </div>
         <div className="">
-          <ManageVenue data={data} onVenueDelete={handleDelete} />{' '}
+          <ManageVenue dataName={data} onVenueDelete={handleDelete} />{' '}
           {/* Render the ManageVenue component */}
         </div>
 

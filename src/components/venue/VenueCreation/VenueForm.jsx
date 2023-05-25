@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import { Spinner } from '../Spinner';
+import { Spinner } from '../../Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { venueApiUrl } from '../../services/authorization/apiBase';
+import { venueApiUrl } from '../../../services/authorization/apiBase';
 
 const matchForm = yup
   .object({

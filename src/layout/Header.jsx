@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
 import { Navbar } from './navigation/Navbar';
 import { VenueSearch } from '../hooks/venues/searchHook';
+import { CgProfile } from 'react-icons/cg';
 
 export function Header() {
   return (
@@ -27,12 +28,17 @@ export function Header() {
                 </h1>
               </div>
               <div className="flex flex-auto flex-row md:flex-row">
-                <div className="flex-1 z-40">
+                <div className="flex md:flex-1 z-40">
                   <div className="flex flex-col z-40 pt-2">
                     <Navbar />
                   </div>
                 </div>
-                <div className="top-20 w-full z-40 m-auto flex justify-center">
+                <div className="hidden md:flex flex-initial z-40">
+                  <div className="flex flex-col z-40 pt-2 hidden">
+                    <CgProfile className="icons-style icons-profile drop-shadow-xl mr-4" />
+                  </div>
+                </div>
+                <div className="top-20  z-40 m-auto flex justify-center hidden">
                   <div className="bg-gradient-to-b from-topaz to-light_salmon m-auto drop-shadow-lg p-1 rounded-xl z-40">
                     <VenueSearch />
                   </div>

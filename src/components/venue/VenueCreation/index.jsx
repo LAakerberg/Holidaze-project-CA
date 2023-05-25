@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TiArrowSortedDown } from 'react-icons/ti';
-import { VenueForm } from '../CreateVenue';
+import { VenueForm } from './VenueForm';
 
 /**
  * This function is holding the creation of venue and when toggle the button the manager will get access to the VenueForm.

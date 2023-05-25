@@ -3,11 +3,16 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { VenueEdit } from '../VenueEdit/index';
 import { HandlingVenues } from '../HandlingVenues';
 import { VenueDelete } from '../VenueDelete';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
 import { Spinner } from '../../Spinner';
+
+// MyVenues
+import { useApiCall } from '../../../hooks/api/useApiCall';
+import { getProfileUrl } from '../../../services/authorization/apiBase';
+import { VenueInfo } from './VenueInfo';
 
 /**
  * Renders the component to manage a venue.
@@ -15,10 +20,9 @@ import { Spinner } from '../../Spinner';
  * @param {Object} props.data - The venue data.
  * @returns {JSX.Element} - The rendered component.
  */
-export function ManageVenue({ data }) {
+export function ManageVenue({ dataName }) {
   const user = JSON.parse(localStorage.getItem('userData'));
-
-  console.log(data);
+  const venueData = dataName;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,14 +30,14 @@ export function ManageVenue({ data }) {
     setIsOpen(!isOpen);
   };
 
-  if (data.name === user.name && user.venueManager === true) {
+  if (venueData.name === user.name && user.venueManager === true) {
     return (
       <>
         <div className="border border-light_salmon bg-gray-200 py-1 my-1">
           <div className="flex flex-col p-1">
             <div className="flex flex-row">
               <div className="flex-1">
-                <h3>Manage venue ({data._count?.venues})</h3>
+                <h3>Manage venue ({venueData._count?.venues})</h3>
               </div>
               <div className="flex-initial">
                 <button
@@ -45,7 +49,7 @@ export function ManageVenue({ data }) {
                 </button>
               </div>
             </div>
-            <div>{isOpen && <HandlingVenues data={data} />}</div>
+            <div>{isOpen && <HandlingVenues data={venueData} />}</div>
           </div>
         </div>
       </>
@@ -63,7 +67,13 @@ export function ManageVenue({ data }) {
  * @returns Returns the venues where the manager can edit or delete
  */
 
-export function MyVenues({ data, onVenueDelete }) {
+export function MyVenues({ onVenueDelete }) {
+  const { name } = useParams(); // Get the 'name' parameter from the URL
+  const { data, isLoading, isError } = useApiCall(
+    getProfileUrl + name + `/venues?_bookings=true&_owner=true` // API endpoint for retrieving user profile data
+  );
+
+  console.log(data);
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
@@ -78,7 +88,15 @@ export function MyVenues({ data, onVenueDelete }) {
     onVenueDelete(venueId);
   };
 
-  if (data.venues.length > 0) {
+  if (isLoading) {
+    return <div>Loading Profile</div>; // Display loading message while profile data is being fetched
+  }
+
+  if (isError) {
+    return <div>Error loading the Profile</div>; // Display error message if there was an error fetching the profile data
+  }
+
+  if (data.length > 0) {
     return (
       <div>
         {successMessage && (
@@ -102,8 +120,8 @@ export function MyVenues({ data, onVenueDelete }) {
             </div>
           </>
         )}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-1 gap-5">
-          {data.venues.map((venue) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 p-1 gap-5">
+          {data.map((venue) => (
             <div key={venue.id} className="flex flex-row p-1">
               <Link to={`/venues/details/${venue.id}`}>
                 <div className="flex-1">
@@ -120,12 +138,15 @@ export function MyVenues({ data, onVenueDelete }) {
                   </div>
                   <div className="">
                     {venue.name.length > 15
-                      ? `${venue.name.slice(0, 20)}...`
+                      ? `${venue.name.slice(0, 25)}...`
                       : venue.name}
                   </div>
                 </div>
               </Link>
               <div className="flex flex-col h-32">
+                <div className="flex-1">
+                  <VenueInfo info={venue} />
+                </div>
                 <div className="flex-1" id="edit_venue">
                   <VenueEdit venue={venue} />
                 </div>
