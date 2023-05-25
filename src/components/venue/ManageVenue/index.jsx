@@ -4,7 +4,6 @@ import { VenueEdit } from '../VenueEdit/index';
 import { HandlingVenues } from '../HandlingVenues';
 import { VenueDelete } from '../VenueDelete';
 import { Link, useParams } from 'react-router-dom';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
@@ -13,6 +12,7 @@ import { Spinner } from '../../Spinner';
 // MyVenues
 import { useApiCall } from '../../../hooks/api/useApiCall';
 import { getProfileUrl } from '../../../services/authorization/apiBase';
+import { VenueInfo } from './VenueInfo';
 
 /**
  * Renders the component to manage a venue.
@@ -145,7 +145,7 @@ export function MyVenues({ onVenueDelete }) {
               </Link>
               <div className="flex flex-col h-32">
                 <div className="flex-1">
-                  <AiOutlineInfoCircle className="icons-style_edit" />
+                  <VenueInfo info={venue} />
                 </div>
                 <div className="flex-1" id="edit_venue">
                   <VenueEdit venue={venue} />
