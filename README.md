@@ -20,7 +20,7 @@
 
 ### Cypress test
 
-[![Automated E2E Testing](https://github.com/LAakerberg/Holidaze-project-CA/actions/workflows/e2e-test.yml/badge.svg?branch=master)](https://github.com/LAakerberg/Holidaze-project-CA/actions/workflows/e2e-test.yml)
+[![Automated E2E Testing](https://github.com/LAakerberg/Holidaze-project-CA/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/LAakerberg/Holidaze-project-CA/actions/workflows/e2e-test.yml)
 
 ### Netlify production
 
