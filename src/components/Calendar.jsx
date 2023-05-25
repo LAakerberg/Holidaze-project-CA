@@ -71,8 +71,8 @@ export function BookingCalendar({ data }) {
   };
   return (
     <>
-      <div className="flex flex-row">
-        <div className="flex">
+      <div className="flex flex-col sm:flex-row justify-around">
+        <div className="flex mt-4 mx-2">
           <Calendar
             className="custom-calendar bg-gradient-to-b from-light_salmon to-topaz drop-shadow-lg"
             onChange={handleDateChange}
@@ -81,8 +81,8 @@ export function BookingCalendar({ data }) {
             selectRange
           />
         </div>
-        <div className="flex flex-col border border-light_salmon ml-5">
-          <div className="p-5">
+        <div className="flex flex-col border border-light_salmon p-5 mt-4 mx-2">
+          <div className="">
             <div className="flex flex-col">
               <span className="font-bold">Reservation name:</span>
               <input type="text" value={user.name} disabled readOnly />
