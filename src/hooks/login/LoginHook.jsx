@@ -47,7 +47,8 @@ export function LoginForm() {
         const user = JSON.parse(localStorage.getItem('userData'));
         setSuccessMessage(<SuccessLogin />); // Set the success message
         setTimeout(() => {
-          window.location.href = `/profile/${user.name}`; // Redirect to success page
+          // Redirect to the dashboard page
+          history.push(`/profile/${user.name}`);
         }, 2500);
       } else {
         setError('Login was not successful, please try again');
