@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Calendar } from 'react-calendar';
-import { bookingVenueUrl } from '../services/authorization/apiBase';
-import { renderDate } from '../utils/formatDates';
+import { Calendar } from "react-calendar";
+import { bookingVenueUrl } from "../services/authorization/apiBase";
+import { renderDate } from "../utils/formatDates";
 
 export function BookingCalendar({ data }) {
   console.log(data);
-  const user = JSON.parse(localStorage.getItem('userData'));
+  const user = JSON.parse(localStorage.getItem("userData"));
   const [selectedDates, setSelectedDates] = useState([]);
   const [guests, setGuests] = useState(1);
 
@@ -37,16 +37,16 @@ export function BookingCalendar({ data }) {
         const dateFrom = selectedDates[0].toISOString();
         const dateTo = selectedDates[1].toISOString();
         const venueId = idFromVenue;
-        const accessToken = localStorage.getItem('accessToken');
+        const accessToken = localStorage.getItem("accessToken");
         console.log(venueId);
 
         const response = await fetch(
           bookingVenueUrl + `?_customer=true&_venue=true`,
           {
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify({ dateFrom, dateTo, guests, venueId }),
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
               Authorization: `Bearer ${accessToken}`,
             },
           }
@@ -54,16 +54,16 @@ export function BookingCalendar({ data }) {
         const responseData = await response.json();
         console.log(responseData);
         if (!response.ok) {
-          throw new Error('Failed to book. Please try again.');
+          throw new Error("Failed to book. Please try again.");
         }
         const data = await response.json();
         console.log(data);
         // Handle API response
       } else {
-        console.log('Please select both dateFrom and dateTo');
+        console.log("Please select both dateFrom and dateTo");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Handle error
     }
   };
@@ -107,11 +107,11 @@ export function BookingCalendar({ data }) {
                 <span className="font-bold">Selected dates</span>
               </div>
               <p>
-                From:{' '}
+                From:{" "}
                 {selectedDates.length > 0 ? renderDate(selectedDates[0]) : null}
               </p>
               <p>
-                To:{' '}
+                To:{" "}
                 {selectedDates.length > 0 ? renderDate(selectedDates[1]) : null}
               </p>
             </div>

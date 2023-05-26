@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { GetVenues } from '../../hooks/venues/GetVenues';
+import { useEffect } from "react";
+import { GetVenues } from "../../hooks/venues/GetVenues";
 
 export function VenuesPage() {
   useEffect(() => {
-    document.title = 'Venues page';
+    document.title = "Venues page";
   }, []);
 
   return (

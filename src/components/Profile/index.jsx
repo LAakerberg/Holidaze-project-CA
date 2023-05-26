@@ -1,6 +1,6 @@
-import { VenueBooked } from '../venue/VenueBooked';
-import { ManageVenue } from '../venue/ManageVenue';
-import { useState, useEffect } from 'react';
+import { VenueBooked } from "../venue/VenueBooked";
+import { ManageVenue } from "../venue/ManageVenue";
+import { useState, useEffect } from "react";
 
 /**
  * Profile component.
@@ -34,7 +34,7 @@ export function Profile({ data, onVenueDelete }) {
         <div className="border border-light_salmon my-1">
           <div className="flex flex-row bg-gray-200 p-1">
             <div>
-              {' '}
+              {" "}
               <img
                 src={data.avatar}
                 className="w-52 object-contain rounded-full"
@@ -55,7 +55,7 @@ export function Profile({ data, onVenueDelete }) {
           </div>
         </div>
         <div className="">
-          <ManageVenue dataName={data} onVenueDelete={handleDelete} />{' '}
+          <ManageVenue dataName={data} onVenueDelete={handleDelete} />{" "}
           {/* Render the ManageVenue component */}
         </div>
 

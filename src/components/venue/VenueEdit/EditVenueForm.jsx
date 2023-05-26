@@ -1,19 +1,19 @@
-import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { venueApiUrl } from '../../../services/authorization/apiBase';
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { venueApiUrl } from "../../../services/authorization/apiBase";
 
 const matchForm = yup
   .object({
     name: yup
       .string()
-      .min(3, 'Title must be at least 3 characters')
+      .min(3, "Title must be at least 3 characters")
       .max(30)
       .required(),
     description: yup
       .string()
-      .min(50, 'Description must be at least 50 characters')
+      .min(50, "Description must be at least 50 characters")
       .required(),
     media: yup
       .mixed()
@@ -21,15 +21,15 @@ const matchForm = yup
         originalValue ? [originalValue] : []
       )
       .test(
-        'is-media-array',
-        'Please enter at least one media URL',
+        "is-media-array",
+        "Please enter at least one media URL",
         (value) => Array.isArray(value) && value.length > 0
       )
-      .required('Please enter a media URL'),
+      .required("Please enter a media URL"),
     price: yup
-      .number('Price must contain a number')
-      .min(1, 'Price must contain a number')
-      .required('Price must contain a number'),
+      .number("Price must contain a number")
+      .min(1, "Price must contain a number")
+      .required("Price must contain a number"),
     maxGuests: yup.number().integer().min(1).max(100).required(),
     rating: yup.number().min(1).max(5).required(),
     wifi: yup.boolean(),
@@ -54,16 +54,16 @@ export function EditVenueForm({ venue }) {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
 
     try {
       // Ensure media field is always an array
       data.media = Array.isArray(data.media) ? data.media : [data.media];
 
       const response = await fetch(venueApiUrl + venue.id, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(data),
@@ -71,12 +71,12 @@ export function EditVenueForm({ venue }) {
       const responseData = await response.json();
       console.log(responseData);
       if (response.ok) {
-        alert('Update of venue was successful, the page will be refreshing');
+        alert("Update of venue was successful, the page will be refreshing");
         setTimeout(() => {
           window.location.reload();
         }, 3000);
       } else {
-        alert('Registration was not successful, please try again');
+        alert("Registration was not successful, please try again");
       }
     } catch (error) {
       console.log(error);
@@ -126,7 +126,7 @@ export function EditVenueForm({ venue }) {
                     id="name"
                     className="venue_form"
                     placeholder="Enter your first-name"
-                    {...register('name')}
+                    {...register("name")}
                   />
 
                   <p>{errors.name?.message}</p>
@@ -140,7 +140,7 @@ export function EditVenueForm({ venue }) {
                     id="description"
                     className="venue_form"
                     placeholder="Enter your first-name"
-                    {...register('description')}
+                    {...register("description")}
                   />
 
                   <p>{errors.description?.message}</p>
@@ -149,7 +149,7 @@ export function EditVenueForm({ venue }) {
                   <label htmlFor="media" className="">
                     Media
                   </label>
-                  <input {...register('media')} />
+                  <input {...register("media")} />
                   <p>{errors.media?.message}</p>
                 </div>
               </div>
@@ -165,7 +165,7 @@ export function EditVenueForm({ venue }) {
                     min="1"
                     max="3000"
                     className="venue_form"
-                    {...register('price')}
+                    {...register("price")}
                   />
                   <p>{errors.price?.message}</p>
                 </div>
@@ -180,7 +180,7 @@ export function EditVenueForm({ venue }) {
                     min="1"
                     max="100"
                     className="venue_form"
-                    {...register('maxGuests')}
+                    {...register("maxGuests")}
                   />
                   <p>{errors.maxGuests?.message}</p>
                 </div>
@@ -195,7 +195,7 @@ export function EditVenueForm({ venue }) {
                     min="0"
                     max="5"
                     className="venue_form"
-                    {...register('rating')}
+                    {...register("rating")}
                   />
                   <p>{errors.rating?.message}</p>
                 </div>
@@ -207,7 +207,7 @@ export function EditVenueForm({ venue }) {
                     <input
                       type="checkbox"
                       id="wifi"
-                      {...register('meta.wifi')}
+                      {...register("meta.wifi")}
                     />
                     <p>{errors.wifi?.message}</p>
                   </div>
@@ -218,7 +218,7 @@ export function EditVenueForm({ venue }) {
                     <input
                       type="checkbox"
                       id="parking"
-                      {...register('meta.parking')}
+                      {...register("meta.parking")}
                     />
                     <p>{errors.parking?.message}</p>
                   </div>
@@ -229,7 +229,7 @@ export function EditVenueForm({ venue }) {
                     <input
                       type="checkbox"
                       id="breakfast"
-                      {...register('meta.breakfast')}
+                      {...register("meta.breakfast")}
                     />
                     <p>{errors.breakfast?.message}</p>
                   </div>
@@ -240,7 +240,7 @@ export function EditVenueForm({ venue }) {
                     <input
                       type="checkbox"
                       id="pets"
-                      {...register('meta.pets')}
+                      {...register("meta.pets")}
                     />
                     <p>{errors.pets?.message}</p>
                   </div>
@@ -257,7 +257,7 @@ export function EditVenueForm({ venue }) {
                   id="address"
                   className="venue_form"
                   placeholder="Enter your first-name"
-                  {...register('address')}
+                  {...register("address")}
                 />
 
                 <p>{errors.address?.message}</p>
@@ -271,7 +271,7 @@ export function EditVenueForm({ venue }) {
                   id="city"
                   className="venue_form"
                   placeholder="Enter your first-name"
-                  {...register('city')}
+                  {...register("city")}
                 />
 
                 <p>{errors.city?.message}</p>
@@ -285,7 +285,7 @@ export function EditVenueForm({ venue }) {
                   id="zip"
                   className="venue_form"
                   placeholder="Enter a url for avatar"
-                  {...register('zip')}
+                  {...register("zip")}
                 />
                 <p>{errors.zip?.message}</p>
               </div>
@@ -298,7 +298,7 @@ export function EditVenueForm({ venue }) {
                   id="country"
                   className="venue_form"
                   placeholder="Enter a url for avatar"
-                  {...register('country')}
+                  {...register("country")}
                 />
                 <p>{errors.country?.message}</p>
               </div>
@@ -311,7 +311,7 @@ export function EditVenueForm({ venue }) {
                   id="continent"
                   className="venue_form"
                   placeholder="Enter a url for avatar"
-                  {...register('continent')}
+                  {...register("continent")}
                 />
                 <p>{errors.continent?.message}</p>
               </div>

@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export function Home() {
   useEffect(() => {
-    document.title = 'Home page';
+    document.title = "Home page";
   }, []);
 
   return (

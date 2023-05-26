@@ -1,7 +1,8 @@
-import { useParams } from 'react-router-dom';
-import { useApiCall } from '../../../hooks/api/useApiCall';
-import { venueApiUrl } from '../../../services/authorization/apiBase';
-import { VenueDetails } from '../../../components/venue/VenueDetails';
+import { useParams } from "react-router-dom";
+import { useApiCall } from "../../../hooks/api/useApiCall";
+import { venueApiUrl } from "../../../services/authorization/apiBase";
+import { VenueDetails } from "../../../components/venue/VenueDetails";
+import { Message } from "../../../components/Message";
 
 export function DetailsPage() {
   const { id } = useParams();
@@ -10,11 +11,11 @@ export function DetailsPage() {
   );
 
   if (isLoading) {
-    return <div>Loading Profile</div>;
+    return <Message type="loading" text="Loading Profile" />;
   }
 
   if (isError) {
-    return <div>Error loading the venues</div>;
+    return <Message type="error" text="Error loading the venues" />;
   }
 
   return (
