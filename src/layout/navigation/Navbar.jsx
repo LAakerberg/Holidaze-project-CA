@@ -1,5 +1,5 @@
-import { Navigation } from './Navigation';
-import { MobileNavigation } from './Mobilenavigation';
+import { Navigation } from "./Navigation";
+import { MobileNavigation } from "./Mobilenavigation";
 
 export function Navbar() {
   return (

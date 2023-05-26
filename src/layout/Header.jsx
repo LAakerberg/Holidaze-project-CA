@@ -1,9 +1,9 @@
 /* import { Navbar } from './navigation/Navbar'; */
-import { Link } from 'react-router-dom';
-import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
-import { Navbar } from './navigation/Navbar';
-import { VenueSearch } from '../hooks/venues/searchHook';
-import { CgProfile } from 'react-icons/cg';
+import { Link } from "react-router-dom";
+import headerbg from "../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg";
+import { Navbar } from "./navigation/Navbar";
+import { VenueSearch } from "../hooks/venues/searchHook";
+import { CgProfile } from "react-icons/cg";
 
 export function Header() {
   return (
@@ -13,9 +13,9 @@ export function Header() {
           className="header_content relative z-20"
           style={{
             backgroundImage: `url(${headerbg})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: '50%',
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "50%",
           }}
         >
           <div className="bg-gradient-to-b from-light_salmon to-topaz drop-shadow-lg">

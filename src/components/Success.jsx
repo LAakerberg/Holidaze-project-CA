@@ -1,19 +1,19 @@
-import { Spinner } from './Spinner';
-import { useNavigate } from 'react-router-dom';
+import { Spinner } from "./Spinner";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Component for the success page after login.
  * Navigates to the user's profile page.
  */
 export function SuccessLogin() {
-  const user = JSON.parse(localStorage.getItem('userData'));
+  const user = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
   setTimeout(() => {
     navigate(`/profile/${user.name}`);
   }, 200);
   return (
     <>
-      {' '}
+      {" "}
       <div className="border bg-green-500/50 border-green-800 w-full m-auto mt-5">
         <div className="flex">
           <div className="flex-1 p-1">
@@ -37,7 +37,7 @@ export function SuccessRegister() {
   navigate(`/login`);
   return (
     <>
-      {' '}
+      {" "}
       <div className="border bg-green-500/50 border-green-800 w-full m-auto mt-5">
         <div className="flex">
           <div className="flex-1 p-1">

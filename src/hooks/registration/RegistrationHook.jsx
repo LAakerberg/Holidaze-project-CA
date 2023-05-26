@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { registerAuth } from '../../services/authorization/apiBase';
-import { Message } from '../../components/Message';
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { registerAuth } from "../../services/authorization/apiBase";
+import { Message } from "../../components/Message";
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 const regexName = /^[\w]+$/;
@@ -13,13 +13,13 @@ const matchForm = yup
   .object({
     name: yup
       .string()
-      .matches(regexName, 'No special character and max 20 char long')
+      .matches(regexName, "No special character and max 20 char long")
       .required(),
     email: yup
       .string()
       .matches(
         regexEmail,
-        'Must be a @stud.noroff.no or @noroff.no defined email'
+        "Must be a @stud.noroff.no or @noroff.no defined email"
       ),
     password: yup.string().min(3).max(20).required(),
     venueManager: yup.boolean().required(),
@@ -39,9 +39,9 @@ export function RegistrationForm() {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(registerAuth, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -49,14 +49,14 @@ export function RegistrationForm() {
 
       if (response.ok) {
         setMessage({
-          type: 'success',
-          text: 'Registration was successful, you will be redirected to login page',
+          type: "success",
+          text: "Registration was successful, you will be redirected to login page",
         });
 
         navigate(`/success/register'`); // Redirect to success page
       } else {
         setMessage({
-          type: 'error',
+          type: "error",
           text: `Registration was not successful, please try again -> ${responseData.errors[0].message}`,
         });
       }
@@ -81,7 +81,7 @@ export function RegistrationForm() {
               type="text"
               id="firstName"
               placeholder="Enter your first-name"
-              {...register('name')}
+              {...register("name")}
             />
 
             <p>{errors.name?.message}</p>
@@ -95,7 +95,7 @@ export function RegistrationForm() {
               type="email"
               id="email"
               placeholder="Enter your email"
-              {...register('email')}
+              {...register("email")}
             />
             <p>{errors.email?.message}</p>
 
@@ -106,7 +106,7 @@ export function RegistrationForm() {
               type="password"
               id="password"
               placeholder="Enter a password"
-              {...register('password')}
+              {...register("password")}
             />
             <p>{errors.password?.message}</p>
           </div>
@@ -119,7 +119,7 @@ export function RegistrationForm() {
                   type="checkbox"
                   id="user"
                   className="user_2"
-                  {...register('venueManager')}
+                  {...register("venueManager")}
                 />
                 <span className="slider round"></span>
               </label>
@@ -134,7 +134,7 @@ export function RegistrationForm() {
               type="url"
               id="avatar"
               placeholder="Enter a url for avatar"
-              {...register('avatar')}
+              {...register("avatar")}
             />
             <p>{errors.avatar?.message}</p>
           </div>

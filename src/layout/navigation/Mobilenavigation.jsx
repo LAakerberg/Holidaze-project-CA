@@ -1,8 +1,8 @@
-import { NavLinks } from './Navlinks';
-import { AiOutlineMenu } from 'react-icons/ai';
-import { AiFillCloseCircle } from 'react-icons/ai';
-import classes from './Navbar.module.css';
-import { useState } from 'react';
+import { NavLinks } from "./Navlinks";
+import { AiOutlineMenu } from "react-icons/ai";
+import { AiFillCloseCircle } from "react-icons/ai";
+import classes from "./Navbar.module.css";
+import { useState } from "react";
 
 export function MobileNavigation() {
   const [openNav, setOpenNav] = useState(false);

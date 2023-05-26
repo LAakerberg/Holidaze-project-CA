@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export function useApiCall(url, method) {
   const [data, setData] = useState([]);
@@ -12,10 +12,10 @@ export function useApiCall(url, method) {
         setIsError(false);
         setIsLoading(true);
 
-        const accessToken = localStorage.getItem('accessToken');
+        const accessToken = localStorage.getItem("accessToken");
         const fetchOptions = {
           headers: {
-            'Content-type': 'application/json',
+            "Content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         };

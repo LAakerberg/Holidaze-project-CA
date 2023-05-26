@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  *
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 export function NavLinks(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const user = JSON.parse(localStorage.getItem('userData'));
+  const user = JSON.parse(localStorage.getItem("userData"));
 
   /**
    * Take's the information from localStorage to see if the user
@@ -18,7 +18,7 @@ export function NavLinks(props) {
    */
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userData'));
+    const user = JSON.parse(localStorage.getItem("userData"));
     if (user && user.accessToken && user.venueManager) {
       setIsLoggedIn(true);
       setIsAdmin(true);
@@ -40,7 +40,7 @@ export function NavLinks(props) {
     localStorage.clear();
     setIsLoggedIn(false);
     setIsAdmin(false);
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   return (

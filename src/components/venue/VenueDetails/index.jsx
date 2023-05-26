@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { BsWifi } from 'react-icons/bs';
-import { TbParking } from 'react-icons/tb';
-import { BiRestaurant } from 'react-icons/bi';
-import { MdOutlinePets } from 'react-icons/md';
-import { BookingCalendar } from '../../Calendar';
-import { renderDate } from '../../../utils/formatDates';
-import 'react-calendar/dist/cjs/MonthView';
-import 'react-datepicker/dist/react-datepicker.css';
-import houseImg from '../../../assets/img/house.jpg';
+import { useEffect, useState } from "react";
+import { BsWifi } from "react-icons/bs";
+import { TbParking } from "react-icons/tb";
+import { BiRestaurant } from "react-icons/bi";
+import { MdOutlinePets } from "react-icons/md";
+import { BookingCalendar } from "../../Calendar";
+import { renderDate } from "../../../utils/formatDates";
+import "react-calendar/dist/cjs/MonthView";
+import "react-datepicker/dist/react-datepicker.css";
+import houseImg from "../../../assets/img/house.jpg";
 
 export function VenueDetails({ venueData }) {
   console.log(venueData.bookings);
@@ -15,7 +15,7 @@ export function VenueDetails({ venueData }) {
   const titleName = venueData.name;
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userData'));
+    const user = JSON.parse(localStorage.getItem("userData"));
     if (user && user.accessToken && user.venueManager) {
       setIsLoggedIn(true);
     } else if (user && user.accessToken) {
@@ -136,7 +136,7 @@ export function VenueDetails({ venueData }) {
                 <p className="text-lg font-bold break-all">Location</p>
                 <ul>
                   <li className="block p-0 ">
-                    Country:{' '}
+                    Country:{" "}
                     {venueData.location?.country ? (
                       <span className="underline">
                         {venueData.location?.country}
@@ -148,7 +148,7 @@ export function VenueDetails({ venueData }) {
                     )}
                   </li>
                   <li className="block p-0">
-                    City:{' '}
+                    City:{" "}
                     {venueData.location?.city ? (
                       <span className="underline underline-offset-2">
                         {venueData.location?.city}
@@ -160,7 +160,7 @@ export function VenueDetails({ venueData }) {
                     )}
                   </li>
                   <li className="block p-0">
-                    Address:{' '}
+                    Address:{" "}
                     {venueData.location?.address ? (
                       <span className="underline">
                         {venueData.location?.address}

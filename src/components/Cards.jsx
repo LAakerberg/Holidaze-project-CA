@@ -1,4 +1,4 @@
-import houseImg from '../assets/img/house.jpg';
+import houseImg from "../assets/img/house.jpg";
 
 export function Card(props) {
   return (
@@ -20,16 +20,16 @@ export function Card(props) {
               <div className="p-2">
                 <ul className="">
                   <li className="block p-0">
-                    Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}
+                    Breakfast: {venue.meta.breakfast ? "Yes" : "No"}
                   </li>
                   <li className="block p-0">
-                    Wifi: {venue.meta.wifi ? 'Yes' : 'No'}
+                    Wifi: {venue.meta.wifi ? "Yes" : "No"}
                   </li>
                   <li className="block p-0">
-                    Parking: {venue.meta.parking ? 'Yes' : 'No'}
+                    Parking: {venue.meta.parking ? "Yes" : "No"}
                   </li>
                   <li className="block p-0">
-                    Pets: {venue.meta.pets ? 'Yes' : 'No'}
+                    Pets: {venue.meta.pets ? "Yes" : "No"}
                   </li>
                 </ul>
               </div>

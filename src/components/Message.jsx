@@ -1,4 +1,4 @@
-import { Spinner } from './Spinner';
+import { Spinner } from "./Spinner";
 
 export const Message = ({ type, text }) => {
   return (
@@ -6,7 +6,7 @@ export const Message = ({ type, text }) => {
       <div className="flex-1">
         <p className="m-2">{text}</p>
       </div>
-      <div className="flex-initial p-1">{type !== 'error' && <Spinner />}</div>
+      <div className="flex-initial p-1">{type !== "error" && <Spinner />}</div>
     </div>
   );
 };
@@ -17,7 +17,7 @@ export const LoadingStatus = ({ type, text }) => {
       <div className="flex-1">
         <p className="m-2">{text}</p>
       </div>
-      <div className="flex-initial p-1">{type !== 'error' && <Spinner />}</div>
+      <div className="flex-initial p-1">{type !== "error" && <Spinner />}</div>
     </div>
   );
 };
