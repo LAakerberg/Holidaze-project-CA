@@ -8,8 +8,7 @@ import { Register } from './pages/AuthPage/Register';
 import { Login } from './pages/AuthPage/Login';
 import { ProfilePage } from './pages/ProfilePage/index';
 import { DetailsPage } from './pages/VenuePage/DetailsPage';
-/* import { SuccessLogin, SuccessRegistration } from './pages/Success'; */
-import { SuccessLogin, SuccessRegister } from './components/Success';
+import { SuccessLogin, SuccessRegistration } from './pages/Success';
 
 function RouteNotFound() {
   return <div>Page not found</div>;
@@ -49,7 +48,7 @@ export default function App() {
           <Route path="auth" element={<AuthUser />} />
           <Route path="/login" element={<Login />} />
           <Route path="/success/login" element={<SuccessLogin />} />
-          <Route path="/success/register" element={<SuccessRegister />} />
+          <Route path="/success/register" element={<SuccessRegistration />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:name" element={<ProfilePage />} />
           <Route path="*" element={<RouteNotFound />} />

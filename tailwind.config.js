@@ -21,8 +21,6 @@ export default {
     screens: {
       mobile: '400px',
       // => @media (min-width: 400px) { ... }
-      tablet: '500px',
-      // => @media (min-width: 400px) { ... }
       sm: '640px',
       // => @media (min-width: 640px) { ... }
       md: '768px',
