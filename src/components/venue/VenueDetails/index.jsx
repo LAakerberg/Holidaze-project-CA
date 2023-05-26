@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BsWifi } from 'react-icons/bs';
 import { TbParking } from 'react-icons/tb';
 import { BiRestaurant } from 'react-icons/bi';
@@ -10,7 +10,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export function VenueDetails({ venueData }) {
   console.log(venueData.bookings);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const titleName = venueData.name;
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userData'));
+    if (user && user.accessToken && user.venueManager) {
+      setIsLoggedIn(true);
+    } else if (user && user.accessToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   useEffect(() => {
     document.title = `Venue | ${titleName}`;
@@ -169,14 +181,33 @@ export function VenueDetails({ venueData }) {
           <p className="">Location: {venueData.location?.city}</p>
         </div>
       </div>
-      <div className="border border-light_salmon m-1 p-1 bg-gray-200">
-        <h4>Select a Date for Booking</h4>
-        <div className="">
-          <div className="flex flex-col justify-around gap-2">
-            <BookingCalendar data={venueData} />
+      {isLoggedIn && (
+        <>
+          <div className="border border-light_salmon m-1 p-1 bg-gray-200">
+            <h4>Select a Date for Booking</h4>
+            <div className="">
+              <div className="flex flex-col justify-around gap-2">
+                <BookingCalendar data={venueData} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+      {!isLoggedIn && (
+        <>
+          <div className="border border-light_salmon m-1 p-1 bg-gray-200">
+            <div className="">
+              <div className="flex flex-col justify-around gap-2">
+                <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
+                  <p className="m-auto">
+                    Calendar is not available, please login to make an booking!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
