@@ -1,8 +1,8 @@
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useState } from 'react';
-import { renderDate } from '../../../../utils/formatDates';
-import { useApiCall } from '../../../../hooks/api/useApiCall';
-import { bookingVenueUrl } from '../../../../services/authorization/apiBase';
+import { renderDate } from '../../../utils/formatDates';
+import { useApiCall } from '../../../hooks/api/useApiCall';
+import { bookingVenueUrl } from '../../../services/authorization/apiBase';
 
 export function VenueInfo({ info }) {
   const [isPopupVisible, setPopupVisible] = useState(false);
