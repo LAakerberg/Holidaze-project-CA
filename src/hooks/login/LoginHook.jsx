@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { loginAuth } from '../../services/authorization/apiBase';
 import * as storage from '../../services/storage/loadToken';
-import { SuccessLogin } from '../../components/StatusMessage';
+import { Message } from '../../components/Message';
 import { useNavigate } from 'react-router-dom';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
@@ -23,7 +23,7 @@ const matchForm = yup
 
 export function LoginForm() {
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); // Added state variable for success message
+  const [message, setMessage] = useState(null);
   const {
     register,
     handleSubmit,
@@ -47,13 +47,19 @@ export function LoginForm() {
 
       if (response.ok) {
         const user = JSON.parse(localStorage.getItem('userData'));
-        setSuccessMessage(<SuccessLogin />); // Set the success message
+        setMessage({
+          type: 'success',
+          text: 'Login was successful, you will be redirected',
+        });
         setTimeout(() => {
           // Redirect to the dashboard page
           navigate(`/profile/${user.name}`);
         }, 2500);
       } else {
-        setError('Login was not successful, please try again');
+        setMessage({
+          type: 'error',
+          text: 'Login was not successful, please try again',
+        });
       }
     } catch (error) {
       setError('Login failed');
@@ -95,9 +101,8 @@ export function LoginForm() {
             </div>
           </div>
           <div>
+            {message && <Message type={message.type} text={message.text} />}
             {error && <p>{error}</p>}
-            {successMessage && <p>{successMessage}</p>}{' '}
-            {/* Render success message */}
             <button className="button primary" type="submit">
               Submit
             </button>
