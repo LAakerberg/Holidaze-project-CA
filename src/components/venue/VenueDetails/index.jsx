@@ -7,6 +7,7 @@ import { BookingCalendar } from '../../Calendar';
 import { renderDate } from '../../../utils/formatDates';
 import 'react-calendar/dist/cjs/MonthView';
 import 'react-datepicker/dist/react-datepicker.css';
+import houseImg from '../../../assets/img/house.jpg';
 
 export function VenueDetails({ venueData }) {
   console.log(venueData.bookings);
@@ -34,19 +35,28 @@ export function VenueDetails({ venueData }) {
         <div className="flex border border-light_salmon m-1 p-1">
           <h2 className="font-bold">{venueData.name}</h2>
         </div>
-        <div className="flex flex-row border border-light_salmon m-1 p-1">
+        <div className="flex flex-col border border-light_salmon m-1 p-1">
           <div className="flex-1 border border-light_salmon m-1 p-1">
-            <img src={venueData.media} className="w-full h-96 object-cover" />
+            <img
+              src={venueData.media}
+              alt={venueData.name}
+              className="w-full h-96 object-cover"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = houseImg;
+              }}
+            />
           </div>
-          <div className="flex-initial w-40 border border-light_salmon m-1 p-1">
-            <div className="flex flex-col">
-              <div className="h-40">
-                <div>
-                  <p className="text-lg font-bold break-all">
-                    This venue offers
-                  </p>
+          <div className="flex-initial w-full border border-light_salmon px-2">
+            <div className="border-b border-light_salmon">
+              <h4 className="">This venue offers</h4>
+            </div>
+            <div className="flex flex-col tablet:flex-row justify-evenly">
+              <div className="flex-initial">
+                <div className="p-1 w-1/2 tablet:w-full">
+                  <p className="text-lg font-bold break-all">Facilities</p>
                   <ul className="grid grid-cols-2 list-none">
-                    <li className="p-0">
+                    <li className="p-2">
                       {venueData.meta?.breakfast ? (
                         <div className="main-icon">
                           <BiRestaurant
@@ -62,7 +72,7 @@ export function VenueDetails({ venueData }) {
                         </div>
                       )}
                     </li>
-                    <li className="p-0">
+                    <li className="p-2">
                       {venueData.meta?.parking ? (
                         <div className="main-icon">
                           <TbParking
@@ -81,7 +91,7 @@ export function VenueDetails({ venueData }) {
                         </div>
                       )}
                     </li>
-                    <li className="p-0">
+                    <li className="p-2">
                       {venueData.meta?.pets ? (
                         <div className="main-icon">
                           <MdOutlinePets
@@ -100,7 +110,7 @@ export function VenueDetails({ venueData }) {
                         </div>
                       )}
                     </li>
-                    <li className="p-0">
+                    <li className="p-2">
                       {venueData.meta?.wifi ? (
                         <div className="main-icon">
                           <BsWifi
@@ -122,8 +132,8 @@ export function VenueDetails({ venueData }) {
                   </ul>
                 </div>
               </div>
-              <div className="h-40">
-                <p className="text-lg font-bold break-all">Location:</p>
+              <div className="p-1">
+                <p className="text-lg font-bold break-all">Location</p>
                 <ul>
                   <li className="block p-0 ">
                     Country:{' '}
@@ -161,6 +171,20 @@ export function VenueDetails({ venueData }) {
                   </li>
                 </ul>
               </div>
+              <div className="p-1">
+                <p className="text-lg font-bold break-all">Key info</p>
+                <ul>
+                  <li className="block p-0 ">
+                    <p className="">Max guests: {venueData.maxGuests}</p>
+                  </li>
+                  <li className="block p-0">
+                    <p className="">Price: {venueData.price}</p>
+                  </li>
+                  <li className="block p-0">
+                    <p className="">Rating: {venueData.rating}</p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -172,13 +196,9 @@ export function VenueDetails({ venueData }) {
           <p>{venueData.description}</p>
         </div>
         <div className="border border-light_salmon m-1 p-1">
-          <p className="">Created: {renderDate(venueData.created)}</p>
           <p className="">ID: {venueData.id}</p>
-          <p className="">Max guests: {venueData.maxGuests}</p>
-          <p className="">Price: {venueData.price}</p>
-          <p className="">Rating: {venueData.rating}</p>
+          <p className="">Created: {renderDate(venueData.created)}</p>
           <p className="">Last update: {renderDate(venueData.updated)}</p>
-          <p className="">Location: {venueData.location?.city}</p>
         </div>
       </div>
       {isLoggedIn && (
@@ -198,8 +218,8 @@ export function VenueDetails({ venueData }) {
           <div className="border border-light_salmon m-1 p-1 bg-gray-200">
             <div className="">
               <div className="flex flex-col justify-around gap-2">
-                <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
-                  <p className="m-auto">
+                <div className="flex border bg-red-500/50 border-red-800 w-full py-2 m-auto">
+                  <p className="m-auto p-1">
                     Calendar is not available, please login to make an booking!
                   </p>
                 </div>
