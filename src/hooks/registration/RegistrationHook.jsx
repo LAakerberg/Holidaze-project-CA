@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { registerAuth } from '../../services/authorization/apiBase';
+import { Message } from '../../components/Message';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 const regexName = /^[\w]+$/;
@@ -26,6 +28,7 @@ const matchForm = yup
   .required();
 
 export function RegistrationForm() {
+  const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const {
     register,
@@ -34,8 +37,6 @@ export function RegistrationForm() {
   } = useForm({ resolver: yupResolver(matchForm) });
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     try {
       const response = await fetch(registerAuth, {
         method: 'POST',
@@ -47,18 +48,20 @@ export function RegistrationForm() {
       const responseData = await response.json();
 
       if (response.ok) {
-        alert(
-          'Registration was successful, you will be redirected to login page'
-        );
+        setMessage({
+          type: 'success',
+          text: 'Registration was successful, you will be redirected to login page',
+        });
+
         navigate(`/success/register'`); // Redirect to success page
       } else {
-        alert('Registration was not successful, please try again');
+        setMessage({
+          type: 'error',
+          text: `Registration was not successful, please try again -> ${responseData.errors[0].message}`,
+        });
       }
-
-      console.log(response);
-      console.log(responseData);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
   return (
@@ -137,6 +140,7 @@ export function RegistrationForm() {
           </div>
         </div>
         <div>
+          {message && <Message type={message.type} text={message.text} />}
           <button className="button primary" type="submit">
             Submit
           </button>
