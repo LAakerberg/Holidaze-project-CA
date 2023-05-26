@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Calendar } from 'react-calendar';
 import { bookingVenueUrl } from '../services/authorization/apiBase';
 import { renderDate } from '../utils/formatDates';
@@ -7,6 +8,8 @@ export function BookingCalendar({ data }) {
   console.log(data);
   const user = JSON.parse(localStorage.getItem('userData'));
   const [selectedDates, setSelectedDates] = useState([]);
+  const [guests, setGuests] = useState(1);
+
   const handleDateChange = (selectedDate) => {
     setSelectedDates(selectedDate);
   };
@@ -27,32 +30,27 @@ export function BookingCalendar({ data }) {
     dateTo: new Date(booking.dateTo),
   }));
 
-  renderDate(selectedDates[0]);
-  renderDate(selectedDates[1]);
-
-  console.log(selectedDates);
-  console.log(selectedDates[0]);
-  console.log(selectedDates[1]);
-
   const handleBookClick = async () => {
     const idFromVenue = data.id;
     try {
       if (selectedDates.length === 2) {
         const dateFrom = selectedDates[0].toISOString();
         const dateTo = selectedDates[1].toISOString();
-        const guests = 1;
         const venueId = idFromVenue;
         const accessToken = localStorage.getItem('accessToken');
         console.log(venueId);
-        // Perform API call here with the selected dates
-        const response = await fetch(bookingVenueUrl, {
-          method: 'POST',
-          body: JSON.stringify({ dateFrom, dateTo, guests, venueId }),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+
+        const response = await fetch(
+          bookingVenueUrl + `?_customer=true&_venue=true`,
+          {
+            method: 'POST',
+            body: JSON.stringify({ dateFrom, dateTo, guests, venueId }),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
         const responseData = await response.json();
         console.log(responseData);
         if (!response.ok) {
@@ -69,6 +67,11 @@ export function BookingCalendar({ data }) {
       // Handle error
     }
   };
+  const handleGuestsChange = (event) => {
+    const value = parseInt(event.target.value); // Parse the input value as an integer
+    setGuests(value); // Update the guests state with the new value
+  };
+
   return (
     <>
       <div className="flex flex-col sm:flex-row justify-around">
@@ -89,7 +92,15 @@ export function BookingCalendar({ data }) {
             </div>
             <div className="flex flex-col">
               <span className="font-bold">How many guests?</span>
-              <input type="number" max={data.maxGuests} />
+              <input
+                type="number"
+                id="guests"
+                placeholder="Max guests"
+                min="1"
+                max={data.maxGuests}
+                value={guests}
+                onChange={handleGuestsChange}
+              />
             </div>
             <div className="flex flex-col">
               <div>
