@@ -12,7 +12,7 @@ import { Spinner } from '../../Spinner';
 // MyVenues
 import { useApiCall } from '../../../hooks/api/useApiCall';
 import { getProfileUrl } from '../../../services/authorization/apiBase';
-import { VenueInfo } from './VenueInfo';
+import { VenueInfo } from '../VenueInfo';
 
 /**
  * Renders the component to manage a venue.
