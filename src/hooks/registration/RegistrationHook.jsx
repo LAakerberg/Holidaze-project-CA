@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { registerAuth } from '../../services/authorization/apiBase';
@@ -25,6 +26,7 @@ const matchForm = yup
   .required();
 
 export function RegistrationForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -48,7 +50,7 @@ export function RegistrationForm() {
         alert(
           'Registration was successful, you will be redirected to login page'
         );
-        window.location.href = '/success'; // Redirect to success page
+        navigate(`/success/register'`); // Redirect to success page
       } else {
         alert('Registration was not successful, please try again');
       }
