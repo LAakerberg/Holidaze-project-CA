@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { loginAuth } from "../../services/authorization/apiBase";
-import * as storage from "../../services/storage/loadToken";
-import { Message } from "../../components/Message";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { loginAuth } from '../../services/authorization/apiBase';
+import * as storage from '../../services/storage/loadToken';
+import { Message } from '../../components/Message';
+import { useNavigate } from 'react-router-dom';
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 
@@ -15,7 +15,7 @@ const matchForm = yup
       .string()
       .matches(
         regexEmail,
-        "Must be a @stud.noroff.no or @noroff.no defined email"
+        'Must be a @stud.noroff.no or @noroff.no defined email'
       ),
     password: yup.string().min(8).required(),
   })
@@ -34,35 +34,34 @@ export function LoginForm() {
   const onSubmit = async (data) => {
     try {
       const response = await fetch(loginAuth, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
       const responseData = await response.json();
       const accessToken = responseData.accessToken;
-      storage.save("accessToken", accessToken);
-      storage.save2("userData", responseData);
+      storage.save('accessToken', accessToken);
+      storage.save2('userData', responseData);
 
       if (response.ok) {
-        /* const user = JSON.parse(localStorage.getItem("userData")); */
         setMessage({
-          type: "success",
-          text: "Login was successful, you will be redirected",
+          type: 'success',
+          text: 'Login was successful, you will be redirected',
         });
         setTimeout(() => {
           navigate(`/success/login`); // Redirect to success page
         }, 2500);
       } else {
         setMessage({
-          type: "error",
-          text: "Login was not successful, please try again",
+          type: 'error',
+          text: 'Login was not successful, please try again',
         });
       }
     } catch (error) {
       console.log(error);
-      setError("Login failed");
+      setError('Login failed');
     }
   };
 
@@ -84,7 +83,7 @@ export function LoginForm() {
                 type="email"
                 id="email"
                 placeholder="Enter your email"
-                {...register("email")}
+                {...register('email')}
               />
               <p>{errors.email?.message}</p>
 
@@ -95,7 +94,7 @@ export function LoginForm() {
                 type="password"
                 id="password"
                 placeholder="Enter a password"
-                {...register("password")}
+                {...register('password')}
               />
               <p>{errors.password?.message}</p>
             </div>
