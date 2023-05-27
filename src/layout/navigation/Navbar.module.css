@@ -47,6 +47,7 @@ nav li {
   text-shadow: 2px 2px 2px #00000075;
 }
 nav li:hover {
+  transition: 0.5s;
   text-decoration: 2px solid white underline;
   text-underline-offset: 5px;
 }

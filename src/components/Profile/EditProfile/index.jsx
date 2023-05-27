@@ -68,7 +68,7 @@ export function EditProfile() {
   return (
     <>
       <button onClick={toggleOpen}>
-        <FaUserEdit className="icons-style bg-orange-500/70 p-1 rounded-2xl" />
+        <FaUserEdit className="icons-style bg-orange-500/20 hover:bg-orange-500/70 transition delay-50 duration-300 ease-in-out p-1 rounded-2xl" />
       </button>
 
       <form

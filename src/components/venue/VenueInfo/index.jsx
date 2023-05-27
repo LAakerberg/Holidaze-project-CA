@@ -20,7 +20,7 @@ export function VenueInfo({ info }) {
   return (
     <>
       <div
-        className=""
+        className="transition delay-50 duration-300 ease-in-out"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -28,11 +28,11 @@ export function VenueInfo({ info }) {
         <AiOutlineInfoCircle className="icons-style_edit" alt="Text" />
 
         {isPopupVisible && (
-          <div className="popup">
+          <div className="popup transition delay-50 duration-300 ease-in-out">
             {/* Render popup content here */}
             <div>
               <div>Bookings</div>
-              <div className="border border-light_salmon">
+              <div className="border border-light_salmon transition delay-50 duration-300 ease-in-out">
                 {bookings.length > 0 ? (
                   bookings
                     .sort(

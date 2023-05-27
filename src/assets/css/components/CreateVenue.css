@@ -12,7 +12,11 @@
   background-color: #f0f0f0;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: 0.4s ease-in-out;
+}
+.arrow-button:hover {
+  transition: 0.4s ease-in-out;
+  background-color: #ea9452;
 }
 
 .arrow-button.open {

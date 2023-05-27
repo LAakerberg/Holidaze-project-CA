@@ -3,9 +3,40 @@ import { Link } from 'react-router-dom';
 import headerbg from '../assets/img/david-vives-ELf8M_YWRTY-unsplash-holidaze-bg2.jpg';
 import { Navbar } from './navigation/Navbar';
 import { VenueSearch } from '../hooks/venues/searchHook';
-import { CgProfile } from 'react-icons/cg';
+import { BiSearch } from 'react-icons/bi';
+import { useState, useEffect, useRef } from 'react';
 
 export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleRef = useRef(null);
+  const scrollThreshold = 200; // Adjust this value to your desired scroll threshold
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (toggleRef.current && !toggleRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleScroll = () => {
+    if (window.scrollY > scrollThreshold) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <header className="relative">
@@ -33,26 +64,33 @@ export function Header() {
                     <Navbar />
                   </div>
                 </div>
-                <div className="hidden md:flex flex-initial z-40">
-                  <div className="flex flex-col z-40 pt-2 hidden">
-                    <CgProfile className="icons-style icons-profile drop-shadow-xl mr-4" />
+                <div className="flex flex-initial z-40">
+                  <div className="flex flex-col z-40 pt-2">
+                    <button onClick={toggleOpen}>
+                      <BiSearch className="icons-style icons-profile drop-shadow-xl mr-4" />
+                    </button>
                   </div>
                 </div>
-                <div className="top-20  z-40 m-auto flex justify-center hidden">
-                  <div className="bg-gradient-to-b from-topaz to-light_salmon m-auto drop-shadow-lg p-1 rounded-xl z-40">
-                    <VenueSearch />
-                  </div>
+                <div className="top-20 z-40 m-auto flex justify-center hidden">
+                  {isOpen && (
+                    <div className="bg-gradient-to-b from-topaz to-light_salmon m-auto drop-shadow-lg p-1 rounded-xl z-40">
+                      <VenueSearch />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="absolute top-20 w-full z-30 m-auto flex justify-center hidden">
-          <div className="w-72 h-20 bg-yellow_red rounded-lg border border-light_salmon flex justify-center items-center">
-            <div className="hidden">
+        <div className="absolute left-2 md:right-2 md:left-auto top-16 z-30 m-auto flex justify-center">
+          {isOpen && (
+            <div
+              ref={toggleRef}
+              className="bg-gradient-to-b from-topaz to-light_salmon m-auto drop-shadow-lg p-1 rounded-xl z-40"
+            >
               <VenueSearch />
             </div>
-          </div>
+          )}
         </div>
         <div className="hidden absolute top-64 z-20 w-full"></div>
       </header>

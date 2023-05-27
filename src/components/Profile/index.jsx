@@ -40,7 +40,13 @@ export function Profile({ data, onVenueDelete }) {
             <div className="p-2">
               <img
                 src={data.avatar}
+                alt={(data.avatar, 'Profile picture')}
                 className="w-52 object-contain rounded-full"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS54088iJjHpn-y9FCxGAh5NBEdHugwIXewWQ&usqp=CAU';
+                }}
               />
             </div>
             <div className="px-2 border-l-2 border-topaz">
