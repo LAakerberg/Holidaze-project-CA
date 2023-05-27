@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { loginAuth } from "../../services/authorization/apiBase";
 import * as storage from "../../services/storage/loadToken";
 import { Message } from "../../components/Message";
+import { useNavigate } from "react-router-dom";
 
 const regexEmail = /^[\w\-.]+@(stud\.)?noroff\.no$/;
 
@@ -21,6 +22,7 @@ const matchForm = yup
   .required();
 
 export function LoginForm() {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const {
@@ -44,12 +46,13 @@ export function LoginForm() {
       storage.save2("userData", responseData);
 
       if (response.ok) {
+        const user = JSON.parse(localStorage.getItem("userData"));
         setMessage({
           type: "success",
           text: "Login was successful, you will be redirected",
         });
         setTimeout(() => {
-          window.location.href = "/success/login"; // Redirect to success page
+          navigate(`/profile/${user.name}`); // Redirect to success page
         }, 2500);
       } else {
         setMessage({
@@ -58,6 +61,7 @@ export function LoginForm() {
         });
       }
     } catch (error) {
+      console.log(error);
       setError("Login failed");
     }
   };
