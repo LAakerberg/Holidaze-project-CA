@@ -46,13 +46,13 @@ export function LoginForm() {
       storage.save2("userData", responseData);
 
       if (response.ok) {
-        const user = JSON.parse(localStorage.getItem("userData"));
+        /* const user = JSON.parse(localStorage.getItem("userData")); */
         setMessage({
           type: "success",
           text: "Login was successful, you will be redirected",
         });
         setTimeout(() => {
-          navigate(`/profile/${user.name}`); // Redirect to success page
+          navigate(`/success/login`); // Redirect to success page
         }, 2500);
       } else {
         setMessage({
