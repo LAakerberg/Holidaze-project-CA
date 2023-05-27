@@ -1,4 +1,4 @@
-import { LoginForm } from "../../../hooks/login/LoginHook";
+import { LoginForm } from '../../../hooks/login/LoginHook';
 
 export function Login() {
   return (

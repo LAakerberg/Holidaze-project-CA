@@ -1,15 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useApiCall } from "../../hooks/api/useApiCall";
-import { getProfileUrl } from "../../services/authorization/apiBase";
-import { Profile } from "../../components/Profile";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useApiCall } from '../../hooks/api/useApiCall';
+import { getProfileUrl } from '../../services/authorization/apiBase';
+import { Profile } from '../../components/Profile';
 
 /**
  * Profile page component.
  * Displays user profile information.
  */
 export function ProfilePage() {
-  const user = JSON.parse(localStorage.getItem("userData")); // Retrieve user data from localStorage
+  const user = JSON.parse(localStorage.getItem('userData')); // Retrieve user data from localStorage
   const { name } = useParams(); // Get the 'name' parameter from the URL
   const [shouldUpdateProfile, setShouldUpdateProfile] = useState(false); // State variable to trigger profile update
   const { data, isLoading, isError } = useApiCall(
@@ -43,7 +43,7 @@ export function ProfilePage() {
       <div className="p-1 my-1">
         <h3>Profile</h3>
         <div>
-          <Profile data={data} onVenueDelete={handleVenueDelete} />{" "}
+          <Profile data={data} onVenueDelete={handleVenueDelete} />{' '}
           {/* Render the Profile component with the fetched data and the delete venue event handler */}
         </div>
       </div>

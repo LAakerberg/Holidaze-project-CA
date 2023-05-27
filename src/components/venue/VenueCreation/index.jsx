@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { TiArrowSortedDown } from "react-icons/ti";
-import { VenueForm } from "./VenueForm";
+import { useState } from 'react';
+import { TiArrowSortedDown } from 'react-icons/ti';
+import { VenueForm } from './VenueForm';
 
 /**
  * This function is holding the creation of venue and when toggle the button the manager will get access to the VenueForm.
@@ -21,7 +21,7 @@ export function VenueCreation() {
         </div>
         <div className="flex-initial">
           <button
-            className={`arrow-button ${isOpen ? "open" : ""}`}
+            className={`arrow-button ${isOpen ? 'open' : ''}`}
             onClick={toggleOpen}
             id="open_venue_form"
           >

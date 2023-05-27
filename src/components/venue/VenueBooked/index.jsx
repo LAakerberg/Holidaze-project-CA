@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { TiArrowSortedDown } from "react-icons/ti";
-import { useParams } from "react-router-dom";
-import { getProfileUrl } from "../../../services/authorization/apiBase";
-import { useApiCall } from "../../../hooks/api/useApiCall";
-import { Spinner } from "../../Spinner";
-import { renderDate } from "../../../utils/formatDates";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { TiArrowSortedDown } from 'react-icons/ti';
+import { useParams } from 'react-router-dom';
+import { getProfileUrl } from '../../../services/authorization/apiBase';
+import { useApiCall } from '../../../hooks/api/useApiCall';
+import { Spinner } from '../../Spinner';
+import { renderDate } from '../../../utils/formatDates';
 
 export function VenueBooked() {
   const { name } = useParams(); // Get the 'name' parameter from the URL
   const { data, isLoading, isError } = useApiCall(
     getProfileUrl + name + `/` + `bookings?sortOrder=asc&_venue=true`,
-    "GET"
+    'GET'
   );
 
   /* console.log(data); */
@@ -64,7 +64,7 @@ export function VenueBooked() {
             </div>
             <div className="flex-initial">
               <button
-                className={`arrow-button ${isOpenBooked ? "open" : ""}`}
+                className={`arrow-button ${isOpenBooked ? 'open' : ''}`}
                 onClick={toggleOpenBooked}
                 id="open_manage_venue"
               >
@@ -90,7 +90,7 @@ export function VenueBooked() {
                       </div>
                       <div className="border rounded-lg mt-1 p-1">
                         <p>Booking dates:</p>
-                        {renderDate(booking.dateFrom)} -{" "}
+                        {renderDate(booking.dateFrom)} -{' '}
                         {renderDate(booking.dateTo)}
                       </div>
                     </div>
@@ -113,7 +113,7 @@ export function VenueBooked() {
             </div>
             <div className="flex-initial">
               <button
-                className={`arrow-button ${isOpenHistory ? "open" : ""}`}
+                className={`arrow-button ${isOpenHistory ? 'open' : ''}`}
                 onClick={toggleOpenHistory}
                 id="open_manage_venue"
               >
@@ -139,7 +139,7 @@ export function VenueBooked() {
                       </div>
                       <div className="border rounded-lg mt-1 p-1">
                         <p>Booking dates:</p>
-                        {renderDate(booking.dateFrom)} -{" "}
+                        {renderDate(booking.dateFrom)} -{' '}
                         {renderDate(booking.dateTo)}
                       </div>
                     </div>

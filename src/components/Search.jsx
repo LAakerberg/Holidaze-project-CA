@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Search = ({ data }) => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [hasInput, setHasInput] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const searchResultsRef = useRef(null);
@@ -16,27 +16,27 @@ export const Search = ({ data }) => {
         )
       : [];
     setFilteredData(newData);
-    setHasInput(value !== "");
+    setHasInput(value !== '');
   };
 
   const handleDocumentClick = (event) => {
-    const isLink = event.target.tagName.toLowerCase() === "a";
+    const isLink = event.target.tagName.toLowerCase() === 'a';
     const isOutsideResults =
       searchResultsRef.current &&
       !searchResultsRef.current.contains(event.target);
 
     if (isLink || isOutsideResults) {
-      setQuery("");
+      setQuery('');
       setFilteredData([]);
       setHasInput(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleDocumentClick);
+    document.addEventListener('click', handleDocumentClick);
 
     return () => {
-      document.removeEventListener("click", handleDocumentClick);
+      document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
 
@@ -50,7 +50,7 @@ export const Search = ({ data }) => {
         className="w-40 md:w-52 h-8 p-1 rounded-md outline outline-1"
       />
       <div
-        className={`absolute pt-1 w-full ${hasInput ? "bg-topaz/90" : ""}`}
+        className={`absolute pt-1 w-full ${hasInput ? 'bg-topaz/90' : ''}`}
         ref={searchResultsRef}
       >
         <ul className="backdrop-blur-xl p-1 text-black rounded-lg">

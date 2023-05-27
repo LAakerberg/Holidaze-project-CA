@@ -1,5 +1,5 @@
-import { NavLinks } from "./Navlinks";
-import classes from "./Navbar.module.css";
+import { NavLinks } from './Navlinks';
+import classes from './Navbar.module.css';
 
 export function Navigation() {
   return (

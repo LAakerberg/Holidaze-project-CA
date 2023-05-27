@@ -1,6 +1,6 @@
-import houseImg from "../../assets/img/house.jpg";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import houseImg from '../../assets/img/house.jpg';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export function VenuesList(props) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +37,7 @@ export function VenuesList(props) {
             key={number}
             onClick={() => setCurrentPage(number)}
             style={{
-              backgroundColor: currentPage === number ? "gray" : "white",
+              backgroundColor: currentPage === number ? 'gray' : 'white',
             }}
             className="p-2 m-1"
           >
@@ -84,16 +84,16 @@ export function VenuesList(props) {
                 <div className="flex-none w-32">
                   <ul className="">
                     <li className="block p-0">
-                      Breakfast: {venue.meta.breakfast ? "Yes" : "No"}
+                      Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}
                     </li>
                     <li className="block p-0">
-                      Parking: {venue.meta.parking ? "Yes" : "No"}
+                      Parking: {venue.meta.parking ? 'Yes' : 'No'}
                     </li>
                     <li className="block p-0">
-                      Pets: {venue.meta.pets ? "Yes" : "No"}
+                      Pets: {venue.meta.pets ? 'Yes' : 'No'}
                     </li>
                     <li className="block p-0">
-                      Wifi: {venue.meta.wifi ? "Yes" : "No"}
+                      Wifi: {venue.meta.wifi ? 'Yes' : 'No'}
                     </li>
                   </ul>
                 </div>

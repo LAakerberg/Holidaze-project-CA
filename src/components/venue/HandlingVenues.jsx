@@ -1,5 +1,5 @@
-import { MyVenues } from "./ManageVenue";
-import { VenueCreation } from "../venue/VenueCreation";
+import { MyVenues } from './ManageVenue';
+import { VenueCreation } from '../venue/VenueCreation';
 
 export function HandlingVenues({ data, onVenueDelete }) {
   return (

@@ -1,14 +1,18 @@
-import { useState } from "react";
-
-import { Calendar } from "react-calendar";
-import { bookingVenueUrl } from "../services/authorization/apiBase";
-import { renderDate } from "../utils/formatDates";
+import { useState } from 'react';
+import { Calendar } from 'react-calendar';
+import { bookingVenueUrl } from '../services/authorization/apiBase';
+import { renderDate } from '../utils/formatDates';
+import { Message } from './Message';
+import { useNavigate } from 'react-router-dom';
 
 export function BookingCalendar({ data }) {
   console.log(data);
-  const user = JSON.parse(localStorage.getItem("userData"));
+  const user = JSON.parse(localStorage.getItem('userData'));
   const [selectedDates, setSelectedDates] = useState([]);
   const [guests, setGuests] = useState(1);
+  const [bookingStatus, setBookingStatus] = useState(null); // New state for booking status
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleDateChange = (selectedDate) => {
     setSelectedDates(selectedDate);
@@ -37,36 +41,50 @@ export function BookingCalendar({ data }) {
         const dateFrom = selectedDates[0].toISOString();
         const dateTo = selectedDates[1].toISOString();
         const venueId = idFromVenue;
-        const accessToken = localStorage.getItem("accessToken");
+        const accessToken = localStorage.getItem('accessToken');
         console.log(venueId);
 
         const response = await fetch(
           bookingVenueUrl + `?_customer=true&_venue=true`,
           {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify({ dateFrom, dateTo, guests, venueId }),
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
           }
         );
         const responseData = await response.json();
         console.log(responseData);
-        if (!response.ok) {
-          throw new Error("Failed to book. Please try again.");
+        if (response.ok) {
+          setBookingStatus('success'); // Set booking status to 'success'
+          setMessage({
+            type: 'success',
+            text: 'Booking was successful, page will reload',
+          });
+          setTimeout(() => {
+            refreshPage();
+          }, 3000);
+        } else {
+          setMessage({
+            type: 'error',
+            text: 'Failed to book. Please try again.',
+          });
         }
-        const data = await response.json();
-        console.log(data);
-        // Handle API response
       } else {
-        console.log("Please select both dateFrom and dateTo");
+        console.log('Please select both dateFrom and dateTo');
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
       // Handle error
     }
   };
+
+  const refreshPage = () => {
+    navigate(0);
+  };
+
   const handleGuestsChange = (event) => {
     const value = parseInt(event.target.value); // Parse the input value as an integer
     setGuests(value); // Update the guests state with the new value
@@ -75,7 +93,7 @@ export function BookingCalendar({ data }) {
   return (
     <>
       <div className="flex flex-col sm:flex-row justify-around">
-        <div className="flex mt-4 mx-2">
+        <div className=" flex mt-4 mx-2">
           <Calendar
             className="custom-calendar bg-gradient-to-b from-light_salmon to-topaz drop-shadow-lg"
             onChange={handleDateChange}
@@ -84,7 +102,11 @@ export function BookingCalendar({ data }) {
             selectRange
           />
         </div>
-        <div className="flex flex-col border border-light_salmon p-5 mt-4 mx-2">
+
+        <div
+          className="flex flex-col border border-light_salmon p-5 mt-4 mx-2"
+          id="booking_menu"
+        >
           <div className="">
             <div className="flex flex-col">
               <span className="font-bold">Reservation name:</span>
@@ -107,20 +129,25 @@ export function BookingCalendar({ data }) {
                 <span className="font-bold">Selected dates</span>
               </div>
               <p>
-                From:{" "}
+                From:{' '}
                 {selectedDates.length > 0 ? renderDate(selectedDates[0]) : null}
               </p>
               <p>
-                To:{" "}
+                To:{' '}
                 {selectedDates.length > 0 ? renderDate(selectedDates[1]) : null}
               </p>
             </div>
           </div>
-          <div className="text-center">
-            <button className="button primary" onClick={handleBookClick}>
-              Book
-            </button>
-          </div>
+          {message && ( // Render Message if message exists
+            <Message type={message.type} text={message.text} />
+          )}
+          {bookingStatus !== 'success' && ( // Render the Book button if booking status is not 'success'
+            <div className="text-center">
+              <button className="button primary" onClick={handleBookClick}>
+                Book
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
