@@ -1,7 +1,7 @@
-import { Spinner } from "../../components/Spinner";
+import { Spinner } from '../../components/Spinner';
 
 export function SuccessLogin() {
-  const user = JSON.parse(localStorage.getItem("userData"));
+  const user = JSON.parse(localStorage.getItem('userData'));
 
   if (user) {
     console.log(user);
@@ -32,7 +32,7 @@ export function SuccessLogin() {
 }
 
 export function SuccessRegistration() {
-  const user = JSON.parse(localStorage.getItem("userData"));
+  const user = JSON.parse(localStorage.getItem('userData'));
 
   if (user) {
     console.log(user);

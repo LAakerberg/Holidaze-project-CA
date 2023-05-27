@@ -1,8 +1,8 @@
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import { useState } from "react";
-import { renderDate } from "../../../utils/formatDates";
-import { useApiCall } from "../../../hooks/api/useApiCall";
-import { bookingVenueUrl } from "../../../services/authorization/apiBase";
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { useState } from 'react';
+import { renderDate } from '../../../utils/formatDates';
+import { useApiCall } from '../../../hooks/api/useApiCall';
+import { bookingVenueUrl } from '../../../services/authorization/apiBase';
 
 export function VenueInfo({ info }) {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -43,16 +43,16 @@ export function VenueInfo({ info }) {
                       let className;
                       if (Date.parse(booked.dateFrom) < Date.parse(today)) {
                         className =
-                          "border border-light_salmon bg-red-200 p-1 m-1";
+                          'border border-light_salmon bg-red-200 p-1 m-1';
                       } else {
-                        className = "border border-light_salmon p-1 m-1";
+                        className = 'border border-light_salmon p-1 m-1';
                       }
                       return (
                         <div className={className} key={booked.id}>
                           <p>
                             Booking ref: {booked.id.slice(0, 8).toUpperCase()}
                           </p>
-                          {renderDate(booked.dateFrom)} -{" "}
+                          {renderDate(booked.dateFrom)} -{' '}
                           {renderDate(booked.dateTo)}
                         </div>
                       );
@@ -72,7 +72,7 @@ export function VenueInfo({ info }) {
 export function VenueSpecifiedInfo() {
   const { data, isLoading, isError } = useApiCall(
     bookingVenueUrl +
-      "f1153ea5-f805-496f-a815-b7a474e899e3" +
+      'f1153ea5-f805-496f-a815-b7a474e899e3' +
       `?_customer=true&_venue=false` // API endpoint for retrieving user profile data
   );
 

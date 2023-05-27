@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { EditVenueForm } from "./EditVenueForm";
-import { AiOutlineEdit } from "react-icons/ai";
-import { AiOutlineClose } from "react-icons/ai";
+import { useState } from 'react';
+import { EditVenueForm } from './EditVenueForm';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 
 /**
  * Renders the component to edit a venue.
@@ -20,7 +20,7 @@ export function VenueEdit({ venue }) {
   return (
     <div className="static">
       <button
-        className={`edit-button ${editOpen ? "open" : ""}`}
+        className={`edit-button ${editOpen ? 'open' : ''}`}
         onClick={toggleEditOpen}
       >
         {editOpen ? (

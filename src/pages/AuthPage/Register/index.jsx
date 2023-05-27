@@ -1,4 +1,4 @@
-import { RegistrationForm } from "../../../hooks/registration/RegistrationHook";
+import { RegistrationForm } from '../../../hooks/registration/RegistrationHook';
 
 export function Register() {
   return (

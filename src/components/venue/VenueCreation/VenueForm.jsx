@@ -1,20 +1,20 @@
-import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
-import { Spinner } from "../../Spinner";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { venueApiUrl } from "../../../services/authorization/apiBase";
+import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import { Spinner } from '../../Spinner';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { venueApiUrl } from '../../../services/authorization/apiBase';
 
 const matchForm = yup
   .object({
     name: yup
       .string()
-      .min(3, "Title must be at least 3 characters")
+      .min(3, 'Title must be at least 3 characters')
       .max(30)
       .required(),
     description: yup
       .string()
-      .min(50, "Description must be at least 50 characters")
+      .min(50, 'Description must be at least 50 characters')
       .required(),
     media: yup
       .mixed()
@@ -22,15 +22,15 @@ const matchForm = yup
         originalValue ? [originalValue] : []
       )
       .test(
-        "is-media-array",
-        "Please enter at least one media URL",
+        'is-media-array',
+        'Please enter at least one media URL',
         (value) => Array.isArray(value) && value.length > 0
       )
-      .required("Please enter a media URL"),
+      .required('Please enter a media URL'),
     price: yup
-      .number("Price must contain a number")
-      .min(1, "Price must contain a number")
-      .required("Price must contain a number"),
+      .number('Price must contain a number')
+      .min(1, 'Price must contain a number')
+      .required('Price must contain a number'),
     maxGuests: yup.number().integer().min(1).max(100).required(),
     rating: yup.number().min(1).max(5).required(),
     wifi: yup.boolean(),
@@ -46,8 +46,8 @@ const matchForm = yup
   .required();
 
 export function VenueForm() {
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const {
     register,
     handleSubmit,
@@ -56,16 +56,16 @@ export function VenueForm() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem('accessToken');
 
     try {
       // Ensure media field is always an array
       data.media = Array.isArray(data.media) ? data.media : [data.media];
 
       const response = await fetch(venueApiUrl, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(data),
@@ -73,13 +73,13 @@ export function VenueForm() {
       const responseData = await response.json();
       console.log(responseData);
       if (response.ok) {
-        setSuccessMessage("Venue was successfully created, page will refresh!");
+        setSuccessMessage('Venue was successfully created, page will refresh!');
         setTimeout(() => {
-          setSuccessMessage(""); // Clear the success message
+          setSuccessMessage(''); // Clear the success message
         }, 3000);
       } else {
-        console.log("Registration was not successful, please try again");
-        setErrorMessage("Registration was not successful, please try again");
+        console.log('Registration was not successful, please try again');
+        setErrorMessage('Registration was not successful, please try again');
       }
     } catch (error) {
       console.log(error);
@@ -134,7 +134,7 @@ export function VenueForm() {
                     id="name"
                     className="venue_form"
                     placeholder="Enter your first-name"
-                    {...register("name")}
+                    {...register('name')}
                   />
 
                   <p>{errors.name?.message}</p>
@@ -148,7 +148,7 @@ export function VenueForm() {
                     id="description"
                     className="venue_form"
                     placeholder="Enter your first-name"
-                    {...register("description")}
+                    {...register('description')}
                   />
 
                   <p>{errors.description?.message}</p>
@@ -157,7 +157,7 @@ export function VenueForm() {
                   <label htmlFor="media" className="">
                     Media
                   </label>
-                  <input {...register("media")} />
+                  <input {...register('media')} />
                   <p>{errors.media?.message}</p>
                 </div>
               </div>
@@ -173,7 +173,7 @@ export function VenueForm() {
                     min="1"
                     max="3000"
                     className="venue_form"
-                    {...register("price")}
+                    {...register('price')}
                   />
                   <p>{errors.price?.message}</p>
                 </div>
@@ -188,7 +188,7 @@ export function VenueForm() {
                     min="1"
                     max="100"
                     className="venue_form"
-                    {...register("maxGuests")}
+                    {...register('maxGuests')}
                   />
                   <p>{errors.maxGuests?.message}</p>
                 </div>
@@ -203,7 +203,7 @@ export function VenueForm() {
                     min="0"
                     max="5"
                     className="venue_form"
-                    {...register("rating")}
+                    {...register('rating')}
                   />
                   <p>{errors.rating?.message}</p>
                 </div>
@@ -215,7 +215,7 @@ export function VenueForm() {
                     <input
                       type="checkbox"
                       id="wifi"
-                      {...register("meta.wifi")}
+                      {...register('meta.wifi')}
                     />
                     <p>{errors.wifi?.message}</p>
                   </div>
@@ -226,7 +226,7 @@ export function VenueForm() {
                     <input
                       type="checkbox"
                       id="parking"
-                      {...register("meta.parking")}
+                      {...register('meta.parking')}
                     />
                     <p>{errors.parking?.message}</p>
                   </div>
@@ -237,7 +237,7 @@ export function VenueForm() {
                     <input
                       type="checkbox"
                       id="breakfast"
-                      {...register("meta.breakfast")}
+                      {...register('meta.breakfast')}
                     />
                     <p>{errors.breakfast?.message}</p>
                   </div>
@@ -248,7 +248,7 @@ export function VenueForm() {
                     <input
                       type="checkbox"
                       id="pets"
-                      {...register("meta.pets")}
+                      {...register('meta.pets')}
                     />
                     <p>{errors.pets?.message}</p>
                   </div>
@@ -265,7 +265,7 @@ export function VenueForm() {
                   id="address"
                   className="venue_form"
                   placeholder="Enter your first-name"
-                  {...register("address")}
+                  {...register('address')}
                 />
 
                 <p>{errors.address?.message}</p>
@@ -279,7 +279,7 @@ export function VenueForm() {
                   id="city"
                   className="venue_form"
                   placeholder="Enter your first-name"
-                  {...register("city")}
+                  {...register('city')}
                 />
 
                 <p>{errors.city?.message}</p>
@@ -293,7 +293,7 @@ export function VenueForm() {
                   id="zip"
                   className="venue_form"
                   placeholder="Enter a url for avatar"
-                  {...register("zip")}
+                  {...register('zip')}
                 />
                 <p>{errors.zip?.message}</p>
               </div>
@@ -306,7 +306,7 @@ export function VenueForm() {
                   id="country"
                   className="venue_form"
                   placeholder="Enter a url for avatar"
-                  {...register("country")}
+                  {...register('country')}
                 />
                 <p>{errors.country?.message}</p>
               </div>
@@ -319,7 +319,7 @@ export function VenueForm() {
                   id="continent"
                   className="venue_form"
                   placeholder="Enter a url for avatar"
-                  {...register("continent")}
+                  {...register('continent')}
                 />
                 <p>{errors.continent?.message}</p>
               </div>

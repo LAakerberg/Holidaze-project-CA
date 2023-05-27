@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { TiArrowSortedDown } from "react-icons/ti";
-import { VenueEdit } from "../VenueEdit/index";
-import { HandlingVenues } from "../HandlingVenues";
-import { VenueDelete } from "../VenueDelete";
-import { Link, useParams } from "react-router-dom";
+import { useState } from 'react';
+import { TiArrowSortedDown } from 'react-icons/ti';
+import { VenueEdit } from '../VenueEdit/index';
+import { HandlingVenues } from '../HandlingVenues';
+import { VenueDelete } from '../VenueDelete';
+import { Link, useParams } from 'react-router-dom';
 
 /* import houseImg from '../../assets/img/house.jpg'; */
 
-import { Spinner } from "../../Spinner";
+import { Spinner } from '../../Spinner';
 
 // MyVenues
-import { useApiCall } from "../../../hooks/api/useApiCall";
-import { getProfileUrl } from "../../../services/authorization/apiBase";
-import { VenueInfo } from "../VenueInfo";
+import { useApiCall } from '../../../hooks/api/useApiCall';
+import { getProfileUrl } from '../../../services/authorization/apiBase';
+import { VenueInfo } from '../VenueInfo';
 
 /**
  * Renders the component to manage a venue.
@@ -21,7 +21,7 @@ import { VenueInfo } from "../VenueInfo";
  * @returns {JSX.Element} - The rendered component.
  */
 export function ManageVenue({ dataName }) {
-  const user = JSON.parse(localStorage.getItem("userData"));
+  const user = JSON.parse(localStorage.getItem('userData'));
   const venueData = dataName;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,7 @@ export function ManageVenue({ dataName }) {
               </div>
               <div className="flex-initial">
                 <button
-                  className={`arrow-button ${isOpen ? "open" : ""}`}
+                  className={`arrow-button ${isOpen ? 'open' : ''}`}
                   onClick={toggleOpen}
                   id="open_manage_venue"
                 >
@@ -74,12 +74,12 @@ export function MyVenues({ onVenueDelete }) {
   );
 
   console.log(data);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);
   };
 
-  const [successMessage, setSuccessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
   const handleSuccess = (message) => {
     setSuccessMessage(message);
   };
