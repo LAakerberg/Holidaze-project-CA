@@ -73,7 +73,8 @@ input:checked + .slider:before {
 }
 
 #reg-form input,
-#login-form input {
+#login-form input,
+#avatar-form input {
   height: 40px;
   border: 1px solid salmon;
   border-radius: 5px;
@@ -83,13 +84,17 @@ input:checked + .slider:before {
 
 /* Create venue form on the profile page */
 
-input.venue_form {
-  border: 1px solid #2196f3;
+input.venue_form,
+textarea.venue_form {
+  border: 1px solid #000000;
 }
 
-form.create-venue input {
+form.create-venue input,
+textarea {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid black;
   width: 80%;
 }
+
+/* Edit avatar on profile page */

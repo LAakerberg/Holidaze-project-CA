@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useState, useEffect } from 'react';
-import { Spinner } from '../../Spinner';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { venueApiUrl } from '../../../services/authorization/apiBase';
+import { Message } from '../../Message';
+import { useNavigate } from 'react-router-dom';
 
 const matchForm = yup
   .object({
@@ -28,8 +29,8 @@ const matchForm = yup
       )
       .required('Please enter a media URL'),
     price: yup
-      .number('Price must contain a number')
-      .min(1, 'Price must contain a number')
+      .number('Price must contain a number ok?')
+      .min(1, 'Price must be higher than 0')
       .required('Price must contain a number'),
     maxGuests: yup.number().integer().min(1).max(100).required(),
     rating: yup.number().min(1).max(5).required(),
@@ -46,8 +47,9 @@ const matchForm = yup
   .required();
 
 export function VenueForm() {
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const [message, setMessage] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -70,49 +72,35 @@ export function VenueForm() {
         },
         body: JSON.stringify(data),
       });
-      const responseData = await response.json();
-      console.log(responseData);
+
       if (response.ok) {
-        setSuccessMessage('Venue was successfully created, page will refresh!');
+        setMessage({
+          type: 'success',
+          text: 'Venue was successfully created, page will refresh!',
+        });
+
         setTimeout(() => {
-          setSuccessMessage(''); // Clear the success message
+          refreshPage();
         }, 3000);
       } else {
-        console.log('Registration was not successful, please try again');
-        setErrorMessage('Registration was not successful, please try again');
+        setMessage({
+          type: 'error',
+          text: 'Venue was not created successful, please try again',
+        });
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {}, [errorMessage, successMessage]);
+  const refreshPage = () => {
+    navigate(0);
+  };
 
   return (
     <div className="venue-form">
       {/* Render success message if it exists */}
-      {successMessage && (
-        <>
-          <div className="border bg-green-500/50 border-green-800 w-full m-auto">
-            <div className="flex">
-              <div className="flex-1 p-1">
-                <p>{successMessage}</p>
-              </div>
-              <div className="flex-initial p-1">
-                <Spinner />
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-      {/* Render error message if it exists */}
-      {errorMessage && (
-        <>
-          <div className="flex border bg-red-500/50 border-red-800 w-full h-10 m-auto">
-            <p className="m-auto">{errorMessage}</p>
-          </div>
-        </>
-      )}
+      {message && <Message type={message.type} text={message.text} />}
       {/* Rest of your form code */}
       <div className="transition-all delay-500 duration-300 ease-in-out p-1">
         <form
@@ -123,8 +111,8 @@ export function VenueForm() {
           id="create-venue-form"
         >
           <div>
-            <div className="flex flex-row">
-              <div className="border flex-1 p-2">
+            <div className="flex flex-col tablet:flex-row">
+              <div className="border m-1 flex-1 p-2">
                 <div className="flex flex-col">
                   <label htmlFor="name" className="">
                     Title name:
@@ -137,31 +125,53 @@ export function VenueForm() {
                     {...register('name')}
                   />
 
-                  <p>{errors.name?.message}</p>
+                  <p>
+                    {errors.name?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.name?.message}
+                      </p>
+                    ) : null}
+                  </p>
+                </div>
+
+                <div className="flex flex-col">
+                  <label htmlFor="media" className="">
+                    Media
+                  </label>
+                  <input
+                    placeholder="Enter a link for the media"
+                    {...register('media')}
+                  />
+                  <p>
+                    {errors.media?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.media?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="description" className="">
                     Description
                   </label>
-                  <input
+                  <textarea
                     type="text"
                     id="description"
                     className="venue_form"
-                    placeholder="Enter your first-name"
+                    placeholder="Enter a description"
                     {...register('description')}
                   />
 
-                  <p>{errors.description?.message}</p>
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="media" className="">
-                    Media
-                  </label>
-                  <input {...register('media')} />
-                  <p>{errors.media?.message}</p>
+                  <p>
+                    {errors.description?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.description?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
               </div>
-              <div className="border ml-2 flex-1 p-2">
+              <div className="border flex-1 m-1 p-2">
                 <div className="flex flex-col">
                   <label htmlFor="price" className="">
                     Price
@@ -170,12 +180,16 @@ export function VenueForm() {
                     type="number"
                     id="price"
                     placeholder="Price for venue"
-                    min="1"
-                    max="3000"
                     className="venue_form"
                     {...register('price')}
                   />
-                  <p>{errors.price?.message}</p>
+                  <p>
+                    {errors.price?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.price?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="maxGuests" className="">
@@ -190,7 +204,13 @@ export function VenueForm() {
                     className="venue_form"
                     {...register('maxGuests')}
                   />
-                  <p>{errors.maxGuests?.message}</p>
+                  <p>
+                    {errors.maxGuests?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.maxGuests?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="rating" className="">
@@ -205,7 +225,13 @@ export function VenueForm() {
                     className="venue_form"
                     {...register('rating')}
                   />
-                  <p>{errors.rating?.message}</p>
+                  <p>
+                    {errors.rating?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.rating?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 item-center justify-center mb-2">
                   <div className="flex flex-col">
@@ -217,7 +243,6 @@ export function VenueForm() {
                       id="wifi"
                       {...register('meta.wifi')}
                     />
-                    <p>{errors.wifi?.message}</p>
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="parking" className="">
@@ -228,7 +253,6 @@ export function VenueForm() {
                       id="parking"
                       {...register('meta.parking')}
                     />
-                    <p>{errors.parking?.message}</p>
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="breakfast" className="">
@@ -239,7 +263,6 @@ export function VenueForm() {
                       id="breakfast"
                       {...register('meta.breakfast')}
                     />
-                    <p>{errors.breakfast?.message}</p>
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="pets" className="">
@@ -250,12 +273,11 @@ export function VenueForm() {
                       id="pets"
                       {...register('meta.pets')}
                     />
-                    <p>{errors.pets?.message}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="border mt-2 p-2">
+            <div className="border m-1 p-2">
               <div className="flex flex-col">
                 <label htmlFor="address" className="">
                   Address
@@ -268,7 +290,13 @@ export function VenueForm() {
                   {...register('address')}
                 />
 
-                <p>{errors.address?.message}</p>
+                <p>
+                  {errors.address?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.address?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="city" className="">
@@ -282,7 +310,13 @@ export function VenueForm() {
                   {...register('city')}
                 />
 
-                <p>{errors.city?.message}</p>
+                <p>
+                  {errors.city?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.city?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="zip" className="">
@@ -295,7 +329,13 @@ export function VenueForm() {
                   placeholder="Enter a url for avatar"
                   {...register('zip')}
                 />
-                <p>{errors.zip?.message}</p>
+                <p>
+                  {errors.zip?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.zip?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="country" className="">
@@ -308,7 +348,13 @@ export function VenueForm() {
                   placeholder="Enter a url for avatar"
                   {...register('country')}
                 />
-                <p>{errors.country?.message}</p>
+                <p>
+                  {errors.country?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.country?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="continent" className="">
@@ -321,7 +367,13 @@ export function VenueForm() {
                   placeholder="Enter a url for avatar"
                   {...register('continent')}
                 />
-                <p>{errors.continent?.message}</p>
+                <p>
+                  {errors.continent?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.continent?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
             </div>
           </div>

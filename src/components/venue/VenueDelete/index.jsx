@@ -1,12 +1,14 @@
 /* Deleting venues */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { venueApiUrl } from '../../../services/authorization/apiBase';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { Message } from '../../Message';
+import { useNavigate } from 'react-router-dom';
 
-export function VenueDelete({ venueId, onError, onMessage, onVenueDelete }) {
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+export function VenueDelete({ venueId }) {
+  const navigate = useNavigate();
+  const [message, setMessage] = useState(null);
   const handleDelete = async () => {
     const accessToken = localStorage.getItem('accessToken');
     try {
@@ -25,32 +27,50 @@ export function VenueDelete({ venueId, onError, onMessage, onVenueDelete }) {
         // You can update the UI or perform any other necessary actions
         console.log(response.ok);
         console.log('Venue deleted successfully');
-        setSuccessMessage('Venue deleted successfully, page will refresh!');
+        setMessage({
+          type: 'success',
+          text: 'Venue deleted successfully, page will refresh!',
+        });
+
         setTimeout(() => {
-          onVenueDelete(venueId);
-        }, 4000);
+          refreshPage();
+        }, 3000);
       } else {
         // Handle the error case if the deletion was not successful
-        console.log('Failed to delete the venue');
-        setErrorMessage('Error deleting the venue');
+
+        setMessage({
+          type: 'error',
+          text: 'Error deleting the venue',
+        });
       }
     } catch (error) {
       // Handle any network or other errors
-      console.error('Error deleting the venue:', error);
-      setErrorMessage('Error deleting the venue', error);
+
+      setMessage({
+        type: 'error',
+        text: 'Error deleting the venue',
+        error,
+      });
     }
   };
 
-  useEffect(() => {
-    onError(errorMessage);
-    onMessage(successMessage);
-  }, [errorMessage, successMessage, onError, onMessage]);
+  const refreshPage = () => {
+    navigate(0);
+  };
 
   return (
     <>
-      <button type="button" onClick={handleDelete} id="delete_button">
+      <button
+        className="relative"
+        type="button"
+        onClick={handleDelete}
+        id="delete_button"
+      >
         <AiOutlineDelete className="icons-style_edit" />
       </button>
+      <div className="absolute z-10 left-0 right-0">
+        {message && <Message type={message.type} text={message.text} />}
+      </div>
     </>
   );
 }
