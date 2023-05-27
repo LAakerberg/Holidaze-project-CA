@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { venueApiUrl } from '../../../services/authorization/apiBase';
+import { Message } from '../../Message';
+import { useNavigate } from 'react-router-dom';
 
 const matchForm = yup
   .object({
@@ -27,8 +29,8 @@ const matchForm = yup
       )
       .required('Please enter a media URL'),
     price: yup
-      .number('Price must contain a number')
-      .min(1, 'Price must contain a number')
+      .number('Price must contain a number ok?')
+      .min(1, 'Price must be higher than 0')
       .required('Price must contain a number'),
     maxGuests: yup.number().integer().min(1).max(100).required(),
     rating: yup.number().min(1).max(5).required(),
@@ -45,6 +47,8 @@ const matchForm = yup
   .required();
 
 export function EditVenueForm({ venue }) {
+  const navigate = useNavigate();
+  const [message, setMessage] = useState(null);
   const {
     register,
     handleSubmit,
@@ -71,16 +75,31 @@ export function EditVenueForm({ venue }) {
       const responseData = await response.json();
       console.log(responseData);
       if (response.ok) {
-        alert('Update of venue was successful, the page will be refreshing');
+        setMessage({
+          type: 'success',
+          text: 'Update of venue was successful, the page will be refreshing',
+        });
+
         setTimeout(() => {
-          window.location.reload();
+          refreshPage();
         }, 3000);
       } else {
-        alert('Registration was not successful, please try again');
+        setMessage({
+          type: 'error',
+          text: 'Venue was not updated successful, please try again',
+        });
       }
     } catch (error) {
-      console.log(error);
+      setMessage({
+        type: 'error',
+        text: 'Venue was not updated successful, please try again',
+        error,
+      });
     }
+  };
+
+  const refreshPage = () => {
+    navigate(0);
   };
 
   useEffect(() => {
@@ -107,6 +126,9 @@ export function EditVenueForm({ venue }) {
 
   return (
     <div className="venue-form form_edit">
+      {/* Render success message if it exists */}
+      {message && <Message type={message.type} text={message.text} />}
+      {/* Rest of your form code */}
       <div className="transition-all delay-500 duration-300 ease-in-out p-1">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -115,8 +137,8 @@ export function EditVenueForm({ venue }) {
           className="create-venue"
         >
           <div>
-            <div className="flex flex-row">
-              <div className="border flex-1 p-2">
+            <div className="flex flex-col tablet:flex-row">
+              <div className="border m-1 flex-1 p-2">
                 <div className="flex flex-col">
                   <label htmlFor="name" className="">
                     Title name:
@@ -129,31 +151,53 @@ export function EditVenueForm({ venue }) {
                     {...register('name')}
                   />
 
-                  <p>{errors.name?.message}</p>
+                  <p>
+                    {errors.name?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.name?.message}
+                      </p>
+                    ) : null}
+                  </p>
+                </div>
+
+                <div className="flex flex-col">
+                  <label htmlFor="media" className="">
+                    Media
+                  </label>
+                  <input
+                    placeholder="Enter a link for the media"
+                    {...register('media')}
+                  />
+                  <p>
+                    {errors.media?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.media?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="description" className="">
                     Description
                   </label>
-                  <input
+                  <textarea
                     type="text"
                     id="description"
                     className="venue_form"
-                    placeholder="Enter your first-name"
+                    placeholder="Enter a description"
                     {...register('description')}
                   />
 
-                  <p>{errors.description?.message}</p>
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="media" className="">
-                    Media
-                  </label>
-                  <input {...register('media')} />
-                  <p>{errors.media?.message}</p>
+                  <p>
+                    {errors.description?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.description?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
               </div>
-              <div className="border ml-2 flex-1 p-2">
+              <div className="border flex-1 m-1 p-2">
                 <div className="flex flex-col">
                   <label htmlFor="price" className="">
                     Price
@@ -162,12 +206,16 @@ export function EditVenueForm({ venue }) {
                     type="number"
                     id="price"
                     placeholder="Price for venue"
-                    min="1"
-                    max="3000"
                     className="venue_form"
                     {...register('price')}
                   />
-                  <p>{errors.price?.message}</p>
+                  <p>
+                    {errors.price?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.price?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="maxGuests" className="">
@@ -182,7 +230,13 @@ export function EditVenueForm({ venue }) {
                     className="venue_form"
                     {...register('maxGuests')}
                   />
-                  <p>{errors.maxGuests?.message}</p>
+                  <p>
+                    {errors.maxGuests?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.maxGuests?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="rating" className="">
@@ -197,7 +251,13 @@ export function EditVenueForm({ venue }) {
                     className="venue_form"
                     {...register('rating')}
                   />
-                  <p>{errors.rating?.message}</p>
+                  <p>
+                    {errors.rating?.message ? (
+                      <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                        {errors.rating?.message}
+                      </p>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2 item-center justify-center mb-2">
                   <div className="flex flex-col">
@@ -209,7 +269,6 @@ export function EditVenueForm({ venue }) {
                       id="wifi"
                       {...register('meta.wifi')}
                     />
-                    <p>{errors.wifi?.message}</p>
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="parking" className="">
@@ -220,7 +279,6 @@ export function EditVenueForm({ venue }) {
                       id="parking"
                       {...register('meta.parking')}
                     />
-                    <p>{errors.parking?.message}</p>
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="breakfast" className="">
@@ -231,7 +289,6 @@ export function EditVenueForm({ venue }) {
                       id="breakfast"
                       {...register('meta.breakfast')}
                     />
-                    <p>{errors.breakfast?.message}</p>
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="pets" className="">
@@ -242,12 +299,11 @@ export function EditVenueForm({ venue }) {
                       id="pets"
                       {...register('meta.pets')}
                     />
-                    <p>{errors.pets?.message}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="border mt-2 p-2">
+            <div className="border m-1 p-2">
               <div className="flex flex-col">
                 <label htmlFor="address" className="">
                   Address
@@ -260,7 +316,13 @@ export function EditVenueForm({ venue }) {
                   {...register('address')}
                 />
 
-                <p>{errors.address?.message}</p>
+                <p>
+                  {errors.address?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.address?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="city" className="">
@@ -274,7 +336,13 @@ export function EditVenueForm({ venue }) {
                   {...register('city')}
                 />
 
-                <p>{errors.city?.message}</p>
+                <p>
+                  {errors.city?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.city?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="zip" className="">
@@ -287,7 +355,13 @@ export function EditVenueForm({ venue }) {
                   placeholder="Enter a url for avatar"
                   {...register('zip')}
                 />
-                <p>{errors.zip?.message}</p>
+                <p>
+                  {errors.zip?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.zip?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="country" className="">
@@ -300,7 +374,13 @@ export function EditVenueForm({ venue }) {
                   placeholder="Enter a url for avatar"
                   {...register('country')}
                 />
-                <p>{errors.country?.message}</p>
+                <p>
+                  {errors.country?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.country?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
               <div className="flex flex-col">
                 <label htmlFor="continent" className="">
@@ -313,7 +393,13 @@ export function EditVenueForm({ venue }) {
                   placeholder="Enter a url for avatar"
                   {...register('continent')}
                 />
-                <p>{errors.continent?.message}</p>
+                <p>
+                  {errors.continent?.message ? (
+                    <p className="bg-red-200 border border-red-800 p-1 mt-1 animate-pulse">
+                      {errors.continent?.message}
+                    </p>
+                  ) : null}
+                </p>
               </div>
             </div>
           </div>
