@@ -1,22 +1,26 @@
 import { Navigation } from "./Navigation";
 import { MobileNavigation } from "./Mobilenavigation";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 export function Navbar() {
   const location = useLocation();
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    console.log("Navigation bar has been reloaded");
-
-    // Example: Scroll to top of the page when the user navigates to a new route
-    window.scrollTo(0, 0);
+    if (location.pathname === "/success/login") {
+      setShouldRender(true);
+    } else {
+      setShouldRender(false);
+    }
   }, [location]);
 
-  return (
-    <>
-      <Navigation />
-      <MobileNavigation />
-    </>
-  );
+  if (!shouldRender) {
+    return (
+      <>
+        <Navigation />
+        <MobileNavigation />
+      </>
+    );
+  }
 }
