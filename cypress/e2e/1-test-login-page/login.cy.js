@@ -1,5 +1,5 @@
 describe('Login function for Holidaze project', () => {
-  it('can login to the holidaze as venue manager', () => {
+  it('can login to the holidaze as venue manager and make post and log out', () => {
     cy.visit('/');
     cy.clearLocalStorage();
     cy.wait(1000);
@@ -14,7 +14,7 @@ describe('Login function for Holidaze project', () => {
     cy.get('#open_manage_venue').click();
     cy.get('#open_venue_form').click();
     cy.get('#create-venue-form input[name="name"]').type('Cypress Venue Test');
-    cy.get('#create-venue-form input[name="description"]').type(
+    cy.get('#create-venue-form textarea[name="description"]').type(
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquet diam eget tortor pharetra mattis. Nulla quis neque sodales, commodo massa a, maximus leo. Nulla.'
     );
     cy.get('#create-venue-form input[name="media"]').type(
@@ -36,8 +36,6 @@ describe('Login function for Holidaze project', () => {
     cy.get('#create-venue-form input[name="continent"]').type('South');
     cy.get('#create-venue-form button[type="submit"]').type('South');
     cy.wait(5000);
-    cy.visit('/');
-    cy.get('li').contains('Profile').click();
     cy.get('#open_manage_venue').click();
     cy.get('#delete_button').click();
     cy.get('li').contains('Logout').click();

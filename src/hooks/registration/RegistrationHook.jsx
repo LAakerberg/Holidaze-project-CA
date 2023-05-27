@@ -23,7 +23,7 @@ const matchForm = yup
       ),
     password: yup.string().min(3).max(20).required(),
     venueManager: yup.boolean().required(),
-    avatar: yup.string(),
+    avatar: yup.string().required(),
   })
   .required();
 

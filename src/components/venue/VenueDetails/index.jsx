@@ -36,7 +36,7 @@ export function VenueDetails({ venueData }) {
           <h2 className="font-bold">{venueData.name}</h2>
         </div>
         <div className="flex flex-col border border-light_salmon m-1 p-1">
-          <div className="flex-1 border border-light_salmon m-1 p-1">
+          <div className="flex-1 m-1 p-1">
             <img
               src={venueData.media}
               alt={venueData.name}
@@ -47,7 +47,7 @@ export function VenueDetails({ venueData }) {
               }}
             />
           </div>
-          <div className="flex-initial w-full border border-light_salmon px-2">
+          <div className="flex-initial w-full px-2">
             <div className="border-b border-light_salmon">
               <h4 className="">This venue offers</h4>
             </div>
@@ -190,12 +190,11 @@ export function VenueDetails({ venueData }) {
         </div>
         <div className="border border-light_salmon m-1 p-1">
           <div className="border-b border-light_salmon">
-            <h4>About</h4>
+            <h4 className="py-2">About</h4>
           </div>
-          <p></p>
-          <p>{venueData.description}</p>
+          <p className="py-4">{venueData.description}</p>
         </div>
-        <div className="border border-light_salmon m-1 p-1">
+        <div className="border border-light_salmon m-1 py-2 px-1">
           <p className="">ID: {venueData.id}</p>
           <p className="">Created: {renderDate(venueData.created)}</p>
           <p className="">Last update: {renderDate(venueData.updated)}</p>
