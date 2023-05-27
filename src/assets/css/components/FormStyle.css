@@ -73,7 +73,8 @@ input:checked + .slider:before {
 }
 
 #reg-form input,
-#login-form input {
+#login-form input,
+#avatar-form input {
   height: 40px;
   border: 1px solid salmon;
   border-radius: 5px;
@@ -95,3 +96,5 @@ textarea {
   border: 1px solid black;
   width: 80%;
 }
+
+/* Edit avatar on profile page */

@@ -1,6 +1,7 @@
 import { VenueBooked } from '../venue/VenueBooked';
 import { ManageVenue } from '../venue/ManageVenue';
 import { useState, useEffect } from 'react';
+import { EditProfile } from './EditProfile';
 
 /**
  * Profile component.
@@ -32,9 +33,11 @@ export function Profile({ data, onVenueDelete }) {
     <>
       <div>
         <div className="border border-light_salmon my-1">
+          <div className="absolute p-1">
+            <EditProfile />
+          </div>
           <div className="flex flex-row bg-gray-200 p-1">
-            <div>
-              {' '}
+            <div className="p-2">
               <img
                 src={data.avatar}
                 className="w-52 object-contain rounded-full"
