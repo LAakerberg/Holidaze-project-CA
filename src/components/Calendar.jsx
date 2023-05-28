@@ -84,7 +84,7 @@ export function BookingCalendar({ data }) {
             text: 'Booking was successful, page will reload',
           });
           setTimeout(() => {
-            refreshPage();
+            navigate(0);
           }, 3000);
         } else {
           setMessage({
@@ -107,9 +107,9 @@ export function BookingCalendar({ data }) {
     }
   };
 
-  const refreshPage = () => {
+  /*   const refreshPage = () => {
     navigate(0);
-  };
+  }; */
 
   const handleGuestsChange = (event) => {
     const value = parseInt(event.target.value); // Parse the input value as an integer
