@@ -69,7 +69,7 @@ export function RegistrationForm() {
           text: 'Registration was successful, you will be redirected to login page',
         });
 
-        navigate(`/success/register'`); // Redirect to success page
+        navigate(`/success/register`); // Redirect to success page
       } else {
         setMessage({
           type: 'error',

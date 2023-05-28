@@ -34,14 +34,16 @@ export function SuccessLogin() {
  */
 export function SuccessRegister() {
   const navigate = useNavigate();
-  navigate(`/login`);
+  setTimeout(() => {
+    navigate(`/login`);
+  }, 1000);
   return (
     <>
       {' '}
       <div className="border bg-green-500/50 border-green-800 w-full m-auto mt-5">
         <div className="flex">
           <div className="flex-1 p-1">
-            <p>Registration was successful</p>
+            <p>Registration was successful!</p>
           </div>
           <div className="flex-initial p-1">
             <Spinner />
