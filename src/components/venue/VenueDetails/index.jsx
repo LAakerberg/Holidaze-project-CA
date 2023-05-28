@@ -55,7 +55,7 @@ export function VenueDetails({ venueData }) {
           </div>
           <div className="flex-initial w-full px-2">
             <div className="border-b border-light_salmon">
-              <h4 className="font-bold">This venue offers</h4>
+              <h3 className="font-bold">This venue offers</h3>
             </div>
             <div className="flex flex-col tablet:flex-row justify-evenly">
               <div className="flex-initial">
@@ -192,7 +192,7 @@ export function VenueDetails({ venueData }) {
         </div>
         <div className="border border-light_salmon m-1 p-1">
           <div className="border-b border-light_salmon">
-            <h4 className="py-2 font-bold">About</h4>
+            <h3 className="py-2 font-bold">About</h3>
           </div>
           <p className="py-4 break-all">{venueData.description}</p>
         </div>
