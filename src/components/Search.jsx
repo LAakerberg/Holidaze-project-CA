@@ -1,12 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Component for searching and displaying search results.
+ *
+ * @param {Object[]} data - The data to be searched.
+ * @returns {JSX.Element} The Search component.
+ */
 export const Search = ({ data }) => {
   const [query, setQuery] = useState('');
   const [hasInput, setHasInput] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const searchResultsRef = useRef(null);
 
+  /**
+   * Handles the input change event and updates the search results.
+   *
+   * @param {Object} event - The input change event.
+   */
   const handleInputChange = (event) => {
     const value = event.target.value;
     setQuery(value);
@@ -19,6 +30,11 @@ export const Search = ({ data }) => {
     setHasInput(value !== '');
   };
 
+  /**
+   * Handles the document click event and resets the search state if necessary.
+   *
+   * @param {Object} event - The document click event.
+   */
   const handleDocumentClick = (event) => {
     const isLink = event.target.tagName.toLowerCase() === 'a';
     const isOutsideResults =

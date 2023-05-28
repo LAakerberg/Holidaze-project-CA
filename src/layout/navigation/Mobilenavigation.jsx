@@ -4,6 +4,10 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import classes from './Navbar.module.css';
 import { useState } from 'react';
 
+/**
+ * Renders the mobile navigation bar with a hamburger icon that toggles
+ * the navigation links when clicked.
+ */
 export function MobileNavigation() {
   const [openNav, setOpenNav] = useState(false);
 
@@ -25,6 +29,9 @@ export function MobileNavigation() {
     />
   );
 
+  /**
+   * Closes the mobile navigation menu.
+   */
   const closeMobile = () => setOpenNav(false);
 
   return (

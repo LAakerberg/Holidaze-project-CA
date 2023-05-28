@@ -6,21 +6,35 @@ import { VenueSearch } from '../hooks/venues/searchHook';
 import { BiSearch } from 'react-icons/bi';
 import { useState, useEffect, useRef } from 'react';
 
+/**
+ * Header component.
+ * Renders the header section of the website, including navigation, logo, and search functionality.
+ */
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleRef = useRef(null);
   const scrollThreshold = 200; // Adjust this value to your desired scroll threshold
 
+  /**
+   * Toggles the open state of the search dropdown.
+   */
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
 
+  /**
+   * Handles the click event outside the search dropdown to close it.
+   * @param {Event} event - The click event.
+   */
   const handleClickOutside = (event) => {
     if (toggleRef.current && !toggleRef.current.contains(event.target)) {
       setIsOpen(false);
     }
   };
 
+  /**
+   * Handles the scroll event to close the search dropdown when scrolling.
+   */
   const handleScroll = () => {
     if (window.scrollY > scrollThreshold) {
       setIsOpen(false);

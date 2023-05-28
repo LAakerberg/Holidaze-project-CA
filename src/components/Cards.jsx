@@ -1,5 +1,12 @@
 import houseImg from '../assets/img/house.jpg';
 
+/**
+ * Component for displaying a card with venue information.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.data - The array of venue data to be displayed.
+ * @returns {JSX.Element} The Card component.
+ */
 export function Card(props) {
   return (
     <>

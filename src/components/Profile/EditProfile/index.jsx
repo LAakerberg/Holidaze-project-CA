@@ -13,6 +13,10 @@ const matchForm = yup
   })
   .required();
 
+/**
+ * Renders the component for editing the user profile.
+ * @returns {JSX.Element} - The rendered component.
+ */
 export function EditProfile() {
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
@@ -29,6 +33,10 @@ export function EditProfile() {
     setIsOpen(!isOpen);
   };
 
+  /**
+   * Handles the form submission for updating the user avatar.
+   * @param {Object} data - The form data.
+   */
   const onSubmit = async (data) => {
     const accessToken = localStorage.getItem('accessToken');
     try {
@@ -40,8 +48,7 @@ export function EditProfile() {
         },
         body: JSON.stringify(data),
       });
-      const responseData = await response.json();
-      console.log(responseData);
+
       if (response.ok) {
         setMessage({
           type: 'success',
@@ -53,14 +60,21 @@ export function EditProfile() {
       } else {
         setMessage({
           type: 'error',
-          text: `Registration was not successful, please try again`,
+          text: `Avatar was not changed, please try again`,
         });
       }
     } catch (error) {
-      console.log(error);
+      setMessage({
+        type: 'error',
+        text: `Error to make the call, please try again`,
+        error,
+      });
     }
   };
 
+  /**
+   * Refreshes the page.
+   */
   const refreshPage = () => {
     navigate(0);
   };

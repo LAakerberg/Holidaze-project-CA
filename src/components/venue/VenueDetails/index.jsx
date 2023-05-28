@@ -9,8 +9,14 @@ import 'react-calendar/dist/cjs/MonthView';
 import 'react-datepicker/dist/react-datepicker.css';
 import houseImg from '../../../assets/img/house.jpg';
 
+/**
+ * Component for displaying venue details.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.venueData - The data of the venue to display.
+ * @returns {JSX.Element} The VenueDetails component.
+ */
 export function VenueDetails({ venueData }) {
-  console.log(venueData.bookings);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const titleName = venueData.name;
 
@@ -192,7 +198,7 @@ export function VenueDetails({ venueData }) {
           <div className="border-b border-light_salmon">
             <h4 className="py-2">About</h4>
           </div>
-          <p className="py-4">{venueData.description}</p>
+          <p className="py-4 break-all">{venueData.description}</p>
         </div>
         <div className="border border-light_salmon m-1 py-2 px-1">
           <p className="">ID: {venueData.id}</p>

@@ -4,9 +4,13 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { useParams } from 'react-router-dom';
 import { getProfileUrl } from '../../../services/authorization/apiBase';
 import { useApiCall } from '../../../hooks/api/useApiCall';
-import { Spinner } from '../../Spinner';
 import { renderDate } from '../../../utils/formatDates';
+import { Message } from '../../Message';
 
+/**
+ * Renders a component for displaying upcoming and past venue bookings.
+ * @returns {JSX.Element} The rendered component.
+ */
 export function VenueBooked() {
   const { name } = useParams(); // Get the 'name' parameter from the URL
   const { data, isLoading, isError } = useApiCall(
@@ -14,15 +18,19 @@ export function VenueBooked() {
     'GET'
   );
 
-  /* console.log(data); */
-
   const [isOpenBooked, setIsOpenBooked] = useState(false);
   const [isOpenHistory, setIsOpenHistory] = useState(false);
 
+  /**
+   * Toggles the display of upcoming bookings.
+   */
   const toggleOpenBooked = () => {
     setIsOpenBooked(!isOpenBooked);
   };
 
+  /**
+   * Toggles the display of past bookings.
+   */
   const toggleOpenHistory = () => {
     setIsOpenHistory(!isOpenHistory);
   };
@@ -30,17 +38,11 @@ export function VenueBooked() {
   const dataApi = data;
 
   if (isLoading) {
-    return (
-      <div className="border border-light_salmon bg-gray-200 py-1 my-1">
-        <div className="p-1">
-          Loading venues <Spinner />
-        </div>
-      </div>
-    ); // Display loading message while profile data is being fetched
+    return <Message type="loading" text="Loading venues" />; // Display loading message while venue data is being fetched
   }
 
   if (isError) {
-    return <div>Error loading the venues</div>; // Display error message if there was an error fetching the profile data
+    return <Message type="error" text="Error loading the venues" />; // Display error message if there was an error fetching the venue data
   }
 
   const today = new Date();

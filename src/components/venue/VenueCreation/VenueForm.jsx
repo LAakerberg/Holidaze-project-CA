@@ -46,6 +46,10 @@ const matchForm = yup
   })
   .required();
 
+/**
+ * Represents a form for creating a venue.
+ * @returns {JSX.Element} The JSX element containing the venue creation form.
+ */
 export function VenueForm() {
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
@@ -56,8 +60,12 @@ export function VenueForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(matchForm) });
 
+  /**
+   * Handles form submission.
+   * @param {Object} data - The form data.
+   * @returns {Promise<void>} A Promise that resolves when the form submission is complete.
+   */
   const onSubmit = async (data) => {
-    console.log(data);
     const accessToken = localStorage.getItem('accessToken');
 
     try {
@@ -89,10 +97,17 @@ export function VenueForm() {
         });
       }
     } catch (error) {
-      console.log(error);
+      setMessage({
+        type: 'error',
+        text: 'Venue was not created successful, please try again',
+      });
     }
   };
 
+  /**
+   * Refreshes the page.
+   * @returns {void}
+   */
   const refreshPage = () => {
     navigate(0);
   };

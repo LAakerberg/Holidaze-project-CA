@@ -46,6 +46,11 @@ const matchForm = yup
   })
   .required();
 
+/**
+ * Renders a form for editing venue information.
+ * @param {Object} venue - The venue object containing the initial data for the form.
+ * @returns {JSX.Element} The rendered form component.
+ */
 export function EditVenueForm({ venue }) {
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
@@ -57,7 +62,6 @@ export function EditVenueForm({ venue }) {
   } = useForm({ resolver: yupResolver(matchForm) });
 
   const onSubmit = async (data) => {
-    console.log(data);
     const accessToken = localStorage.getItem('accessToken');
 
     try {
@@ -72,8 +76,7 @@ export function EditVenueForm({ venue }) {
         },
         body: JSON.stringify(data),
       });
-      const responseData = await response.json();
-      console.log(responseData);
+
       if (response.ok) {
         setMessage({
           type: 'success',

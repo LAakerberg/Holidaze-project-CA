@@ -5,8 +5,14 @@ import { renderDate } from '../utils/formatDates';
 import { Message } from './Message';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for booking a venue using a calendar.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.data - The venue data for booking.
+ * @returns {JSX.Element} The BookingCalendar component.
+ */
 export function BookingCalendar({ data }) {
-  console.log(data);
   const user = JSON.parse(localStorage.getItem('userData'));
   const [selectedDates, setSelectedDates] = useState([]);
   const [guests, setGuests] = useState(1);
@@ -14,10 +20,22 @@ export function BookingCalendar({ data }) {
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
 
+  /**
+   * Event handler for date selection in the calendar.
+   *
+   * @param {Date|Date[]} selectedDate - The selected date(s).
+   */
   const handleDateChange = (selectedDate) => {
     setSelectedDates(selectedDate);
   };
 
+  /**
+   * Function to disable specific dates in the calendar.
+   *
+   * @param {Object} param - The date object.
+   * @param {Date} param.date - The date to be evaluated.
+   * @returns {boolean} Whether the date should be disabled.
+   */
   const tileDisabled = ({ date }) => {
     const formattedDate = new Date(date.toDateString());
     return bookedDates?.some((booking) => {
@@ -34,6 +52,10 @@ export function BookingCalendar({ data }) {
     dateTo: new Date(booking.dateTo),
   }));
 
+  /**
+   * Event handler for the book button click.
+   * Sends a booking request to the server.
+   */
   const handleBookClick = async () => {
     const idFromVenue = data.id;
     try {
@@ -42,7 +64,6 @@ export function BookingCalendar({ data }) {
         const dateTo = selectedDates[1].toISOString();
         const venueId = idFromVenue;
         const accessToken = localStorage.getItem('accessToken');
-        console.log(venueId);
 
         const response = await fetch(
           bookingVenueUrl + `?_customer=true&_venue=true`,
@@ -55,8 +76,7 @@ export function BookingCalendar({ data }) {
             },
           }
         );
-        const responseData = await response.json();
-        console.log(responseData);
+
         if (response.ok) {
           setBookingStatus('success'); // Set booking status to 'success'
           setMessage({
@@ -73,11 +93,17 @@ export function BookingCalendar({ data }) {
           });
         }
       } else {
-        console.log('Please select both dateFrom and dateTo');
+        setMessage({
+          type: 'error',
+          text: 'Please select both dateFrom and dateTo.',
+        });
       }
     } catch (error) {
-      console.error('Error:', error);
-      // Handle error
+      setMessage({
+        type: 'error',
+        text: 'Error, not able to book',
+        error,
+      });
     }
   };
 
