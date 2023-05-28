@@ -40,6 +40,5 @@ describe('Login function for Holidaze project', () => {
     cy.wait(500);
     cy.get('#delete_button').click();
     cy.get('li').contains('Logout').click();
-    cy.wait(500);
   });
 });
