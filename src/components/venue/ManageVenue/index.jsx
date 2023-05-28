@@ -4,12 +4,7 @@ import { VenueEdit } from '../VenueEdit/index';
 import { HandlingVenues } from '../HandlingVenues';
 import { VenueDelete } from '../VenueDelete';
 import { Link, useParams } from 'react-router-dom';
-
-/* import houseImg from '../../assets/img/house.jpg'; */
-
 import { Spinner } from '../../Spinner';
-
-// MyVenues
 import { useApiCall } from '../../../hooks/api/useApiCall';
 import { getProfileUrl } from '../../../services/authorization/apiBase';
 import { VenueInfo } from '../VenueInfo';
@@ -17,8 +12,8 @@ import { VenueInfo } from '../VenueInfo';
 /**
  * Renders the component to manage a venue.
  * @param {Object} props - The component props.
- * @param {Object} props.data - The venue data.
- * @returns {JSX.Element} - The rendered component.
+ * @param {Object} props.dataName - The venue data.
+ * @returns {JSX.Element|null} - The rendered component if the user is the manager of the venue, otherwise null.
  */
 export function ManageVenue({ dataName }) {
   const user = JSON.parse(localStorage.getItem('userData'));
@@ -60,11 +55,10 @@ export function ManageVenue({ dataName }) {
 }
 
 /**
- * This function is rendering if the venueManger has any active venues. If the manager does not have any venues it's will
- * been rendering that's no venue is created yet. The function will also execute successful or error message during edit or deleting.
- * @param {string} props The components props
- * @param {string} data.venues Is mapping all venues
- * @returns Returns the venues where the manager can edit or delete
+ * Renders the component that displays the venues managed by the venue manager.
+ * @param {Object} props - The component props.
+ * @param {Function} props.onVenueDelete - The callback function for handling venue deletion.
+ * @returns {JSX.Element} - The rendered component.
  */
 
 export function MyVenues({ onVenueDelete }) {
@@ -73,7 +67,6 @@ export function MyVenues({ onVenueDelete }) {
     getProfileUrl + name + `/venues?_bookings=true&_owner=true` // API endpoint for retrieving user profile data
   );
 
-  console.log(data);
   const [errorMessage, setErrorMessage] = useState('');
   const handleDeleteError = (error) => {
     setErrorMessage(error);

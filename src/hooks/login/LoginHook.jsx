@@ -21,6 +21,16 @@ const matchForm = yup
   })
   .required();
 
+/**
+ * Renders a registration form component.
+ *
+ * @returns {JSX.Element} JSX element representing the registration form component.
+ * @example
+ * <RegistrationForm />
+ * // Output:
+ * // A registration form component with input fields for name, email, password, user or venue manager option, and avatar.
+ * // Users can submit the form and receive messages indicating the success or failure of the registration.
+ */
 export function LoginForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -31,6 +41,12 @@ export function LoginForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(matchForm) });
 
+  /**
+   * Handles the form submission event.
+   *
+   * @param {Object} data - The form data submitted by the user.
+   * @returns {Promise<void>} A promise that resolves after handling the form submission.
+   */
   const onSubmit = async (data) => {
     try {
       const response = await fetch(loginAuth, {
@@ -60,7 +76,6 @@ export function LoginForm() {
         });
       }
     } catch (error) {
-      console.log(error);
       setError('Login failed');
     }
   };

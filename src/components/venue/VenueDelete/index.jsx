@@ -1,19 +1,29 @@
-/* Deleting venues */
-
 import { useState } from 'react';
 import { venueApiUrl } from '../../../services/authorization/apiBase';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Message } from '../../Message';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for deleting a venue.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.venueId - The ID of the venue to delete.
+ * @returns {JSX.Element} The VenueDelete component.
+ */
 export function VenueDelete({ venueId }) {
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
+
+  /**
+   * Handles the delete button click event.
+   * Sends a delete request to the server to delete the venue.
+   *
+   * @returns {Promise<void>} A Promise that resolves when the deletion is complete.
+   */
   const handleDelete = async () => {
     const accessToken = localStorage.getItem('accessToken');
     try {
-      // Perform the delete request
-      // You can use the fetch API or any other library you prefer
       const response = await fetch(venueApiUrl + `${venueId}`, {
         method: 'DELETE',
         headers: {
@@ -23,28 +33,24 @@ export function VenueDelete({ venueId }) {
       });
 
       if (response.ok) {
-        // Handle the successful deletion
-        // You can update the UI or perform any other necessary actions
-        console.log(response.ok);
-        console.log('Venue deleted successfully');
         setMessage({
           type: 'success',
           text: 'Venue deleted successfully, page will refresh!',
         });
 
-        setTimeout(() => {
-          refreshPage();
-        }, 3000);
+        setTimeout(refreshPage, 3000);
       } else {
-        // Handle the error case if the deletion was not successful
-
         setMessage({
           type: 'error',
           text: 'Error deleting the venue',
         });
       }
     } catch (error) {
-      // Handle any network or other errors
+      setMessage({
+        type: 'error',
+        text: 'Error deleting the venue',
+        error,
+      });
 
       setMessage({
         type: 'error',
@@ -54,6 +60,9 @@ export function VenueDelete({ venueId }) {
     }
   };
 
+  /**
+   * Refreshes the current page.
+   */
   const refreshPage = () => {
     navigate(0);
   };

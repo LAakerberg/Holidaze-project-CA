@@ -1,22 +1,34 @@
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useState } from 'react';
 import { renderDate } from '../../../utils/formatDates';
-import { useApiCall } from '../../../hooks/api/useApiCall';
-import { bookingVenueUrl } from '../../../services/authorization/apiBase';
 
+/**
+ * Component for displaying venue information and bookings.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.info - The information about the venue.
+ * @returns {JSX.Element} The VenueInfo component.
+ */
 export function VenueInfo({ info }) {
   const [isPopupVisible, setPopupVisible] = useState(false);
 
+  /**
+   * Handles the mouse enter event to show the popup.
+   */
   const handleMouseEnter = () => {
     setPopupVisible(true);
   };
 
+  /**
+   * Handles the mouse leave event to hide the popup.
+   */
   const handleMouseLeave = () => {
     setPopupVisible(false);
   };
-  /*   console.log(info.bookings); */
+
+  // Extract bookings from the info object
   const bookings = info.bookings;
-  console.log(bookings);
+
   return (
     <>
       <div
@@ -67,22 +79,4 @@ export function VenueInfo({ info }) {
       </div>
     </>
   );
-}
-
-export function VenueSpecifiedInfo() {
-  const { data, isLoading, isError } = useApiCall(
-    bookingVenueUrl +
-      'f1153ea5-f805-496f-a815-b7a474e899e3' +
-      `?_customer=true&_venue=false` // API endpoint for retrieving user profile data
-  );
-
-  if (isLoading) {
-    return <div>Loading Profile</div>; // Display loading message while profile data is being fetched
-  }
-
-  if (isError) {
-    return <div>Error loading the Profile</div>; // Display error message if there was an error fetching the profile data
-  }
-
-  return data;
 }

@@ -2,6 +2,13 @@ import houseImg from '../../assets/img/house.jpg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Component for displaying a list of venues.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.data - The array of venue data.
+ * @returns {JSX.Element} The VenuesList component.
+ */
 export function VenuesList(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [venuesPerPage] = useState(10);
@@ -18,10 +25,16 @@ export function VenuesList(props) {
     pageNumbers.push(i);
   }
 
+  /**
+   * Event handler for the next page button click.
+   */
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
 
+  /**
+   * Event handler for the previous page button click.
+   */
   const handlePrevPage = () => {
     setCurrentPage(currentPage - 1);
   };
