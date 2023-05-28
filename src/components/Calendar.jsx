@@ -107,10 +107,6 @@ export function BookingCalendar({ data }) {
     }
   };
 
-  /*   const refreshPage = () => {
-    navigate(0);
-  }; */
-
   const handleGuestsChange = (event) => {
     const value = parseInt(event.target.value); // Parse the input value as an integer
     setGuests(value); // Update the guests state with the new value

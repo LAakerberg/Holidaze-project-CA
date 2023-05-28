@@ -66,6 +66,7 @@ export function VenueForm() {
    * @returns {Promise<void>} A Promise that resolves when the form submission is complete.
    */
   const onSubmit = async (data) => {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const accessToken = localStorage.getItem('accessToken');
 
     try {
@@ -88,7 +89,7 @@ export function VenueForm() {
         });
 
         setTimeout(() => {
-          refreshPage();
+          navigate(`/profile/${user.name}`);
         }, 3000);
       } else {
         setMessage({
@@ -102,14 +103,6 @@ export function VenueForm() {
         text: 'Venue was not created successful, please try again',
       });
     }
-  };
-
-  /**
-   * Refreshes the page.
-   * @returns {void}
-   */
-  const refreshPage = () => {
-    navigate(0);
   };
 
   return (
