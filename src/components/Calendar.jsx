@@ -84,7 +84,7 @@ export function BookingCalendar({ data }) {
             text: 'Booking was successful, page will reload',
           });
           setTimeout(() => {
-            navigate(0);
+            navigate(`/profile/${user.name}`);
           }, 3000);
         } else {
           setMessage({
