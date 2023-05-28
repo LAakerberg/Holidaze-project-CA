@@ -66,7 +66,6 @@ export function VenueForm() {
    * @returns {Promise<void>} A Promise that resolves when the form submission is complete.
    */
   const onSubmit = async (data) => {
-    const user = JSON.parse(localStorage.getItem('userData'));
     const accessToken = localStorage.getItem('accessToken');
 
     try {
@@ -89,7 +88,7 @@ export function VenueForm() {
         });
 
         setTimeout(() => {
-          navigate(`/profile/${user.name}`);
+          navigate(`/success/login`);
         }, 3000);
       } else {
         setMessage({
