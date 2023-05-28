@@ -35,9 +35,11 @@ describe('Login function for Holidaze project', () => {
     cy.get('#create-venue-form input[name="country"]').type('Spain');
     cy.get('#create-venue-form input[name="continent"]').type('South');
     cy.get('#create-venue-form button[type="submit"]').type('South');
-    cy.wait(5000);
+    cy.wait(8000);
     cy.get('#open_manage_venue').click();
+    cy.wait(500);
     cy.get('#delete_button').click();
     cy.get('li').contains('Logout').click();
+    cy.wait(500);
   });
 });

@@ -66,7 +66,6 @@ export function VenueForm() {
    * @returns {Promise<void>} A Promise that resolves when the form submission is complete.
    */
   const onSubmit = async (data) => {
-    const user = JSON.parse(localStorage.getItem('userData'));
     const accessToken = localStorage.getItem('accessToken');
 
     try {
@@ -89,7 +88,7 @@ export function VenueForm() {
         });
 
         setTimeout(() => {
-          navigate(`/profile/${user.name}`);
+          navigate(`/success/event`);
         }, 3000);
       } else {
         setMessage({
@@ -107,9 +106,8 @@ export function VenueForm() {
 
   return (
     <div className="venue-form">
-      {/* Render success message if it exists */}
       {message && <Message type={message.type} text={message.text} />}
-      {/* Rest of your form code */}
+
       <div className="transition-all delay-500 duration-300 ease-in-out p-1">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -294,7 +292,7 @@ export function VenueForm() {
                   type="text"
                   id="address"
                   className="venue_form"
-                  placeholder="Enter your first-name"
+                  placeholder="Enter the address"
                   {...register('address')}
                 />
 
@@ -314,7 +312,7 @@ export function VenueForm() {
                   type="text"
                   id="city"
                   className="venue_form"
-                  placeholder="Enter your first-name"
+                  placeholder="Enter the city name"
                   {...register('city')}
                 />
 
@@ -334,7 +332,7 @@ export function VenueForm() {
                   type="number"
                   id="zip"
                   className="venue_form"
-                  placeholder="Enter a url for avatar"
+                  placeholder="Enter a zip code"
                   {...register('zip')}
                 />
                 <p>
@@ -353,7 +351,7 @@ export function VenueForm() {
                   type="text"
                   id="country"
                   className="venue_form"
-                  placeholder="Enter a url for avatar"
+                  placeholder="Enter country name"
                   {...register('country')}
                 />
                 <p>
@@ -372,7 +370,7 @@ export function VenueForm() {
                   type="text"
                   id="continent"
                   className="venue_form"
-                  placeholder="Enter a url for avatar"
+                  placeholder="Enter continent"
                   {...register('continent')}
                 />
                 <p>

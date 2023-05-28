@@ -52,7 +52,6 @@ const matchForm = yup
  * @returns {JSX.Element} The rendered form component.
  */
 export function EditVenueForm({ venue }) {
-  const user = JSON.parse(localStorage.getItem('userData'));
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
   const {
@@ -87,7 +86,7 @@ export function EditVenueForm({ venue }) {
         });
 
         setTimeout(() => {
-          navigate(`/profile/${user.name}`);
+          navigate(`/success/login`);
         }, 3000);
       } else {
         setMessage({

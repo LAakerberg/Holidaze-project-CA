@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 /**
  *
@@ -11,6 +11,7 @@ export function NavLinks(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const user = JSON.parse(localStorage.getItem('userData'));
+  const navigate = useNavigate();
 
   /**
    * Take's the information from localStorage to see if the user
@@ -40,7 +41,7 @@ export function NavLinks(props) {
     localStorage.clear();
     setIsLoggedIn(false);
     setIsAdmin(false);
-    window.location.href = '/';
+    navigate('/'); // Redirect to home page
   };
 
   return (
