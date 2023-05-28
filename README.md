@@ -1,22 +1,33 @@
-### Dependency feature
+## Project Exam 2 - Holidaze
 
-- Prettier
-- ESLint
-- Lint-staged
+### About
 
-### TailwindCSS installed with Vite and React template
+This is my school project for Noroff where we should build a similar solution as a Airbnb.
+Users can rent a house/apartment for upcoming trips or vacation. As a venue manager you can also create venue for renting out to others.
 
-- TailwindCSS
-- React Template
-- Vite Dev server
--
+### Get started
 
-### React library
+#### Installing
 
-- Styled-components
-- React-router
-- React Icons
-- React hook form
+- Clone the repo
+- Open the project in VSC
+- Write `npm install`
+- Open the dev server: `npm run dev`
+
+#### Testing
+
+- You can view homepage and venues / venues specific with account
+- Create account as a user or venue manager.
+- As venue manager can you also book your next trip/vacation
+  - Venue manager can create venues, delete and edit.
+- As a regular user you only book your next trip/vacation
+- You can change your avatar if needed
+
+### Built with:
+
+- Vite.js as bundler
+- React.js as library/framework
+- TailwindCSS as CSS framework
 
 ### Cypress test
 
@@ -26,4 +37,11 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/475448f9-7036-41a2-be12-c9f829ac872a/deploy-status)](https://app.netlify.com/sites/eloquent-swan-2c30bb/deploys)
 
-### Update of README!
+### Bugs
+
+- Netlify is struggling with the reload/refresh of the page
+
+### Features function planned
+
+- Better UI/UX of animation/transitions of buttons and interaction of functions.
+- Carousel of image on specific venue page when more than one is added.
