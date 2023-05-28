@@ -3,6 +3,8 @@
 .message {
   display: flex;
   width: 100%;
+  max-width: 600px;
+  border-radius: 5px;
   margin: auto;
   margin-top: 1.25rem;
 }
@@ -18,7 +20,7 @@
 }
 
 .message.loading {
-  background-color: rgb(247 221 30);
+  background-color: rgb(249, 235, 134);
   border: 1px solid rgb(126, 75, 0);
 }
 

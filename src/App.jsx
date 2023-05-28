@@ -1,7 +1,7 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
-import { Home } from './pages/HomePage/HomePage';
+import { Home } from './pages/HomePage';
 import { VenuesPage } from './pages/VenuePage';
 import { AuthUser } from './pages/AuthPage/Index';
 import { Register } from './pages/AuthPage/Register';

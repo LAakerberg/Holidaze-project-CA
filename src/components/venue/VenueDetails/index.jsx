@@ -7,7 +7,7 @@ import { BookingCalendar } from '../../Calendar';
 import { renderDate } from '../../../utils/formatDates';
 import 'react-calendar/dist/cjs/MonthView';
 import 'react-datepicker/dist/react-datepicker.css';
-import houseImg from '../../../assets/img/house.jpg';
+import houseBigImg from '../../../assets/img/house-big.jpg';
 
 /**
  * Component for displaying venue details.
@@ -49,13 +49,13 @@ export function VenueDetails({ venueData }) {
               className="w-full h-96 object-cover"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = houseImg;
+                e.target.src = houseBigImg;
               }}
             />
           </div>
           <div className="flex-initial w-full px-2">
             <div className="border-b border-light_salmon">
-              <h4 className="">This venue offers</h4>
+              <h3 className="font-bold">This venue offers</h3>
             </div>
             <div className="flex flex-col tablet:flex-row justify-evenly">
               <div className="flex-initial">
@@ -181,14 +181,10 @@ export function VenueDetails({ venueData }) {
                 <p className="text-lg font-bold break-all">Key info</p>
                 <ul>
                   <li className="block p-0 ">
-                    <p className="">Max guests: {venueData.maxGuests}</p>
+                    Max guests: {venueData.maxGuests}
                   </li>
-                  <li className="block p-0">
-                    <p className="">Price: {venueData.price}</p>
-                  </li>
-                  <li className="block p-0">
-                    <p className="">Rating: {venueData.rating}</p>
-                  </li>
+                  <li className="block p-0">Price: {venueData.price}</li>
+                  <li className="block p-0">Rating: {venueData.rating}</li>
                 </ul>
               </div>
             </div>
@@ -196,14 +192,16 @@ export function VenueDetails({ venueData }) {
         </div>
         <div className="border border-light_salmon m-1 p-1">
           <div className="border-b border-light_salmon">
-            <h4 className="py-2">About</h4>
+            <h3 className="py-2 font-bold">About</h3>
           </div>
           <p className="py-4 break-all">{venueData.description}</p>
         </div>
         <div className="border border-light_salmon m-1 py-2 px-1">
-          <p className="">ID: {venueData.id}</p>
-          <p className="">Created: {renderDate(venueData.created)}</p>
-          <p className="">Last update: {renderDate(venueData.updated)}</p>
+          <ul>
+            <li>ID: {venueData.id}</li>
+            <li>Created: {renderDate(venueData.created)}</li>
+            <li>Last update: {renderDate(venueData.updated)}</li>
+          </ul>
         </div>
       </div>
       {isLoggedIn && (
