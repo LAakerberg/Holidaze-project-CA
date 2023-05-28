@@ -15,7 +15,6 @@ export function VenuesPage() {
 
   return (
     <>
-      <div className="flex flex-row absolute -top-60 z-10 w-full p-2 gap-4 justify-center"></div>
       <div className="">
         <GetVenues />
       </div>
