@@ -39,9 +39,15 @@ Users can rent a house/apartment for upcoming trips or vacation. As a venue mana
 
 ### Bugs
 
-- Netlify is struggling with the reload/refresh of the page
+- Open bugs
+  - [[The project want work as attended on netlify #69]](https://github.com/LAakerberg/Holidaze-project-CA/issues/69)
+  - [[Error when edit media on existing venue #70]](https://github.com/LAakerberg/Holidaze-project-CA/issues/70)
 
 ### Features function planned
 
 - Better UI/UX of animation/transitions of buttons and interaction of functions.
 - Carousel of image on specific venue page when more than one is added.
+
+### Link to my project
+
+- [Holidaze Summer](https://holidaze-summer.netlify.app/)
