@@ -43,8 +43,12 @@ export function VenuesList(props) {
 
   return (
     <>
-      <div className="text-center justify-center flex">
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+      <div className="justify-center flex flex-wrap">
+        <button
+          className="flex-initial"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
           <HiArrowSmLeft className="icons-style hover:text-red-500 transition delay-75 duration-200 ease-in-out" />
         </button>
         {pageNumbers.map((number) => (
@@ -60,6 +64,7 @@ export function VenuesList(props) {
           </button>
         ))}
         <button
+          className="flex-initial"
           onClick={handleNextPage}
           disabled={
             currentPage === Math.ceil(props.data.length / venuesPerPage)
@@ -77,7 +82,7 @@ export function VenuesList(props) {
             key={venue.id}
             className="backdrop-blur-xl bg-white/30 hover:bg-white border border-light_salmon p-1 mb-2 flex flex-col sm:flex-row transition ease-in-out delay-100 duration-500 items-center justify-center text-center sm:justify-start sm:text-start"
           >
-            <div className="flex-1">
+            <div className="flex-1 w-full">
               <div>
                 <p className="text-lg font-bold">{venue.name}</p>
               </div>
@@ -86,7 +91,7 @@ export function VenuesList(props) {
                   <img
                     src={venue.media}
                     alt={venue.name}
-                    className="object-cover rounded-xl h-32 sm:w-36 border border-1 border-gray-800 m-auto drop-shadow-xl"
+                    className="object-cover rounded-xl h-52 sm:h-32 w-full border border-1 border-gray-800 m-auto drop-shadow-xl"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = houseImg;
@@ -94,10 +99,12 @@ export function VenuesList(props) {
                   />
                 </div>
                 <div className="flex-1 w-full px-1 md:block">
-                  <p className="break-all">{venue.description.slice(0, 200)}</p>
+                  <p className="break-all p-0">
+                    {venue.description.slice(0, 200)}
+                  </p>
                 </div>
-                <div className="flex-none w-32">
-                  <ul className="">
+                <div className="flex-none w-36">
+                  <ul className="px-2 border-t-2 sm:border-l-2 sm:border-t-0 border-topaz">
                     <li className="block p-0">
                       Breakfast: {venue.meta.breakfast ? 'Yes' : 'No'}
                     </li>
