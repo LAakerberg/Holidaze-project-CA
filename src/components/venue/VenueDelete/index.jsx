@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
  * @returns {JSX.Element} The VenueDelete component.
  */
 export function VenueDelete({ venueId }) {
+  const user = JSON.parse(localStorage.getItem('userData'));
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
 
@@ -38,7 +39,7 @@ export function VenueDelete({ venueId }) {
           text: 'Venue deleted successfully, page will refresh!',
         });
 
-        setTimeout(refreshPage, 3000);
+        setTimeout(navigate(`/profile/${user.name}`), 3000);
       } else {
         setMessage({
           type: 'error',
@@ -58,13 +59,6 @@ export function VenueDelete({ venueId }) {
         error,
       });
     }
-  };
-
-  /**
-   * Refreshes the current page.
-   */
-  const refreshPage = () => {
-    navigate(0);
   };
 
   return (

@@ -55,7 +55,7 @@ export function EditProfile() {
           text: 'Avatar was changed, page will be refreshed',
         });
         setTimeout(() => {
-          refreshPage();
+          navigate(`/profile/${user.name}`);
         }, 3000);
       } else {
         setMessage({
@@ -70,13 +70,6 @@ export function EditProfile() {
         error,
       });
     }
-  };
-
-  /**
-   * Refreshes the page.
-   */
-  const refreshPage = () => {
-    navigate(0);
   };
 
   return (
