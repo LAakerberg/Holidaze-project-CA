@@ -10,7 +10,7 @@ export function SuccessLogin() {
   const navigate = useNavigate();
   setTimeout(() => {
     navigate(`/profile/${user.name}`);
-  }, 200);
+  }, 1000);
   return (
     <>
       {' '}
