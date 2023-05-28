@@ -33,7 +33,7 @@ export function ProfilePage() {
     <>
       <div className=""></div>
       <div className="p-1 my-1">
-        <h3>Profile</h3>
+        <h2>Profile</h2>
         <div>
           <Profile data={data} />{' '}
         </div>

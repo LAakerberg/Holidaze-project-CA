@@ -1,6 +1,8 @@
 import houseImg from '../../assets/img/house.jpg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HiArrowSmRight } from 'react-icons/hi';
+import { HiArrowSmLeft } from 'react-icons/hi';
 
 /**
  * Component for displaying a list of venues.
@@ -41,9 +43,9 @@ export function VenuesList(props) {
 
   return (
     <>
-      <div className="text-center">
+      <div className="text-center justify-center flex">
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
-          Prev
+          <HiArrowSmLeft className="icons-style hover:text-red-500 transition delay-75 duration-200 ease-in-out" />
         </button>
         {pageNumbers.map((number) => (
           <button
@@ -63,11 +65,11 @@ export function VenuesList(props) {
             currentPage === Math.ceil(props.data.length / venuesPerPage)
           }
         >
-          Next
+          <HiArrowSmRight className="icons-style hover:text-red-500 transition delay-75 duration-200 ease-in-out" />
         </button>
       </div>
       <div>
-        <h3>Find your next venue</h3>
+        <h2>Find your next venue</h2>
       </div>
       <div className="pt-4">
         {currentVenues.map((venue) => (

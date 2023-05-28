@@ -9,6 +9,11 @@
     font-weight: 500;
     src: url(/src/assets/fonts/anton/Anton-Regular.ttf) format('ttf');
   }
+  @font-face {
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    src: url(/src/assets/fonts/montserrat/Montserrat-Medium.ttf) format('ttf');
+  }
 }
 
 .header-logo {
@@ -16,4 +21,15 @@
   color: #fff;
   letter-spacing: 1px;
   text-shadow: 3px 4px #633825;
+}
+
+p {
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  word-break: break-all;
+  word-break: normal;
+  padding: 8px 0px;
+}
+
+li {
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
 }
