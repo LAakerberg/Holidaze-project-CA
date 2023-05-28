@@ -7,7 +7,7 @@ import { BookingCalendar } from '../../Calendar';
 import { renderDate } from '../../../utils/formatDates';
 import 'react-calendar/dist/cjs/MonthView';
 import 'react-datepicker/dist/react-datepicker.css';
-import houseImg from '../../../assets/img/house.jpg';
+import houseBigImg from '../../../assets/img/house-big.jpg';
 
 /**
  * Component for displaying venue details.
@@ -49,7 +49,7 @@ export function VenueDetails({ venueData }) {
               className="w-full h-96 object-cover"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = houseImg;
+                e.target.src = houseBigImg;
               }}
             />
           </div>
