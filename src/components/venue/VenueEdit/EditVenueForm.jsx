@@ -77,6 +77,8 @@ export function EditVenueForm({ venue }) {
         body: JSON.stringify(data),
       });
 
+      const responseData = await response.json();
+
       if (response.ok) {
         setMessage({
           type: 'success',
@@ -89,13 +91,13 @@ export function EditVenueForm({ venue }) {
       } else {
         setMessage({
           type: 'error',
-          text: 'Venue was not updated successful, please try again',
+          text: `Venue was not updated successful, please try again! Error -> ${responseData.errors?.[0].message} ${responseData.errors?.[0].path[0]}`,
         });
       }
     } catch (error) {
       setMessage({
         type: 'error',
-        text: 'Venue was not updated successful, please try again',
+        text: 'Venue was not updated successful, please try again2',
         error,
       });
     }
