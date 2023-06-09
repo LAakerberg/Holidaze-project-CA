@@ -1,18 +1,31 @@
-## Project Exam 2 - Holidaze
+# Project Exam 2 - Holidaze
 
-### About
+## Description
 
 This is my school project for Noroff where we should build a similar solution as a Airbnb.
 Users can rent a house/apartment for upcoming trips or vacation. As a venue manager you can also create venue for renting out to others.
 
-### Get started
+# Get started
 
-#### Installing
+## Installing
 
-- Clone the repo
-- Open the project in VSC
-- Write `npm install`
-- Open the dev server: `npm run dev`
+1. Clone the repo
+
+```
+clone git git@github.com:LAakerberg/Holidaze-project-CA.git
+```
+
+2. Install dependencies
+
+```
+npm install
+```
+
+3. Open the dev server to run a locally copy
+
+```
+npm run dev
+```
 
 #### Testing
 
@@ -23,19 +36,20 @@ Users can rent a house/apartment for upcoming trips or vacation. As a venue mana
 - As a regular user you only book your next trip/vacation
 - You can change your avatar if needed
 
-### Built with:
+### Building
 
-- Vite.js as bundler
-- React.js as library/framework
+- Html
+- CSS
 - TailwindCSS as CSS framework
+- JavaScript Vanilla
+- React.js as library/framework
+- Vite.js as bundler
+
+[![Tech stack](https://skillicons.dev/icons?i=html,css,tailwindcss,js,react,vite)](https://skillicons.dev)
 
 ### Cypress test
 
 [![Automated E2E Testing](https://github.com/LAakerberg/Holidaze-project-CA/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/LAakerberg/Holidaze-project-CA/actions/workflows/e2e-test.yml)
-
-### Netlify production
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/475448f9-7036-41a2-be12-c9f829ac872a/deploy-status)](https://app.netlify.com/sites/eloquent-swan-2c30bb/deploys)
 
 ### Bugs
 
@@ -48,6 +62,17 @@ Users can rent a house/apartment for upcoming trips or vacation. As a venue mana
 - Better UI/UX of animation/transitions of buttons and interaction of functions.
 - Carousel of image on specific venue page when more than one is added.
 
+### Netlify production
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/475448f9-7036-41a2-be12-c9f829ac872a/deploy-status)](https://app.netlify.com/sites/eloquent-swan-2c30bb/deploys)
+
 ### Link to my project
 
 - [Holidaze Summer](https://holidaze-summer.netlify.app/)
+
+# Contact
+
+Contact me on my social media
+
+[![My socialMedia](https://skillicons.dev/icons?i=github)](https://github.com/LAakerberg)
+[![My socialMedia](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/linus-%C3%A5kerberg-4126891b1/)
