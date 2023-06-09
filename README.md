@@ -5,6 +5,10 @@
 This is my school project for Noroff where we should build a similar solution as a Airbnb.
 Users can rent a house/apartment for upcoming trips or vacation. As a venue manager you can also create venue for renting out to others.
 
+## Image
+![holidazeThumbNail](https://github.com/LAakerberg/Holidaze-project-CA/assets/44141432/2d00b23b-9c95-41db-88fe-161dc6785637)
+
+
 # Get started
 
 ## Installing
